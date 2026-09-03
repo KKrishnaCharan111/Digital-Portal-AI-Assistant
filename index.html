@@ -179,26 +179,164 @@
       <div id="day-schedule-list" class="space-y-2.5"></div>
     </section>
 
-    <!-- NEW TAB: GOOGLE CLASSROOM NOTES -->
+    <!-- TAB: GOOGLE CLASSROOM NOTES -->
     <section id="view-notes" class="tab-view hidden space-y-4">
-        <div class="bg-gradient-to-r from-emerald-600 to-teal-700 rounded-2xl p-6 text-white shadow-md flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4">
-            <div>
-              <h2 class="text-xl font-extrabold flex items-center gap-2">
-                  <i class="fa-brands fa-google-drive"></i> Study Materials & Notes
-              </h2>
-              <p class="text-xs text-emerald-100 font-medium mt-1.5">Access all your 3rd Semester ECE files securely in Google Drive.</p>
-            </div>
-            <a href="https://drive.google.com/drive/folders/1T5Cw__HX2kbtxAuu3Eu6IACtLLbRH5Go?usp=drive_link" target="_blank" rel="noopener noreferrer" class="px-5 py-2.5 bg-white text-emerald-700 text-sm font-bold rounded-xl shadow-sm hover:bg-emerald-50 transition flex items-center justify-center gap-2 active:scale-95 whitespace-nowrap w-full sm:w-auto">
-                Open Google Drive <i class="fa-solid fa-arrow-up-right-from-square text-xs"></i>
-            </a>
-        </div>
+      <div class="bg-gradient-to-r from-emerald-600 to-teal-700 rounded-2xl p-6 text-white shadow-md">
+        <h2 class="text-xl font-extrabold flex items-center gap-2">
+          <i class="fa-brands fa-google-drive"></i> Classroom Notes & Resources
+        </h2>
+        <p class="text-xs text-emerald-100 font-medium mt-1.5">
+          Direct cloud access to lecture slides, assignments, syllabus modules, and lab materials.
+        </p>
+      </div>
+
+      <!-- Subject Drive Folders Grid -->
+      <div class="grid grid-cols-1 sm:grid-cols-2 gap-3.5">
         
-        <div class="bg-white border border-slate-200 rounded-xl p-4 flex items-start gap-3 shadow-xs">
-          <i class="fa-solid fa-circle-info text-blue-500 mt-0.5"></i>
-          <p class="text-xs text-slate-600 leading-relaxed">
-            <strong>Accessing your files:</strong> Click the button above to be redirected directly to the official Google Drive folder. This prevents any PDF preview errors and ensures you have the most up-to-date materials directly from your professors.
-          </p>
+        <!-- 1. Digital Logic Design -->
+        <div class="bg-white border border-slate-200 rounded-2xl p-4 shadow-xs flex flex-col justify-between hover:shadow-md transition">
+          <div class="flex items-start justify-between gap-3">
+            <div class="w-10 h-10 rounded-xl bg-amber-50 text-amber-600 flex items-center justify-center shrink-0 border border-amber-200">
+              <i class="fa-solid fa-microchip text-lg"></i>
+            </div>
+            <span class="text-[10px] font-mono font-bold bg-slate-100 text-slate-600 px-2 py-0.5 rounded">ESC 204</span>
+          </div>
+          <div class="mt-3">
+            <h3 class="font-extrabold text-sm text-slate-900">Digital Logic Design</h3>
+            <p class="text-xs text-slate-500 mt-0.5">Faculty: Prof. Chethan G S</p>
+          </div>
+          <a href="https://drive.google.com/drive/folders/1aUI9xTFeM5XEn-ZYjH4_A1Y3xe9lOVG8?usp=drive_link" target="_blank" rel="noopener noreferrer" class="mt-4 w-full py-2 px-3 bg-emerald-50 hover:bg-emerald-100 text-emerald-800 text-xs font-bold rounded-xl flex items-center justify-center gap-2 transition active:scale-95">
+            <i class="fa-brands fa-google-drive text-sm"></i> Open Drive Folder <i class="fa-solid fa-arrow-up-right-from-square text-[10px]"></i>
+          </a>
         </div>
+
+        <!-- 2. Analog Electronics Circuits -->
+        <div class="bg-white border border-slate-200 rounded-2xl p-4 shadow-xs flex flex-col justify-between hover:shadow-md transition">
+          <div class="flex items-start justify-between gap-3">
+            <div class="w-10 h-10 rounded-xl bg-violet-50 text-violet-600 flex items-center justify-center shrink-0 border border-violet-200">
+              <i class="fa-solid fa-wave-square text-lg"></i>
+            </div>
+            <span class="text-[10px] font-mono font-bold bg-slate-100 text-slate-600 px-2 py-0.5 rounded">ESC 202</span>
+          </div>
+          <div class="mt-3">
+            <h3 class="font-extrabold text-sm text-slate-900">Analog Electronics Circuits</h3>
+            <p class="text-xs text-slate-500 mt-0.5">Faculty: Dr. Buddha Dharani</p>
+          </div>
+          <a href="https://drive.google.com/drive/folders/1gUY51citev0PLt1GZvYmRnTt2qxU_C1T?usp=drive_link" target="_blank" rel="noopener noreferrer" class="mt-4 w-full py-2 px-3 bg-emerald-50 hover:bg-emerald-100 text-emerald-800 text-xs font-bold rounded-xl flex items-center justify-center gap-2 transition active:scale-95">
+            <i class="fa-brands fa-google-drive text-sm"></i> Open Drive Folder <i class="fa-solid fa-arrow-up-right-from-square text-[10px]"></i>
+          </a>
+        </div>
+
+        <!-- 3. Applied Biology -->
+        <div class="bg-white border border-slate-200 rounded-2xl p-4 shadow-xs flex flex-col justify-between hover:shadow-md transition">
+          <div class="flex items-start justify-between gap-3">
+            <div class="w-10 h-10 rounded-xl bg-teal-50 text-teal-600 flex items-center justify-center shrink-0 border border-teal-200">
+              <i class="fa-solid fa-dna text-lg"></i>
+            </div>
+            <span class="text-[10px] font-mono font-bold bg-slate-100 text-slate-600 px-2 py-0.5 rounded">BSC 203</span>
+          </div>
+          <div class="mt-3">
+            <h3 class="font-extrabold text-sm text-slate-900">Applied Biology</h3>
+            <p class="text-xs text-slate-500 mt-0.5">Faculty: Dr. Tamilvelan</p>
+          </div>
+          <a href="https://drive.google.com/drive/folders/1Nr7my2PCJgsfP1avisOrzVwHYT9c-Nif?usp=drive_link" target="_blank" rel="noopener noreferrer" class="mt-4 w-full py-2 px-3 bg-emerald-50 hover:bg-emerald-100 text-emerald-800 text-xs font-bold rounded-xl flex items-center justify-center gap-2 transition active:scale-95">
+            <i class="fa-brands fa-google-drive text-sm"></i> Open Drive Folder <i class="fa-solid fa-arrow-up-right-from-square text-[10px]"></i>
+          </a>
+        </div>
+
+        <!-- 4. Design Thinking -->
+        <div class="bg-white border border-slate-200 rounded-2xl p-4 shadow-xs flex flex-col justify-between hover:shadow-md transition">
+          <div class="flex items-start justify-between gap-3">
+            <div class="w-10 h-10 rounded-xl bg-yellow-50 text-yellow-600 flex items-center justify-center shrink-0 border border-yellow-200">
+              <i class="fa-solid fa-lightbulb text-lg"></i>
+            </div>
+            <span class="text-[10px] font-mono font-bold bg-slate-100 text-slate-600 px-2 py-0.5 rounded">ESC 205</span>
+          </div>
+          <div class="mt-3">
+            <h3 class="font-extrabold text-sm text-slate-900">Design Thinking</h3>
+            <p class="text-xs text-slate-500 mt-0.5">Faculty: Prof. Hari Krishna Moorthy</p>
+          </div>
+          <a href="https://drive.google.com/drive/folders/1mC-nwMUdXIhtEIduBMM9z1DuuGsGAW7u?usp=drive_link" target="_blank" rel="noopener noreferrer" class="mt-4 w-full py-2 px-3 bg-emerald-50 hover:bg-emerald-100 text-emerald-800 text-xs font-bold rounded-xl flex items-center justify-center gap-2 transition active:scale-95">
+            <i class="fa-brands fa-google-drive text-sm"></i> Open Drive Folder <i class="fa-solid fa-arrow-up-right-from-square text-[10px]"></i>
+          </a>
+        </div>
+
+        <!-- 5. Environmental Science -->
+        <div class="bg-white border border-slate-200 rounded-2xl p-4 shadow-xs flex flex-col justify-between hover:shadow-md transition">
+          <div class="flex items-start justify-between gap-3">
+            <div class="w-10 h-10 rounded-xl bg-emerald-50 text-emerald-600 flex items-center justify-center shrink-0 border border-emerald-200">
+              <i class="fa-solid fa-leaf text-lg"></i>
+            </div>
+            <span class="text-[10px] font-mono font-bold bg-slate-100 text-slate-600 px-2 py-0.5 rounded">BSC 201</span>
+          </div>
+          <div class="mt-3">
+            <h3 class="font-extrabold text-sm text-slate-900">Environmental Science</h3>
+            <p class="text-xs text-slate-500 mt-0.5">Faculty: Dr. Dasarathy</p>
+          </div>
+          <a href="https://drive.google.com/drive/folders/19suFBCio45OhnbdmrMoEScQK3ndeVblT?usp=drive_link" target="_blank" rel="noopener noreferrer" class="mt-4 w-full py-2 px-3 bg-emerald-50 hover:bg-emerald-100 text-emerald-800 text-xs font-bold rounded-xl flex items-center justify-center gap-2 transition active:scale-95">
+            <i class="fa-brands fa-google-drive text-sm"></i> Open Drive Folder <i class="fa-solid fa-arrow-up-right-from-square text-[10px]"></i>
+          </a>
+        </div>
+
+        <!-- 6. Signals and Systems -->
+        <div class="bg-white border border-slate-200 rounded-2xl p-4 shadow-xs flex flex-col justify-between hover:shadow-md transition">
+          <div class="flex items-start justify-between gap-3">
+            <div class="w-10 h-10 rounded-xl bg-blue-50 text-blue-600 flex items-center justify-center shrink-0 border border-blue-200">
+              <i class="fa-solid fa-chart-line text-lg"></i>
+            </div>
+            <span class="text-[10px] font-mono font-bold bg-slate-100 text-slate-600 px-2 py-0.5 rounded">ESC 201</span>
+          </div>
+          <div class="mt-3">
+            <h3 class="font-extrabold text-sm text-slate-900">Signals and Systems</h3>
+            <p class="text-xs text-slate-500 mt-0.5">Faculty: Dr. Sunil Kumar</p>
+          </div>
+          <a href="https://drive.google.com/drive/folders/1JbKCXonZGk7zmqNn_SWFJDM5fk2K8OzO?usp=drive_link" target="_blank" rel="noopener noreferrer" class="mt-4 w-full py-2 px-3 bg-emerald-50 hover:bg-emerald-100 text-emerald-800 text-xs font-bold rounded-xl flex items-center justify-center gap-2 transition active:scale-95">
+            <i class="fa-brands fa-google-drive text-sm"></i> Open Drive Folder <i class="fa-solid fa-arrow-up-right-from-square text-[10px]"></i>
+          </a>
+        </div>
+
+        <!-- 7. Sports and Yoga -->
+        <div class="bg-white border border-slate-200 rounded-2xl p-4 shadow-xs flex flex-col justify-between hover:shadow-md transition">
+          <div class="flex items-start justify-between gap-3">
+            <div class="w-10 h-10 rounded-xl bg-sky-50 text-sky-600 flex items-center justify-center shrink-0 border border-sky-200">
+              <i class="fa-solid fa-person-running text-lg"></i>
+            </div>
+            <span class="text-[10px] font-mono font-bold bg-slate-100 text-slate-600 px-2 py-0.5 rounded">HSMC 201</span>
+          </div>
+          <div class="mt-3">
+            <h3 class="font-extrabold text-sm text-slate-900">Sports and Yoga</h3>
+            <p class="text-xs text-slate-500 mt-0.5">Faculty: Dr. Srinivas M</p>
+          </div>
+          <a href="https://drive.google.com/drive/folders/1Cw_v5LUZ_EDjKBPpKRjyAIIDOUT5bfCE?usp=drive_link" target="_blank" rel="noopener noreferrer" class="mt-4 w-full py-2 px-3 bg-emerald-50 hover:bg-emerald-100 text-emerald-800 text-xs font-bold rounded-xl flex items-center justify-center gap-2 transition active:scale-95">
+            <i class="fa-brands fa-google-drive text-sm"></i> Open Drive Folder <i class="fa-solid fa-arrow-up-right-from-square text-[10px]"></i>
+          </a>
+        </div>
+
+        <!-- 8. Statistical & Numerical Methods -->
+        <div class="bg-white border border-slate-200 rounded-2xl p-4 shadow-xs flex flex-col justify-between hover:shadow-md transition">
+          <div class="flex items-start justify-between gap-3">
+            <div class="w-10 h-10 rounded-xl bg-purple-50 text-purple-600 flex items-center justify-center shrink-0 border border-purple-200">
+              <i class="fa-solid fa-calculator text-lg"></i>
+            </div>
+            <span class="text-[10px] font-mono font-bold bg-slate-100 text-slate-600 px-2 py-0.5 rounded">BSC 202</span>
+          </div>
+          <div class="mt-3">
+            <h3 class="font-extrabold text-sm text-slate-900">Statistical & Numerical Methods</h3>
+            <p class="text-xs text-slate-500 mt-0.5">Faculty: Prof. Ajeya Kashi</p>
+          </div>
+          <a href="https://drive.google.com/drive/folders/1nSwNYZUXR8kMsej-ebTtRZOZIUZObJya?usp=drive_link" target="_blank" rel="noopener noreferrer" class="mt-4 w-full py-2 px-3 bg-emerald-50 hover:bg-emerald-100 text-emerald-800 text-xs font-bold rounded-xl flex items-center justify-center gap-2 transition active:scale-95">
+            <i class="fa-brands fa-google-drive text-sm"></i> Open Drive Folder <i class="fa-solid fa-arrow-up-right-from-square text-[10px]"></i>
+          </a>
+        </div>
+
+      </div>
+
+      <div class="bg-white border border-slate-200 rounded-xl p-4 flex items-start gap-3 shadow-xs mt-2">
+        <i class="fa-solid fa-shield-halved text-emerald-600 mt-0.5"></i>
+        <p class="text-xs text-slate-600 leading-relaxed">
+          <strong>Access Notes:</strong> Folders open directly in Google Drive to prevent file preview errors and preserve original formatting for PDFs, PPTs, lab manuals, and assignments.
+        </p>
+      </div>
     </section>
 
     <!-- TAB 2: CALENDAR OF EVENTS -->
@@ -419,43 +557,43 @@
       </div>
     </section>
 
-    <!-- NEW TAB: OFFICIAL ERP PORTAL -->
+    <!-- TAB: OFFICIAL ERP PORTAL -->
     <section id="view-erp" class="tab-view hidden space-y-4">
-        <div class="bg-gradient-to-r from-orange-600 to-amber-700 rounded-2xl p-6 text-white shadow-md flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4">
-            <div>
-              <h2 class="text-xl font-extrabold flex items-center gap-2">
-                  <i class="fa-solid fa-building-columns"></i> Official ERP Portal
-              </h2>
-              <p class="text-xs text-orange-100 font-medium mt-1.5">Access your JAIN University student dashboard, grades, and attendance.</p>
-            </div>
-            <a href="https://erpfet.jainuniversity.ac.in/Login" target="_blank" rel="noopener noreferrer" class="px-5 py-2.5 bg-white text-orange-700 text-sm font-bold rounded-xl shadow-sm hover:bg-orange-50 transition flex items-center justify-center gap-2 active:scale-95 whitespace-nowrap w-full sm:w-auto">
-                Go to ERP Login <i class="fa-solid fa-arrow-up-right-from-square text-xs"></i>
-            </a>
+      <div class="bg-gradient-to-r from-orange-600 to-amber-700 rounded-2xl p-6 text-white shadow-md flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4">
+        <div>
+          <h2 class="text-xl font-extrabold flex items-center gap-2">
+            <i class="fa-solid fa-building-columns"></i> Official ERP Portal
+          </h2>
+          <p class="text-xs text-orange-100 font-medium mt-1.5">Access your JAIN University student dashboard, grades, and attendance.</p>
         </div>
-        
-        <div class="bg-white border border-slate-200 rounded-xl p-4 flex items-start gap-3 shadow-xs">
-          <i class="fa-solid fa-shield-halved text-blue-500 mt-0.5"></i>
-          <p class="text-xs text-slate-600 leading-relaxed">
-            <strong>Secure Login:</strong> You are being redirected to the official JAIN (Deemed-to-be University) ERP system. Ensure you have your official student credentials ready to sign in.
-          </p>
-        </div>
+        <a href="https://erpfet.jainuniversity.ac.in/Login" target="_blank" rel="noopener noreferrer" class="px-5 py-2.5 bg-white text-orange-700 text-sm font-bold rounded-xl shadow-sm hover:bg-orange-50 transition flex items-center justify-center gap-2 active:scale-95 whitespace-nowrap w-full sm:w-auto">
+          Go to ERP Login <i class="fa-solid fa-arrow-up-right-from-square text-xs"></i>
+        </a>
+      </div>
+      
+      <div class="bg-white border border-slate-200 rounded-xl p-4 flex items-start gap-3 shadow-xs">
+        <i class="fa-solid fa-shield-halved text-blue-500 mt-0.5"></i>
+        <p class="text-xs text-slate-600 leading-relaxed">
+          <strong>Secure Login:</strong> You are being redirected to the official JAIN (Deemed-to-be University) ERP system. Ensure you have your official student credentials ready to sign in.
+        </p>
+      </div>
     </section>
 
-    <!-- NEW TAB: CLASS CHAT -->
+    <!-- TAB: CLASS CHAT -->
     <section id="view-chat" class="tab-view hidden space-y-4 h-[75vh] flex flex-col">
-        <div class="bg-gradient-to-r from-purple-600 to-pink-700 rounded-2xl p-6 text-white shadow-md shrink-0">
-            <div>
-              <h2 class="text-xl font-extrabold flex items-center gap-2">
-                  <i class="fa-solid fa-comments"></i> Chat with your classmates
-              </h2>
-              <p class="text-xs text-purple-100 font-medium mt-1.5">Connect, discuss, and collaborate with your peers in real-time.</p>
-            </div>
+      <div class="bg-gradient-to-r from-purple-600 to-pink-700 rounded-2xl p-6 text-white shadow-md shrink-0">
+        <div>
+          <h2 class="text-xl font-extrabold flex items-center gap-2">
+            <i class="fa-solid fa-comments"></i> Chat with your classmates
+          </h2>
+          <p class="text-xs text-purple-100 font-medium mt-1.5">Connect, discuss, and collaborate with your peers in real-time.</p>
         </div>
-        
-        <!-- Chatango Embed -->
-        <div class="bg-white border border-slate-200 rounded-xl p-2 shadow-xs flex-1 w-full overflow-hidden">
-            <iframe src="https://65box.chatango.com/" class="w-full h-full rounded-lg border-0" title="Class Chat"></iframe>
-        </div>
+      </div>
+      
+      <!-- Chatango Embed -->
+      <div class="bg-white border border-slate-200 rounded-xl p-2 shadow-xs flex-1 w-full overflow-hidden">
+        <iframe src="https://65box.chatango.com/" class="w-full h-full rounded-lg border-0" title="Class Chat"></iframe>
+      </div>
     </section>
 
   </main>
@@ -663,7 +801,7 @@
       { sem: 8, no: 4, code: "PROJ 3", name: "Engineering Project-3 (Testing & Social outreach)", type: "PROJ", ltpe: "0-0-12-0", cr: 6, nh: 180, l: 0, t: 0, p: 180 },
     ];
 
-    // 3. Complete ECE Student List (UPDATED WITH 65 STUDENTS)
+    // 3. Complete ECE Student List (65 STUDENTS)
     const studentList = [
       { sr: 1, usn: "25BTREC001", name: "A PREETHAM", type: "regular", remark: "" },
       { sr: 2, usn: "25BTREC002", name: "AARTHI D", type: "regular", remark: "" },
@@ -749,27 +887,23 @@
         return;
       }
 
-      // Check if Name and USN combination exists in the studentList
       const matchedStudent = studentList.find(s => 
         s.name.toLowerCase() === nameInput && 
         s.usn.toLowerCase() === usnInput
       );
 
       if (matchedStudent) {
-        // Success: Hide error, fade out overlay, update welcome text
         errorMsg.classList.add('hidden');
-        document.getElementById('user-display-name').textContent = matchedStudent.name.split(' ')[0]; // Use first name
+        document.getElementById('user-display-name').textContent = matchedStudent.name.split(' ')[0];
         
         const overlay = document.getElementById('login-overlay');
         overlay.classList.add('opacity-0');
         
-        // Remove overlay from DOM and restore scrolling after transition
         setTimeout(() => {
           overlay.classList.add('hidden');
           document.getElementById('main-body').classList.remove('overflow-hidden');
         }, 500);
       } else {
-        // Fail
         errorMsg.textContent = "Invalid Name or USN. Please check your spelling.";
         errorMsg.classList.remove('hidden');
       }
@@ -1029,9 +1163,8 @@
     function generateAIResponse(query) {
       const q = query.toLowerCase();
 
-      // 1. Student queries (Lookup by name or USN)
+      // 1. Student queries
       if (q.includes('student') || q.includes('usn') || q.includes('roll') || q.includes('lateral') || q.includes('tc') || q.includes('who is') || q.includes('find')) {
-        
         if (q.includes('lateral')) {
           const laterals = studentList.filter(s => s.type === 'lateral');
           let resp = `🎓 <strong>Lateral Entry Students (Diploma Batch):</strong><br>`;
@@ -1046,7 +1179,6 @@
           return `⚠️ <strong>Transfer Certificate (TC) Record:</strong><br>• <strong>${tcStudents[0].name}</strong> (USN: <code>${tcStudents[0].usn}</code>) — Roll #${tcStudents[0].sr} (TC Issued).`;
         }
 
-        // Direct Name Search in Student List
         const matched = studentList.filter(s => q.includes(s.name.toLowerCase()) || q.includes(s.usn.toLowerCase()) || (s.name.split(' ').some(part => part.length > 2 && q.includes(part.toLowerCase()))));
         if (matched.length > 0) {
           let resp = `👤 <strong>Found Student Record(s):</strong><br>`;
@@ -1061,17 +1193,22 @@
         }
       }
 
-      // 2. Semester End Exam Queries
+      // 2. Notes / Drive queries
+      if (q.includes('note') || q.includes('notes') || q.includes('drive') || q.includes('material') || q.includes('study')) {
+        return `📁 <strong>Classroom Notes & Drive Links:</strong><br>Switch to the <strong>Notes</strong> tab on the navigation bar to access separate direct Google Drive folders for all 8 subjects including Digital Logic Design, Analog Electronics, Signals and Systems, and more!`;
+      }
+
+      // 3. Semester End Exam Queries
       if (q.includes('see') || q.includes('semester exam') || q.includes('exam start') || q.includes('exam date') || q.includes('end exam')) {
         return `📅 <strong>Semester End Examinations (SEE):</strong><br>• Commencement date: <strong>December 4, 2026</strong> for UG/PG programs.<br>• Last day of instruction: <strong>November 28, 2026</strong>.<br>• Even Semester starts: <strong>January 2, 2027</strong>.`;
       }
 
-      // 3. Internal Test Schedule
+      // 4. Internal Test Schedule
       if (q.includes('internal') || q.includes('test 1') || q.includes('test 2') || q.includes('iat') || q.includes('test week')) {
         return `📝 <strong>Internal Test Schedule (2026 Odd Sem):</strong><br>• <strong>Internal Test Week 1:</strong> September 7–12, 2026 (also includes JAIN Entrepreneurship Fest on Sep 11-12)<br>• <strong>Internal Test Week 2:</strong> October 26–31, 2026.`;
       }
 
-      // 4. Holidays Queries
+      // 5. Holidays Queries
       if (q.includes('holiday') || q.includes('holidays') || q.includes('leave')) {
         if (q.includes('oct')) {
           return `🏖️ <strong>General Holidays in October 2026 (5 Days):</strong><br>• <strong>Oct 2:</strong> Gandhi Jayanthi<br>• <strong>Oct 10:</strong> Mahalaya Amavasya<br>• <strong>Oct 20–21:</strong> Mahanavami & Vijayadashami.`;
@@ -1085,7 +1222,7 @@
         return `🏖️ <strong>Key Upcoming General Holidays:</strong><br>• <strong>Aug 15:</strong> Independence Day<br>• <strong>Aug 21:</strong> Varamahalakshmi Vrata<br>• <strong>Aug 26:</strong> Eid-Milad<br>• <strong>Sep 14:</strong> Vinayaka Chaturthi<br>• <strong>Oct 2:</strong> Gandhi Jayanthi<br>• <strong>Oct 20-21:</strong> Mahanavami / Vijayadashami<br>• <strong>Nov 10:</strong> Balipadyami<br>• <strong>Nov 27:</strong> Kanakadasa Jayanthi<br>• <strong>Dec 25:</strong> Christmas.`;
       }
 
-      // 5. Timetable Day Specific Queries
+      // 6. Timetable Day Specific Queries
       const days = ['monday', 'tuesday', 'wednesday', 'thursday', 'friday', 'saturday'];
       for (const d of days) {
         if (q.includes(d)) {
@@ -1099,7 +1236,7 @@
         }
       }
 
-      // 6. Faculty / Subject Teachers queries
+      // 7. Faculty / Subject Teachers queries
       if (q.includes('who teaches') || q.includes('faculty') || q.includes('teacher') || q.includes('sir') || q.includes('madam') || q.includes('prof') || q.includes('dr.')) {
         if (q.includes('analog') || q.includes('aec')) {
           return `👨‍🏫 <strong>Analog Electronics Circuits (ESC 202 / 203):</strong><br>• Faculty: <strong>Dr. Buddha Dharani</strong> (Theory & Lab)<br>• Lab Instructors: Prof. Chethan GS, Prof. Pramod R, Dr. Buddha Dharani, Dr. Eashwar S.`;
@@ -1127,7 +1264,7 @@
         }
       }
 
-      // 7. Course Matrix & Semester Credits
+      // 8. Course Matrix & Semester Credits
       if (q.includes('sem 3') || q.includes('semester 3') || q.includes('3rd sem')) {
         return `📚 <strong>Semester 3 Breakdown:</strong><br>• <strong>Total Credits:</strong> 23 Credits<br>• <strong>Notional Hours:</strong> 600 hrs (195 L, 180 P)<br>• <strong>Key Subjects:</strong> BSC 201 Env Sci, BSC 202 Maths-3, BSC 203 Bio, ESC 201 Signals, ESC 202 Analog, ESC 204 DLD, ESC 205 Design Thinking, HSMC201 Sports & Yoga.`;
       }
@@ -1143,7 +1280,7 @@
       }
 
       // Default fallback
-      return `💡 I couldn't find an exact match for your query. Try asking:<br>• <em>"What is the USN of Akshatha?"</em><br>• <em>"List lateral entry students"</em><br>• <em>"What classes do I have on Tuesday?"</em><br>• <em>"Who teaches Digital Logic Design?"</em>`;
+      return `💡 I couldn't find an exact match for your query. Try asking:<br>• <em>"What is the USN of Akshatha?"</em><br>• <em>"List lateral entry students"</em><br>• <em>"Where can I find DLD notes?"</em><br>• <em>"What classes do I have on Tuesday?"</em><br>• <em>"Who teaches Digital Logic Design?"</em>`;
     }
 
     // Initialize View Defaults
