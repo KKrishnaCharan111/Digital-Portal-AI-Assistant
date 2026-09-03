@@ -113,7 +113,6 @@
 </head>
 <body class="bg-slate-100 text-slate-800 min-h-screen pb-24 md:pb-8 antialiased overflow-hidden" id="main-body">
 
-  <!-- Login Modal -->
   <div id="login-overlay" class="fixed inset-0 z-50 bg-slate-50 flex flex-col items-center justify-center px-4 transition-all duration-500 ease-in-out">
     <div class="bg-white p-8 rounded-3xl shadow-2xl w-full max-w-md flex flex-col items-center text-center border border-slate-100 transform transition-transform duration-500 relative" id="login-box">
       
@@ -126,7 +125,19 @@
       </div>
 
       <h2 class="text-xl font-extrabold text-slate-900 mb-1 mt-1">Digital Portal</h2>
-      <p class="text-xs text-slate-500 mb-6 font-medium">Enter your credentials to access your dashboard</p>
+      <p class="text-xs text-slate-500 mb-6 font-medium">Verify your identity to access your dashboard</p>
+
+      <div id="bio-login-container" class="hidden w-full mb-4">
+        <button onclick="handleBiometricLogin()" class="w-full bg-gradient-to-r from-emerald-600 to-teal-600 hover:from-emerald-700 hover:to-teal-700 text-white font-bold py-3.5 rounded-xl shadow-md transition active:scale-95 flex items-center justify-center gap-2">
+          <i class="fa-solid fa-fingerprint text-lg"></i>
+          <span id="bio-login-label">Login with Fingerprint / Face ID</span>
+        </button>
+        <div class="relative flex py-4 items-center">
+          <div class="flex-grow border-t border-slate-200"></div>
+          <span class="flex-shrink mx-3 text-[11px] font-bold text-slate-400 uppercase tracking-wider">or sign in manually</span>
+          <div class="flex-grow border-t border-slate-200"></div>
+        </div>
+      </div>
 
       <div class="w-full space-y-4">
         <div class="text-left">
@@ -137,7 +148,7 @@
           <label class="block text-[11px] font-bold text-slate-500 uppercase mb-1.5 ml-1">USN</label>
           <input type="text" id="login-usn" placeholder="e.g. 25BTREC020" class="w-full px-4 py-3 bg-slate-50 border border-slate-200 rounded-xl text-sm focus:outline-none focus:ring-2 focus:ring-blue-600 font-mono transition uppercase" onkeydown="if(event.key === 'Enter') handleLogin()" />
         </div>
-        <div id="login-error" class="hidden text-rose-500 text-[11px] font-bold mt-2 bg-rose-50 p-2 rounded-lg border border-rose-100">
+        <div id="login-error" class="hidden text-rose-500 text-[11px] font-bold mt-2 bg-rose-50 p-2 rounded-lg border border-rose-100 text-left">
           Invalid Name or USN. Please check your spelling and try again.
         </div>
       </div>
@@ -148,7 +159,6 @@
     </div>
   </div>
 
-  <!-- Header -->
   <header class="bg-white border-b border-slate-200 sticky top-0 z-30 shadow-xs">
     <div class="max-w-7xl mx-auto px-4 py-3 flex items-center justify-between">
       <div class="flex items-center space-x-3">
@@ -168,10 +178,12 @@
           <i class="fa-solid fa-wand-magic-sparkles text-[11px]"></i>
           <span class="hidden sm:inline">Ask AI</span>
         </button>
+        <button onclick="handleLogout()" class="w-8 h-8 rounded-full bg-rose-50 hover:bg-rose-100 flex items-center justify-center text-rose-600 transition shadow-xs" title="Sign Out & Switch Student">
+          <i class="fa-solid fa-arrow-right-from-bracket text-xs"></i>
+        </button>
       </div>
     </div>
 
-    <!-- Desktop Navigation Pill Bar -->
     <div class="border-t border-slate-100 bg-white">
       <nav class="hidden md:flex max-w-7xl mx-auto px-4 py-2.5 items-center justify-center gap-1.5 lg:gap-2 text-xs font-semibold overflow-x-auto no-scrollbar">
         <button onclick="switchTab('timetable')" id="desk-tab-timetable" class="desk-nav-btn active-pill px-3.5 py-1.5 rounded-full flex items-center gap-2 whitespace-nowrap">
@@ -182,7 +194,6 @@
           <i class="fa-brands fa-whatsapp text-emerald-500 text-sm"></i>
           <span>Leave Permission</span>
         </button>
-        <!-- NEW COLOR: Drive Gold/Amber for Notes -->
         <button onclick="switchTab('notes')" id="desk-tab-notes" class="desk-nav-btn inactive-pill px-3.5 py-1.5 rounded-full flex items-center gap-2 whitespace-nowrap">
           <i class="fa-brands fa-google-drive text-amber-500 text-sm"></i>
           <span>Classroom Notes</span>
@@ -195,7 +206,6 @@
           <i class="fa-solid fa-book-bookmark text-rose-500 text-sm"></i>
           <span>Course Matrix</span>
         </button>
-        <!-- NEW COLOR: Indigo / Deep Violet for Student Directory -->
         <button onclick="switchTab('students')" id="desk-tab-students" class="desk-nav-btn inactive-pill px-3.5 py-1.5 rounded-full flex items-center gap-2 whitespace-nowrap">
           <i class="fa-solid fa-users text-indigo-500 text-sm"></i>
           <span>Student Directory</span>
@@ -214,7 +224,6 @@
 
   <main class="max-w-5xl mx-auto px-3.5 sm:px-6 py-4">
 
-    <!-- 1. Timetable -->
     <section id="view-timetable" class="tab-view space-y-4">
       <div class="bg-gradient-to-r from-blue-700 via-indigo-700 to-purple-800 rounded-2xl p-5 text-white shadow-lg">
         <div class="flex justify-between items-start">
@@ -241,13 +250,10 @@
       <div id="day-schedule-list" class="space-y-2.5"></div>
     </section>
 
-    <!-- 2. Leave Permission -->
     <section id="view-leave" class="tab-view hidden space-y-4">
       <div class="bg-gradient-to-r from-emerald-600 via-teal-600 to-cyan-700 rounded-2xl p-6 text-white shadow-lg">
         <div class="flex items-center gap-3">
-          <div class="w-12 h-12 rounded-2xl bg-white/20 flex items-center justify-center text-white text-2xl backdrop-blur-xs shadow-inner">
-            <i class="fa-brands fa-whatsapp"></i>
-          </div>
+          <i class="fa-brands fa-whatsapp text-2xl"></i>
           <div>
             <h2 class="text-xl font-black leading-tight">Faculty Leave Permission</h2>
             <p class="text-xs text-emerald-100 mt-1 font-medium">Click any faculty member to open WhatsApp with an auto-drafted leave request.</p>
@@ -265,15 +271,10 @@
       <div id="faculty-cards-container" class="grid grid-cols-1 sm:grid-cols-2 gap-3.5"></div>
     </section>
 
-    <!-- 3. Classroom Notes (NOW RE-COLORED: Drive Gold / Warm Amber + Multi-Color accents) -->
     <section id="view-notes" class="tab-view hidden space-y-4">
-      <!-- Drive Themed Vibrant Gradient Banner -->
       <div class="bg-gradient-to-r from-amber-500 via-yellow-500 to-amber-600 rounded-2xl p-6 text-slate-950 shadow-lg relative overflow-hidden">
-        <div class="absolute -right-6 -bottom-6 w-32 h-32 bg-white/20 rounded-full blur-xl pointer-events-none"></div>
         <div class="flex items-center gap-3">
-          <div class="w-12 h-12 rounded-2xl bg-white/30 backdrop-blur-xs flex items-center justify-center text-slate-900 text-2xl shadow-inner">
-            <i class="fa-brands fa-google-drive"></i>
-          </div>
+          <i class="fa-brands fa-google-drive text-2xl"></i>
           <div>
             <h2 class="text-xl font-black flex items-center gap-2">
               Classroom Notes & Resources
@@ -285,10 +286,8 @@
         </div>
       </div>
 
-      <!-- Subject Cards with unique colors & distinct Drive-themed button -->
       <div class="grid grid-cols-1 sm:grid-cols-2 gap-3.5">
         
-        <!-- Digital Logic Design -->
         <div class="bg-white border border-slate-200 rounded-2xl p-4 shadow-xs flex flex-col justify-between hover:border-amber-400 hover:shadow-md transition">
           <div class="flex items-start justify-between gap-3">
             <div class="w-10 h-10 rounded-xl bg-amber-50 text-amber-600 flex items-center justify-center shrink-0 border border-amber-200">
@@ -305,7 +304,6 @@
           </a>
         </div>
 
-        <!-- Analog Electronics Circuits -->
         <div class="bg-white border border-slate-200 rounded-2xl p-4 shadow-xs flex flex-col justify-between hover:border-violet-400 hover:shadow-md transition">
           <div class="flex items-start justify-between gap-3">
             <div class="w-10 h-10 rounded-xl bg-violet-50 text-violet-600 flex items-center justify-center shrink-0 border border-violet-200">
@@ -322,7 +320,6 @@
           </a>
         </div>
 
-        <!-- Applied Biology -->
         <div class="bg-white border border-slate-200 rounded-2xl p-4 shadow-xs flex flex-col justify-between hover:border-teal-400 hover:shadow-md transition">
           <div class="flex items-start justify-between gap-3">
             <div class="w-10 h-10 rounded-xl bg-teal-50 text-teal-600 flex items-center justify-center shrink-0 border border-teal-200">
@@ -339,7 +336,6 @@
           </a>
         </div>
 
-        <!-- Design Thinking -->
         <div class="bg-white border border-slate-200 rounded-2xl p-4 shadow-xs flex flex-col justify-between hover:border-yellow-400 hover:shadow-md transition">
           <div class="flex items-start justify-between gap-3">
             <div class="w-10 h-10 rounded-xl bg-yellow-50 text-yellow-600 flex items-center justify-center shrink-0 border border-yellow-200">
@@ -356,7 +352,6 @@
           </a>
         </div>
 
-        <!-- Environmental Science -->
         <div class="bg-white border border-slate-200 rounded-2xl p-4 shadow-xs flex flex-col justify-between hover:border-emerald-400 hover:shadow-md transition">
           <div class="flex items-start justify-between gap-3">
             <div class="w-10 h-10 rounded-xl bg-emerald-50 text-emerald-600 flex items-center justify-center shrink-0 border border-emerald-200">
@@ -373,7 +368,6 @@
           </a>
         </div>
 
-        <!-- Signals and Systems -->
         <div class="bg-white border border-slate-200 rounded-2xl p-4 shadow-xs flex flex-col justify-between hover:border-blue-400 hover:shadow-md transition">
           <div class="flex items-start justify-between gap-3">
             <div class="w-10 h-10 rounded-xl bg-blue-50 text-blue-600 flex items-center justify-center shrink-0 border border-blue-200">
@@ -390,7 +384,6 @@
           </a>
         </div>
 
-        <!-- Sports and Yoga -->
         <div class="bg-white border border-slate-200 rounded-2xl p-4 shadow-xs flex flex-col justify-between hover:border-sky-400 hover:shadow-md transition">
           <div class="flex items-start justify-between gap-3">
             <div class="w-10 h-10 rounded-xl bg-sky-50 text-sky-600 flex items-center justify-center shrink-0 border border-sky-200">
@@ -407,7 +400,6 @@
           </a>
         </div>
 
-        <!-- Statistical & Numerical Methods -->
         <div class="bg-white border border-slate-200 rounded-2xl p-4 shadow-xs flex flex-col justify-between hover:border-purple-400 hover:shadow-md transition">
           <div class="flex items-start justify-between gap-3">
             <div class="w-10 h-10 rounded-xl bg-purple-50 text-purple-600 flex items-center justify-center shrink-0 border border-purple-200">
@@ -434,7 +426,6 @@
       </div>
     </section>
 
-    <!-- 4. Calendar of Events (COE) -->
     <section id="view-coe" class="tab-view hidden space-y-4">
       <div class="grid grid-cols-2 sm:grid-cols-4 gap-2.5">
         <div class="bg-white p-4 rounded-2xl border border-blue-200 shadow-xs">
@@ -550,7 +541,6 @@
       </div>
     </section>
 
-    <!-- 5. Course Matrix -->
     <section id="view-matrix" class="tab-view hidden space-y-4">
       <div class="space-y-2">
         <div class="relative">
@@ -583,10 +573,7 @@
       <div id="m-course-container" class="space-y-2.5"></div>
     </section>
 
-    <!-- 6. Student Directory (NOW RE-COLORED: Vibrant Indigo & Royal Purple Theme) -->
     <section id="view-students" class="tab-view hidden space-y-4">
-      
-      <!-- Vibrant Indigo Student Overview Cards -->
       <div class="grid grid-cols-3 gap-2.5">
         <div class="bg-white p-3.5 rounded-2xl border border-indigo-200 shadow-xs text-center">
           <p class="text-[10px] font-bold uppercase text-indigo-500">Total Enrolled</p>
@@ -622,7 +609,6 @@
       <div id="student-list-container" class="space-y-2"></div>
     </section>
 
-    <!-- 7. Official ERP Portal -->
     <section id="view-erp" class="tab-view hidden space-y-4">
       <div class="bg-gradient-to-r from-orange-600 via-amber-600 to-amber-700 rounded-2xl p-6 text-white shadow-lg flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4">
         <div>
@@ -644,7 +630,6 @@
       </div>
     </section>
 
-    <!-- 8. Class Chat -->
     <section id="view-chat" class="tab-view hidden space-y-4 h-[75vh] flex flex-col">
       <div class="bg-gradient-to-r from-purple-600 via-pink-600 to-rose-600 rounded-2xl p-6 text-white shadow-lg shrink-0">
         <div>
@@ -662,7 +647,6 @@
 
   </main>
 
-  <!-- Mobile Bottom Navigation Bar -->
   <div class="md:hidden fixed bottom-0 left-0 right-0 bg-white/95 backdrop-blur-md border-t border-slate-200 z-30 px-2 py-2 flex justify-between items-center overflow-x-auto no-scrollbar gap-1 shadow-lg">
     <button onclick="switchTab('timetable')" id="bot-tab-timetable" class="bot-nav-btn flex flex-col items-center gap-0.5 text-blue-600 min-w-[52px]">
       <i class="fa-regular fa-clock text-base"></i>
@@ -672,7 +656,6 @@
       <i class="fa-brands fa-whatsapp text-base"></i>
       <span class="text-[10px] font-bold">Leave</span>
     </button>
-    <!-- Notes is now distinct Amber / Gold -->
     <button onclick="switchTab('notes')" id="bot-tab-notes" class="bot-nav-btn flex flex-col items-center gap-0.5 text-slate-400 hover:text-slate-600 min-w-[52px]">
       <i class="fa-brands fa-google-drive text-base"></i>
       <span class="text-[10px] font-bold">Notes</span>
@@ -685,7 +668,6 @@
       <i class="fa-solid fa-book-bookmark text-base"></i>
       <span class="text-[10px] font-bold">Courses</span>
     </button>
-    <!-- Students is now distinct Indigo -->
     <button onclick="switchTab('students')" id="bot-tab-students" class="bot-nav-btn flex flex-col items-center gap-0.5 text-slate-400 hover:text-slate-600 min-w-[52px]">
       <i class="fa-solid fa-users text-base"></i>
       <span class="text-[10px] font-bold">Students</span>
@@ -700,7 +682,6 @@
     </button>
   </div>
 
-  <!-- AI Drawer Modal -->
   <div id="ai-modal" class="fixed inset-0 z-50 bg-slate-950/70 backdrop-blur-xs flex flex-col justify-end md:justify-center md:items-center hidden transition-opacity duration-300">
     <div class="bg-white w-full md:max-w-xl h-[88vh] md:h-[620px] rounded-t-3xl md:rounded-2xl shadow-2xl flex flex-col overflow-hidden">
       
@@ -763,7 +744,7 @@
       }
     }
 
-    // Faculty Directory with matched subjects, titles, and WhatsApp numbers
+    // Faculty Directory
     const facultyList = [
       {
         name: "Prof. Chethan G S",
@@ -802,7 +783,7 @@
         bgBadge: "bg-purple-50 text-purple-900 border-purple-200"
       },
       {
-        name: "Dr.破 Dasarathy",
+        name: "Dr. Dasarathy",
         role: "Faculty (HOD Civil)",
         subject: "Environmental Science (BSC 201)",
         phone: "919840062899",
@@ -1017,7 +998,124 @@
     let studentSearchQuery = '';
     let loggedInStudent = null;
 
-    // -------- LOGIN SYSTEM --------
+    // -------- BIOMETRIC AUTHENTICATION ENGINE (WebAuthn) --------
+    
+    // Check if device supports Biometrics / WebAuthn
+    function isWebAuthnAvailable() {
+      return !!(window.PublicKeyCredential && navigator.credentials && navigator.credentials.create);
+    }
+
+    async function promptBiometricRegistration(student) {
+      if (!isWebAuthnAvailable()) return;
+
+      const hasRegistered = localStorage.getItem('portal_bio_registered_' + student.usn);
+      if (hasRegistered) return;
+
+      const wantsBio = confirm("Do you want to enable Fingerprint / Face ID for faster login on this device next time?");
+      if (!wantsBio) return;
+
+      try {
+        const challenge = new Uint8Array(32);
+        window.crypto.getRandomValues(challenge);
+        
+        const userId = new Uint8Array(student.usn.split('').map(c => c.charCodeAt(0)));
+
+        const publicKeyCredentialCreationOptions = {
+          challenge: challenge,
+          rp: {
+            name: "FET Digital Portal",
+            id: window.location.hostname || "localhost"
+          },
+          user: {
+            id: userId,
+            name: student.usn,
+            displayName: student.name
+          },
+          pubKeyCredParams: [{ alg: -7, type: "public-key" }, { alg: -257, type: "public-key" }],
+          authenticatorSelection: {
+            authenticatorAttachment: "platform",
+            userVerification: "required"
+          },
+          timeout: 60000,
+          attestation: "none"
+        };
+
+        const credential = await navigator.credentials.create({
+          publicKey: publicKeyCredentialCreationOptions
+        });
+
+        if (credential) {
+          localStorage.setItem('portal_bio_registered_' + student.usn, 'true');
+          localStorage.setItem('portal_saved_usn', student.usn);
+          alert("Biometric authentication successfully activated!");
+        }
+      } catch (err) {
+        console.warn("Biometric enrollment bypassed or cancelled:", err);
+      }
+    }
+
+    async function handleBiometricLogin() {
+      const savedUsn = localStorage.getItem('portal_saved_usn');
+      const errorMsg = document.getElementById('login-error');
+
+      if (!savedUsn) {
+        errorMsg.textContent = "No saved student found. Sign in manually first.";
+        errorMsg.classList.remove('hidden');
+        return;
+      }
+
+      const matchedStudent = studentList.find(s => s.usn.toLowerCase() === savedUsn.toLowerCase());
+      if (!matchedStudent) {
+        errorMsg.textContent = "Saved student profile not found. Please log in manually.";
+        errorMsg.classList.remove('hidden');
+        return;
+      }
+
+      if (isWebAuthnAvailable()) {
+        try {
+          const challenge = new Uint8Array(32);
+          window.crypto.getRandomValues(challenge);
+
+          const getOptions = {
+            challenge: challenge,
+            timeout: 60000,
+            userVerification: "required",
+            rpId: window.location.hostname || "localhost"
+          };
+
+          const assertion = await navigator.credentials.get({ publicKey: getOptions });
+          if (assertion) {
+            grantAccess(matchedStudent);
+            return;
+          }
+        } catch (e) {
+          console.warn("Biometric prompt skipped or canceled:", e);
+          errorMsg.textContent = "Biometric check canceled. You can sign in using Name & USN.";
+          errorMsg.classList.remove('hidden');
+          return;
+        }
+      }
+
+      // Fallback for browsers that support local fast login
+      grantAccess(matchedStudent);
+    }
+
+    function checkExistingBiometrics() {
+      const savedUsn = localStorage.getItem('portal_saved_usn');
+      if (savedUsn) {
+        const student = studentList.find(s => s.usn.toLowerCase() === savedUsn.toLowerCase());
+        if (student) {
+          const bioContainer = document.getElementById('bio-login-container');
+          const bioLabel = document.getElementById('bio-login-label');
+          if (bioContainer && bioLabel) {
+            bioContainer.classList.remove('hidden');
+            bioLabel.textContent = `Unlock as ${student.name.split(' ')[0]} (Fingerprint / Face ID)`;
+          }
+        }
+      }
+    }
+
+    // -------- MANUAL LOGIN SYSTEM --------
     function handleLogin() {
       const nameInput = document.getElementById('login-name').value.trim().toLowerCase();
       const usnInput = document.getElementById('login-usn').value.trim().toLowerCase();
@@ -1035,20 +1133,38 @@
       );
 
       if (matchedStudent) {
-        loggedInStudent = matchedStudent;
-        errorMsg.classList.add('hidden');
-        document.getElementById('user-display-name').textContent = matchedStudent.name.split(' ')[0];
-        
-        const overlay = document.getElementById('login-overlay');
-        overlay.classList.add('opacity-0');
-        
-        setTimeout(() => {
-          overlay.classList.add('hidden');
-          document.getElementById('main-body').classList.remove('overflow-hidden');
-        }, 500);
+        grantAccess(matchedStudent);
+        // Prompt for fingerprint/Face ID registration for future one-touch logins
+        promptBiometricRegistration(matchedStudent);
       } else {
         errorMsg.textContent = "Invalid Name or USN. Please check your spelling.";
         errorMsg.classList.remove('hidden');
+      }
+    }
+
+    function grantAccess(student) {
+      loggedInStudent = student;
+      localStorage.setItem('portal_saved_usn', student.usn);
+      localStorage.setItem('portal_active_session', JSON.stringify(student));
+
+      const errorMsg = document.getElementById('login-error');
+      if (errorMsg) errorMsg.classList.add('hidden');
+      
+      document.getElementById('user-display-name').textContent = student.name.split(' ')[0];
+      
+      const overlay = document.getElementById('login-overlay');
+      overlay.classList.add('opacity-0');
+      
+      setTimeout(() => {
+        overlay.classList.add('hidden');
+        document.getElementById('main-body').classList.remove('overflow-hidden');
+      }, 400);
+    }
+
+    function handleLogout() {
+      if (confirm("Do you want to log out and switch student?")) {
+        localStorage.removeItem('portal_active_session');
+        location.reload();
       }
     }
 
@@ -1244,7 +1360,7 @@
       renderStudentList();
     }
 
-    // Render Student Directory with Distinct Indigo Palette
+    // Render Student Directory
     function renderStudentList() {
       const container = document.getElementById('student-list-container');
       const filtered = studentList.filter(s => {
@@ -1416,11 +1532,26 @@
       return `💡 I couldn't find an exact match for your query. Try asking:<br>• <em>"Where are the notes?"</em><br>• <em>"What is the USN of Akshatha?"</em><br>• <em>"What classes do I have on Friday?"</em><br>• <em>"Who teaches Digital Logic Design?"</em>`;
     }
 
-    // Initialize View Defaults
-    selectDay('Mon');
-    filterMobileSem('3');
-    renderStudentList();
-    renderFacultyCards();
+    // Auto-login or show Biometric prompt if previously registered
+    window.addEventListener('DOMContentLoaded', () => {
+      selectDay('Mon');
+      filterMobileSem('3');
+      renderStudentList();
+      renderFacultyCards();
+
+      const activeSession = localStorage.getItem('portal_active_session');
+      if (activeSession) {
+        try {
+          const student = JSON.parse(activeSession);
+          grantAccess(student);
+          return;
+        } catch (e) {
+          localStorage.removeItem('portal_active_session');
+        }
+      }
+
+      checkExistingBiometrics();
+    });
   </script>
 </body>
 </html>
