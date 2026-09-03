@@ -16,22 +16,22 @@
     .no-scrollbar::-webkit-scrollbar { display: none; }
     .no-scrollbar { -ms-overflow-style: none; scrollbar-width: none; }
     
-    /* --- NIGHT MODE CUSTOM CSS --- */
+    /* --- NIGHT / DARK MODE CUSTOM CSS --- */
     html.dark {
-      background-color: #0f172a; /* slate-900 */
-      color: #f8fafc; /* slate-50 */
+      background-color: #0b1120;
+      color: #f8fafc;
     }
     html.dark body {
-      background-color: #0f172a;
+      background-color: #0b1120;
       color: #f8fafc;
     }
     
     /* Backgrounds & Borders */
-    html.dark .bg-slate-100 { background-color: #0f172a !important; }
-    html.dark .bg-slate-50 { background-color: #1e293b !important; border-color: #334155 !important; }
-    html.dark .bg-white { background-color: #1e293b !important; border-color: #334155 !important; }
-    html.dark .border-slate-200 { border-color: #334155 !important; }
-    html.dark .border-slate-100 { border-color: #1e293b !important; }
+    html.dark .bg-slate-100 { background-color: #0b1120 !important; }
+    html.dark .bg-slate-50 { background-color: #151f32 !important; border-color: #27354f !important; }
+    html.dark .bg-white { background-color: #131c2e !important; border-color: #223049 !important; }
+    html.dark .border-slate-200 { border-color: #223049 !important; }
+    html.dark .border-slate-100 { border-color: #151f32 !important; }
     
     /* Typography */
     html.dark .text-slate-900 { color: #f8fafc !important; }
@@ -42,43 +42,91 @@
     html.dark .text-slate-400 { color: #64748b !important; }
     
     /* Inputs */
-    html.dark input { background-color: #0f172a !important; color: #f8fafc !important; border-color: #334155 !important; }
+    html.dark input { background-color: #0b1120 !important; color: #f8fafc !important; border-color: #27354f !important; }
     html.dark input::placeholder { color: #64748b !important; }
     
     /* Modals & Overlays */
-    html.dark #login-overlay { background-color: #0f172a !important; }
-    html.dark #login-box { background-color: #1e293b !important; border-color: #334155 !important; }
+    html.dark #login-overlay { background-color: #0b1120 !important; }
+    html.dark #login-box { background-color: #131c2e !important; border-color: #27354f !important; }
     
-    /* Specific pill and alert colors for Dark Mode */
-    html.dark .bg-blue-50 { background-color: rgba(30, 58, 138, 0.4) !important; border-color: rgba(30, 58, 138, 0.6) !important; color: #bfdbfe !important; }
-    html.dark .bg-amber-50 { background-color: rgba(120, 53, 15, 0.4) !important; border-color: rgba(120, 53, 15, 0.6) !important; color: #fde68a !important; }
-    html.dark .bg-rose-50 { background-color: rgba(136, 19, 55, 0.4) !important; border-color: rgba(136, 19, 55, 0.6) !important; color: #fecdd3 !important; }
-    html.dark .bg-emerald-50 { background-color: rgba(6, 78, 59, 0.4) !important; border-color: rgba(6, 78, 59, 0.6) !important; color: #a7f3d0 !important; }
+    /* Dynamic Pill and Alert Colors for Dark Mode */
+    html.dark .bg-blue-50 { background-color: rgba(30, 58, 138, 0.4) !important; border-color: rgba(59, 130, 246, 0.4) !important; color: #bfdbfe !important; }
+    html.dark .bg-amber-50 { background-color: rgba(120, 53, 15, 0.4) !important; border-color: rgba(245, 158, 11, 0.4) !important; color: #fde68a !important; }
+    html.dark .bg-rose-50 { background-color: rgba(136, 19, 55, 0.4) !important; border-color: rgba(244, 63, 94, 0.4) !important; color: #fecdd3 !important; }
+    html.dark .bg-emerald-50 { background-color: rgba(6, 78, 59, 0.4) !important; border-color: rgba(16, 185, 129, 0.4) !important; color: #a7f3d0 !important; }
+    html.dark .bg-indigo-50 { background-color: rgba(49, 46, 129, 0.4) !important; border-color: rgba(99, 102, 241, 0.4) !important; color: #c7d2fe !important; }
+    html.dark .bg-purple-50 { background-color: rgba(88, 28, 135, 0.4) !important; border-color: rgba(168, 85, 247, 0.4) !important; color: #e9d5ff !important; }
     
     html.dark .text-blue-700 { color: #93c5fd !important; }
     html.dark .text-blue-600 { color: #60a5fa !important; }
     html.dark .text-amber-900 { color: #fcd34d !important; }
     html.dark .text-rose-800 { color: #fda4af !important; }
     html.dark .text-emerald-900 { color: #6ee7b7 !important; }
+    html.dark .text-indigo-900 { color: #a5b4fc !important; }
+    html.dark .text-purple-900 { color: #d8b4fe !important; }
+    
+    /* Notes & Student Section Specific Dark Mode Adjustments */
+    html.dark .notes-btn-drive {
+      background: linear-gradient(135deg, rgba(245, 158, 11, 0.25), rgba(37, 99, 235, 0.25)) !important;
+      border: 1px solid rgba(245, 158, 11, 0.4) !important;
+      color: #fde68a !important;
+    }
+    html.dark .notes-btn-drive:hover {
+      background: linear-gradient(135deg, rgba(245, 158, 11, 0.4), rgba(37, 99, 235, 0.4)) !important;
+    }
+    html.dark .student-card-border {
+      border-color: rgba(129, 140, 248, 0.25) !important;
+    }
     
     /* Bottom Nav Bar */
     html.dark .bot-nav-btn.text-slate-400 { color: #64748b !important; }
     html.dark .bot-nav-btn.text-slate-600 { color: #cbd5e1 !important; }
+
+    /* Custom Pill Navigation Styling */
+    .desk-nav-btn {
+      transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+    }
+    .desk-nav-btn.active-pill {
+      background: linear-gradient(135deg, #2563eb, #4f46e5) !important;
+      color: #ffffff !important;
+      box-shadow: 0 4px 14px rgba(37, 99, 235, 0.35);
+    }
+    .desk-nav-btn.active-pill i {
+      color: #ffffff !important;
+    }
+    .desk-nav-btn.inactive-pill {
+      background-color: transparent;
+      color: #475569;
+    }
+    .desk-nav-btn.inactive-pill:hover {
+      background-color: #f1f5f9;
+      color: #0f172a;
+    }
+    html.dark .desk-nav-btn.inactive-pill {
+      color: #cbd5e1;
+    }
+    html.dark .desk-nav-btn.inactive-pill:hover {
+      background-color: #1e293b;
+      color: #ffffff;
+    }
   </style>
 </head>
 <body class="bg-slate-100 text-slate-800 min-h-screen pb-24 md:pb-8 antialiased overflow-hidden" id="main-body">
 
-  <!-- LOGIN OVERLAY -->
+  <!-- Login Modal -->
   <div id="login-overlay" class="fixed inset-0 z-50 bg-slate-50 flex flex-col items-center justify-center px-4 transition-all duration-500 ease-in-out">
-    <div class="bg-white p-8 rounded-3xl shadow-xl w-full max-w-md flex flex-col items-center text-center border border-slate-100 transform transition-transform duration-500 relative" id="login-box">
+    <div class="bg-white p-8 rounded-3xl shadow-2xl w-full max-w-md flex flex-col items-center text-center border border-slate-100 transform transition-transform duration-500 relative" id="login-box">
       
-      <!-- Night Mode Toggle (Login) -->
       <button onclick="toggleDarkMode()" class="absolute top-5 right-5 w-8 h-8 rounded-full bg-slate-100 hover:bg-slate-200 flex items-center justify-center text-slate-600 transition" title="Toggle Dark Mode">
         <i class="fa-solid fa-moon" id="theme-icon-login"></i>
       </button>
 
-      <h2 class="text-xl font-extrabold text-slate-900 mb-1 mt-2">Digital Portal</h2>
-      <p class="text-xs text-slate-500 mb-8 font-medium">Enter your credentials to access the dashboard</p>
+      <div class="w-12 h-12 rounded-2xl bg-gradient-to-tr from-blue-600 to-indigo-600 flex items-center justify-center text-white text-xl shadow-lg mb-2">
+        <i class="fa-solid fa-graduation-cap"></i>
+      </div>
+
+      <h2 class="text-xl font-extrabold text-slate-900 mb-1 mt-1">Digital Portal</h2>
+      <p class="text-xs text-slate-500 mb-6 font-medium">Enter your credentials to access your dashboard</p>
 
       <div class="w-full space-y-4">
         <div class="text-left">
@@ -94,83 +142,95 @@
         </div>
       </div>
 
-      <button onclick="handleLogin()" class="w-full mt-8 bg-blue-600 hover:bg-blue-700 text-white font-bold py-3.5 rounded-xl shadow-md transition active:scale-95 flex items-center justify-center gap-2">
+      <button onclick="handleLogin()" class="w-full mt-6 bg-gradient-to-r from-blue-600 to-indigo-600 hover:from-blue-700 hover:to-indigo-700 text-white font-bold py-3.5 rounded-xl shadow-md transition active:scale-95 flex items-center justify-center gap-2">
         <i class="fa-solid fa-right-to-bracket"></i> Secure Login
       </button>
     </div>
   </div>
 
-  <!-- Top App Header -->
+  <!-- Header -->
   <header class="bg-white border-b border-slate-200 sticky top-0 z-30 shadow-xs">
-    <div class="max-w-5xl mx-auto px-4 py-3 flex items-center justify-between">
+    <div class="max-w-7xl mx-auto px-4 py-3 flex items-center justify-between">
       <div class="flex items-center space-x-3">
+        <div class="w-9 h-9 rounded-xl bg-gradient-to-tr from-blue-600 to-indigo-600 flex items-center justify-center text-white text-base shadow-sm">
+          <i class="fa-solid fa-graduation-cap"></i>
+        </div>
         <div>
           <h1 class="text-sm font-bold text-slate-900 leading-tight">Digital Portal</h1>
           <p class="text-[10px] text-slate-500 font-medium">Welcome, <span id="user-display-name" class="text-blue-600 font-bold">Student</span></p>
         </div>
       </div>
       <div class="flex items-center gap-2 shrink-0">
-        <!-- Night Mode Toggle (Dashboard) -->
-        <button onclick="toggleDarkMode()" class="w-8 h-8 rounded-full bg-slate-100 hover:bg-slate-200 flex items-center justify-center text-slate-600 transition" title="Toggle Dark Mode">
+        <button onclick="toggleDarkMode()" class="w-8 h-8 rounded-full bg-slate-100 hover:bg-slate-200 flex items-center justify-center text-slate-600 transition shadow-inner" title="Toggle Dark Mode">
           <i class="fa-solid fa-moon" id="theme-icon-header"></i>
         </button>
-        <button onclick="toggleAiDrawer()" class="flex items-center gap-1 bg-gradient-to-r from-blue-600 to-indigo-600 text-white text-xs font-bold px-3 py-1.5 rounded-full shadow-sm active:scale-95 transition">
+        <button onclick="toggleAiDrawer()" class="flex items-center gap-1.5 bg-gradient-to-r from-blue-600 via-indigo-600 to-purple-600 text-white text-xs font-bold px-3.5 py-1.5 rounded-full shadow-md hover:shadow-indigo-500/20 active:scale-95 transition">
           <i class="fa-solid fa-wand-magic-sparkles text-[11px]"></i>
           <span class="hidden sm:inline">Ask AI</span>
         </button>
       </div>
     </div>
 
-    <!-- Desktop Navigation -->
-    <nav class="hidden md:flex max-w-5xl mx-auto px-4 border-t border-slate-100 text-xs font-semibold overflow-x-auto no-scrollbar">
-      <button onclick="switchTab('timetable')" id="desk-tab-timetable" class="desk-nav-btn py-3 px-4 border-b-2 border-blue-600 text-blue-600 whitespace-nowrap">
-        <i class="fa-solid fa-clock mr-1.5"></i> Class Schedule
-      </button>
-      <button onclick="switchTab('leave')" id="desk-tab-leave" class="desk-nav-btn py-3 px-4 border-b-2 border-transparent text-slate-500 hover:text-slate-800 whitespace-nowrap">
-        <i class="fa-brands fa-whatsapp text-emerald-600 mr-1.5"></i> Leave Permission
-      </button>
-      <button onclick="switchTab('notes')" id="desk-tab-notes" class="desk-nav-btn py-3 px-4 border-b-2 border-transparent text-slate-500 hover:text-slate-800 whitespace-nowrap">
-        <i class="fa-brands fa-google-drive mr-1.5"></i> Classroom Notes
-      </button>
-      <button onclick="switchTab('coe')" id="desk-tab-coe" class="desk-nav-btn py-3 px-4 border-b-2 border-transparent text-slate-500 hover:text-slate-800 whitespace-nowrap">
-        <i class="fa-solid fa-calendar-days mr-1.5"></i> Academic Calendar
-      </button>
-      <button onclick="switchTab('matrix')" id="desk-tab-matrix" class="desk-nav-btn py-3 px-4 border-b-2 border-transparent text-slate-500 hover:text-slate-800 whitespace-nowrap">
-        <i class="fa-solid fa-graduation-cap mr-1.5"></i> Course Matrix
-      </button>
-      <button onclick="switchTab('students')" id="desk-tab-students" class="desk-nav-btn py-3 px-4 border-b-2 border-transparent text-slate-500 hover:text-slate-800 whitespace-nowrap">
-        <i class="fa-solid fa-users mr-1.5"></i> Student Directory
-      </button>
-      <button onclick="switchTab('erp')" id="desk-tab-erp" class="desk-nav-btn py-3 px-4 border-b-2 border-transparent text-slate-500 hover:text-slate-800 whitespace-nowrap">
-        <i class="fa-solid fa-building-columns mr-1.5"></i> ERP Portal
-      </button>
-      <button onclick="switchTab('chat')" id="desk-tab-chat" class="desk-nav-btn py-3 px-4 border-b-2 border-transparent text-slate-500 hover:text-slate-800 whitespace-nowrap">
-        <i class="fa-solid fa-comments mr-1.5"></i> Class Chat
-      </button>
-    </nav>
+    <!-- Desktop Navigation Pill Bar -->
+    <div class="border-t border-slate-100 bg-white">
+      <nav class="hidden md:flex max-w-7xl mx-auto px-4 py-2.5 items-center justify-center gap-1.5 lg:gap-2 text-xs font-semibold overflow-x-auto no-scrollbar">
+        <button onclick="switchTab('timetable')" id="desk-tab-timetable" class="desk-nav-btn active-pill px-3.5 py-1.5 rounded-full flex items-center gap-2 whitespace-nowrap">
+          <i class="fa-regular fa-clock text-blue-500 text-sm"></i>
+          <span>Class Schedule</span>
+        </button>
+        <button onclick="switchTab('leave')" id="desk-tab-leave" class="desk-nav-btn inactive-pill px-3.5 py-1.5 rounded-full flex items-center gap-2 whitespace-nowrap">
+          <i class="fa-brands fa-whatsapp text-emerald-500 text-sm"></i>
+          <span>Leave Permission</span>
+        </button>
+        <!-- NEW COLOR: Drive Gold/Amber for Notes -->
+        <button onclick="switchTab('notes')" id="desk-tab-notes" class="desk-nav-btn inactive-pill px-3.5 py-1.5 rounded-full flex items-center gap-2 whitespace-nowrap">
+          <i class="fa-brands fa-google-drive text-amber-500 text-sm"></i>
+          <span>Classroom Notes</span>
+        </button>
+        <button onclick="switchTab('coe')" id="desk-tab-coe" class="desk-nav-btn inactive-pill px-3.5 py-1.5 rounded-full flex items-center gap-2 whitespace-nowrap">
+          <i class="fa-regular fa-calendar text-cyan-500 text-sm"></i>
+          <span>Academic Calendar</span>
+        </button>
+        <button onclick="switchTab('matrix')" id="desk-tab-matrix" class="desk-nav-btn inactive-pill px-3.5 py-1.5 rounded-full flex items-center gap-2 whitespace-nowrap">
+          <i class="fa-solid fa-book-bookmark text-rose-500 text-sm"></i>
+          <span>Course Matrix</span>
+        </button>
+        <!-- NEW COLOR: Indigo / Deep Violet for Student Directory -->
+        <button onclick="switchTab('students')" id="desk-tab-students" class="desk-nav-btn inactive-pill px-3.5 py-1.5 rounded-full flex items-center gap-2 whitespace-nowrap">
+          <i class="fa-solid fa-users text-indigo-500 text-sm"></i>
+          <span>Student Directory</span>
+        </button>
+        <button onclick="switchTab('erp')" id="desk-tab-erp" class="desk-nav-btn inactive-pill px-3.5 py-1.5 rounded-full flex items-center gap-2 whitespace-nowrap">
+          <i class="fa-solid fa-landmark text-orange-500 text-sm"></i>
+          <span>ERP Portal</span>
+        </button>
+        <button onclick="switchTab('chat')" id="desk-tab-chat" class="desk-nav-btn inactive-pill px-3.5 py-1.5 rounded-full flex items-center gap-2 whitespace-nowrap">
+          <i class="fa-solid fa-comments text-fuchsia-500 text-sm"></i>
+          <span>Class Chat</span>
+        </button>
+      </nav>
+    </div>
   </header>
 
-  <!-- Main View Container -->
   <main class="max-w-5xl mx-auto px-3.5 sm:px-6 py-4">
 
-    <!-- TAB 1: TIMETABLE -->
+    <!-- 1. Timetable -->
     <section id="view-timetable" class="tab-view space-y-4">
-      <div class="bg-gradient-to-r from-blue-700 to-indigo-800 rounded-2xl p-4 text-white shadow-md">
+      <div class="bg-gradient-to-r from-blue-700 via-indigo-700 to-purple-800 rounded-2xl p-5 text-white shadow-lg">
         <div class="flex justify-between items-start">
           <div>
-            <span class="text-[10px] uppercase tracking-wider font-bold text-blue-200 bg-white/10 px-2 py-0.5 rounded">3rd Semester</span>
-            <h2 class="text-lg font-extrabold mt-1">Electronics & Comm. Engg</h2>
+            <span class="text-[10px] uppercase tracking-wider font-extrabold text-blue-100 bg-white/20 px-2.5 py-1 rounded-lg backdrop-blur-xs">3rd Semester</span>
+            <h2 class="text-xl font-black mt-2">Electronics & Comm. Engg</h2>
           </div>
-          <span class="bg-emerald-400 text-slate-950 text-[10px] font-black px-2 py-0.5 rounded-md">2026</span>
+          <span class="bg-amber-400 text-slate-950 text-xs font-black px-2.5 py-1 rounded-lg shadow-sm">2026 Batch</span>
         </div>
-        <p class="text-xs text-blue-100 mt-2 font-medium">
-          <i class="fa-solid fa-user-tie text-[10px] mr-1"></i> Section Incharge: Prof. Chethan G S
+        <p class="text-xs text-blue-100 mt-2.5 font-medium flex items-center gap-1.5">
+          <i class="fa-solid fa-user-tie text-amber-300"></i> Section Incharge: <strong>Prof. Chethan G S</strong>
         </p>
       </div>
 
-      <!-- Day Selector Pills -->
       <div class="flex items-center gap-2 overflow-x-auto no-scrollbar py-1">
-        <button onclick="selectDay('Mon')" class="day-btn px-4 py-2 rounded-xl text-xs font-bold transition bg-blue-600 text-white shadow-sm flex-1 min-w-[62px] text-center" data-day="Mon">Mon</button>
+        <button onclick="selectDay('Mon')" class="day-btn px-4 py-2 rounded-xl text-xs font-bold transition bg-blue-600 text-white shadow-md flex-1 min-w-[62px] text-center" data-day="Mon">Mon</button>
         <button onclick="selectDay('Tue')" class="day-btn px-4 py-2 rounded-xl text-xs font-bold transition bg-white text-slate-700 border border-slate-200 flex-1 min-w-[62px] text-center" data-day="Tue">Tue</button>
         <button onclick="selectDay('Wed')" class="day-btn px-4 py-2 rounded-xl text-xs font-bold transition bg-white text-slate-700 border border-slate-200 flex-1 min-w-[62px] text-center" data-day="Wed">Wed</button>
         <button onclick="selectDay('Thu')" class="day-btn px-4 py-2 rounded-xl text-xs font-bold transition bg-white text-slate-700 border border-slate-200 flex-1 min-w-[62px] text-center" data-day="Thu">Thu</button>
@@ -178,223 +238,227 @@
         <button onclick="selectDay('Sat')" class="day-btn px-4 py-2 rounded-xl text-xs font-bold transition bg-white text-slate-700 border border-slate-200 flex-1 min-w-[62px] text-center" data-day="Sat">Sat</button>
       </div>
 
-      <!-- Periods List -->
       <div id="day-schedule-list" class="space-y-2.5"></div>
     </section>
 
-    <!-- TAB: LEAVE PERMISSION (FACULTY WHATSAPP DIRECTORY) -->
+    <!-- 2. Leave Permission -->
     <section id="view-leave" class="tab-view hidden space-y-4">
-      <div class="bg-gradient-to-r from-emerald-600 to-teal-800 rounded-2xl p-6 text-white shadow-md">
+      <div class="bg-gradient-to-r from-emerald-600 via-teal-600 to-cyan-700 rounded-2xl p-6 text-white shadow-lg">
         <div class="flex items-center gap-3">
-          <div class="w-12 h-12 rounded-2xl bg-white/20 flex items-center justify-center text-white text-2xl backdrop-blur-xs">
+          <div class="w-12 h-12 rounded-2xl bg-white/20 flex items-center justify-center text-white text-2xl backdrop-blur-xs shadow-inner">
             <i class="fa-brands fa-whatsapp"></i>
           </div>
           <div>
-            <h2 class="text-xl font-extrabold leading-tight">Faculty Leave Permission</h2>
+            <h2 class="text-xl font-black leading-tight">Faculty Leave Permission</h2>
             <p class="text-xs text-emerald-100 mt-1 font-medium">Click any faculty member to open WhatsApp with an auto-drafted leave request.</p>
           </div>
         </div>
       </div>
 
-      <div class="bg-blue-50 border border-blue-200 rounded-xl p-3.5 flex items-start gap-3 shadow-xs">
+      <div class="bg-blue-50 border border-blue-200 rounded-2xl p-3.5 flex items-start gap-3 shadow-xs">
         <i class="fa-solid fa-circle-info text-blue-600 text-sm mt-0.5"></i>
         <p class="text-xs text-blue-900 leading-relaxed font-medium">
-          <strong>Tip:</strong> Always remember to send leave notifications in advance to your subject teachers and keep your Section Incharge (Prof. Chethan G S) informed.
+          <strong>Tip:</strong> Always notify your subject teachers in advance and keep your Section Incharge (Prof. Chethan G S) updated.
         </p>
       </div>
 
-      <!-- Faculty Cards Grid -->
-      <div id="faculty-cards-container" class="grid grid-cols-1 sm:grid-cols-2 gap-3.5">
-        <!-- Injected via JavaScript -->
-      </div>
+      <div id="faculty-cards-container" class="grid grid-cols-1 sm:grid-cols-2 gap-3.5"></div>
     </section>
 
-    <!-- TAB: GOOGLE CLASSROOM NOTES -->
+    <!-- 3. Classroom Notes (NOW RE-COLORED: Drive Gold / Warm Amber + Multi-Color accents) -->
     <section id="view-notes" class="tab-view hidden space-y-4">
-      <div class="bg-gradient-to-r from-emerald-600 to-teal-700 rounded-2xl p-6 text-white shadow-md">
-        <h2 class="text-xl font-extrabold flex items-center gap-2">
-          <i class="fa-brands fa-google-drive"></i> Classroom Notes & Resources
-        </h2>
-        <p class="text-xs text-emerald-100 font-medium mt-1.5">
-          Direct cloud access to lecture slides, assignments, syllabus modules, and lab materials.
-        </p>
+      <!-- Drive Themed Vibrant Gradient Banner -->
+      <div class="bg-gradient-to-r from-amber-500 via-yellow-500 to-amber-600 rounded-2xl p-6 text-slate-950 shadow-lg relative overflow-hidden">
+        <div class="absolute -right-6 -bottom-6 w-32 h-32 bg-white/20 rounded-full blur-xl pointer-events-none"></div>
+        <div class="flex items-center gap-3">
+          <div class="w-12 h-12 rounded-2xl bg-white/30 backdrop-blur-xs flex items-center justify-center text-slate-900 text-2xl shadow-inner">
+            <i class="fa-brands fa-google-drive"></i>
+          </div>
+          <div>
+            <h2 class="text-xl font-black flex items-center gap-2">
+              Classroom Notes & Resources
+            </h2>
+            <p class="text-xs text-amber-950 font-medium mt-1">
+              Direct cloud access to lecture slides, assignments, lab manuals, and syllabus modules.
+            </p>
+          </div>
+        </div>
       </div>
 
-      <!-- Subject Drive Folders Grid -->
+      <!-- Subject Cards with unique colors & distinct Drive-themed button -->
       <div class="grid grid-cols-1 sm:grid-cols-2 gap-3.5">
         
-        <!-- 1. Digital Logic Design -->
-        <div class="bg-white border border-slate-200 rounded-2xl p-4 shadow-xs flex flex-col justify-between hover:shadow-md transition">
+        <!-- Digital Logic Design -->
+        <div class="bg-white border border-slate-200 rounded-2xl p-4 shadow-xs flex flex-col justify-between hover:border-amber-400 hover:shadow-md transition">
           <div class="flex items-start justify-between gap-3">
             <div class="w-10 h-10 rounded-xl bg-amber-50 text-amber-600 flex items-center justify-center shrink-0 border border-amber-200">
               <i class="fa-solid fa-microchip text-lg"></i>
             </div>
-            <span class="text-[10px] font-mono font-bold bg-slate-100 text-slate-600 px-2 py-0.5 rounded">ESC 204</span>
+            <span class="text-[10px] font-mono font-bold bg-amber-50 text-amber-800 border border-amber-200 px-2 py-0.5 rounded">ESC 204</span>
           </div>
           <div class="mt-3">
             <h3 class="font-extrabold text-sm text-slate-900">Digital Logic Design</h3>
             <p class="text-xs text-slate-500 mt-0.5">Faculty: Prof. Chethan G S</p>
           </div>
-          <a href="https://drive.google.com/drive/folders/1aUI9xTFeM5XEn-ZYjH4_A1Y3xe9lOVG8?usp=drive_link" target="_blank" rel="noopener noreferrer" class="mt-4 w-full py-2 px-3 bg-emerald-50 hover:bg-emerald-100 text-emerald-800 text-xs font-bold rounded-xl flex items-center justify-center gap-2 transition active:scale-95">
-            <i class="fa-brands fa-google-drive text-sm"></i> Open Drive Folder <i class="fa-solid fa-arrow-up-right-from-square text-[10px]"></i>
+          <a href="https://drive.google.com/drive/folders/1aUI9xTFeM5XEn-ZYjH4_A1Y3xe9lOVG8?usp=drive_link" target="_blank" rel="noopener noreferrer" class="notes-btn-drive mt-4 w-full py-2.5 px-3 bg-gradient-to-r from-amber-50 to-yellow-100 hover:from-amber-100 hover:to-yellow-200 text-amber-900 border border-amber-200 text-xs font-bold rounded-xl flex items-center justify-center gap-2 transition active:scale-95 shadow-2xs">
+            <i class="fa-brands fa-google-drive text-amber-600 text-sm"></i> Open Drive Folder <i class="fa-solid fa-arrow-up-right-from-square text-[10px]"></i>
           </a>
         </div>
 
-        <!-- 2. Analog Electronics Circuits -->
-        <div class="bg-white border border-slate-200 rounded-2xl p-4 shadow-xs flex flex-col justify-between hover:shadow-md transition">
+        <!-- Analog Electronics Circuits -->
+        <div class="bg-white border border-slate-200 rounded-2xl p-4 shadow-xs flex flex-col justify-between hover:border-violet-400 hover:shadow-md transition">
           <div class="flex items-start justify-between gap-3">
             <div class="w-10 h-10 rounded-xl bg-violet-50 text-violet-600 flex items-center justify-center shrink-0 border border-violet-200">
               <i class="fa-solid fa-wave-square text-lg"></i>
             </div>
-            <span class="text-[10px] font-mono font-bold bg-slate-100 text-slate-600 px-2 py-0.5 rounded">ESC 202</span>
+            <span class="text-[10px] font-mono font-bold bg-violet-50 text-violet-800 border border-violet-200 px-2 py-0.5 rounded">ESC 202</span>
           </div>
           <div class="mt-3">
             <h3 class="font-extrabold text-sm text-slate-900">Analog Electronics Circuits</h3>
             <p class="text-xs text-slate-500 mt-0.5">Faculty: Dr. Buddha Dharani</p>
           </div>
-          <a href="https://drive.google.com/drive/folders/1gUY51citev0PLt1GZvYmRnTt2qxU_C1T?usp=drive_link" target="_blank" rel="noopener noreferrer" class="mt-4 w-full py-2 px-3 bg-emerald-50 hover:bg-emerald-100 text-emerald-800 text-xs font-bold rounded-xl flex items-center justify-center gap-2 transition active:scale-95">
-            <i class="fa-brands fa-google-drive text-sm"></i> Open Drive Folder <i class="fa-solid fa-arrow-up-right-from-square text-[10px]"></i>
+          <a href="https://drive.google.com/drive/folders/1gUY51citev0PLt1GZvYmRnTt2qxU_C1T?usp=drive_link" target="_blank" rel="noopener noreferrer" class="notes-btn-drive mt-4 w-full py-2.5 px-3 bg-gradient-to-r from-amber-50 to-yellow-100 hover:from-amber-100 hover:to-yellow-200 text-amber-900 border border-amber-200 text-xs font-bold rounded-xl flex items-center justify-center gap-2 transition active:scale-95 shadow-2xs">
+            <i class="fa-brands fa-google-drive text-amber-600 text-sm"></i> Open Drive Folder <i class="fa-solid fa-arrow-up-right-from-square text-[10px]"></i>
           </a>
         </div>
 
-        <!-- 3. Applied Biology -->
-        <div class="bg-white border border-slate-200 rounded-2xl p-4 shadow-xs flex flex-col justify-between hover:shadow-md transition">
+        <!-- Applied Biology -->
+        <div class="bg-white border border-slate-200 rounded-2xl p-4 shadow-xs flex flex-col justify-between hover:border-teal-400 hover:shadow-md transition">
           <div class="flex items-start justify-between gap-3">
             <div class="w-10 h-10 rounded-xl bg-teal-50 text-teal-600 flex items-center justify-center shrink-0 border border-teal-200">
               <i class="fa-solid fa-dna text-lg"></i>
             </div>
-            <span class="text-[10px] font-mono font-bold bg-slate-100 text-slate-600 px-2 py-0.5 rounded">BSC 203</span>
+            <span class="text-[10px] font-mono font-bold bg-teal-50 text-teal-800 border border-teal-200 px-2 py-0.5 rounded">BSC 203</span>
           </div>
           <div class="mt-3">
             <h3 class="font-extrabold text-sm text-slate-900">Applied Biology</h3>
             <p class="text-xs text-slate-500 mt-0.5">Faculty: Dr. Tamilvelan</p>
           </div>
-          <a href="https://drive.google.com/drive/folders/1Nr7my2PCJgsfP1avisOrzVwHYT9c-Nif?usp=drive_link" target="_blank" rel="noopener noreferrer" class="mt-4 w-full py-2 px-3 bg-emerald-50 hover:bg-emerald-100 text-emerald-800 text-xs font-bold rounded-xl flex items-center justify-center gap-2 transition active:scale-95">
-            <i class="fa-brands fa-google-drive text-sm"></i> Open Drive Folder <i class="fa-solid fa-arrow-up-right-from-square text-[10px]"></i>
+          <a href="https://drive.google.com/drive/folders/1Nr7my2PCJgsfP1avisOrzVwHYT9c-Nif?usp=drive_link" target="_blank" rel="noopener noreferrer" class="notes-btn-drive mt-4 w-full py-2.5 px-3 bg-gradient-to-r from-amber-50 to-yellow-100 hover:from-amber-100 hover:to-yellow-200 text-amber-900 border border-amber-200 text-xs font-bold rounded-xl flex items-center justify-center gap-2 transition active:scale-95 shadow-2xs">
+            <i class="fa-brands fa-google-drive text-amber-600 text-sm"></i> Open Drive Folder <i class="fa-solid fa-arrow-up-right-from-square text-[10px]"></i>
           </a>
         </div>
 
-        <!-- 4. Design Thinking -->
-        <div class="bg-white border border-slate-200 rounded-2xl p-4 shadow-xs flex flex-col justify-between hover:shadow-md transition">
+        <!-- Design Thinking -->
+        <div class="bg-white border border-slate-200 rounded-2xl p-4 shadow-xs flex flex-col justify-between hover:border-yellow-400 hover:shadow-md transition">
           <div class="flex items-start justify-between gap-3">
             <div class="w-10 h-10 rounded-xl bg-yellow-50 text-yellow-600 flex items-center justify-center shrink-0 border border-yellow-200">
               <i class="fa-solid fa-lightbulb text-lg"></i>
             </div>
-            <span class="text-[10px] font-mono font-bold bg-slate-100 text-slate-600 px-2 py-0.5 rounded">ESC 205</span>
+            <span class="text-[10px] font-mono font-bold bg-yellow-50 text-yellow-800 border border-yellow-200 px-2 py-0.5 rounded">ESC 205</span>
           </div>
           <div class="mt-3">
             <h3 class="font-extrabold text-sm text-slate-900">Design Thinking</h3>
             <p class="text-xs text-slate-500 mt-0.5">Faculty: Prof. Hari Krishna Moorthy</p>
           </div>
-          <a href="https://drive.google.com/drive/folders/1mC-nwMUdXIhtEIduBMM9z1DuuGsGAW7u?usp=drive_link" target="_blank" rel="noopener noreferrer" class="mt-4 w-full py-2 px-3 bg-emerald-50 hover:bg-emerald-100 text-emerald-800 text-xs font-bold rounded-xl flex items-center justify-center gap-2 transition active:scale-95">
-            <i class="fa-brands fa-google-drive text-sm"></i> Open Drive Folder <i class="fa-solid fa-arrow-up-right-from-square text-[10px]"></i>
+          <a href="https://drive.google.com/drive/folders/1mC-nwMUdXIhtEIduBMM9z1DuuGsGAW7u?usp=drive_link" target="_blank" rel="noopener noreferrer" class="notes-btn-drive mt-4 w-full py-2.5 px-3 bg-gradient-to-r from-amber-50 to-yellow-100 hover:from-amber-100 hover:to-yellow-200 text-amber-900 border border-amber-200 text-xs font-bold rounded-xl flex items-center justify-center gap-2 transition active:scale-95 shadow-2xs">
+            <i class="fa-brands fa-google-drive text-amber-600 text-sm"></i> Open Drive Folder <i class="fa-solid fa-arrow-up-right-from-square text-[10px]"></i>
           </a>
         </div>
 
-        <!-- 5. Environmental Science -->
-        <div class="bg-white border border-slate-200 rounded-2xl p-4 shadow-xs flex flex-col justify-between hover:shadow-md transition">
+        <!-- Environmental Science -->
+        <div class="bg-white border border-slate-200 rounded-2xl p-4 shadow-xs flex flex-col justify-between hover:border-emerald-400 hover:shadow-md transition">
           <div class="flex items-start justify-between gap-3">
             <div class="w-10 h-10 rounded-xl bg-emerald-50 text-emerald-600 flex items-center justify-center shrink-0 border border-emerald-200">
               <i class="fa-solid fa-leaf text-lg"></i>
             </div>
-            <span class="text-[10px] font-mono font-bold bg-slate-100 text-slate-600 px-2 py-0.5 rounded">BSC 201</span>
+            <span class="text-[10px] font-mono font-bold bg-emerald-50 text-emerald-800 border border-emerald-200 px-2 py-0.5 rounded">BSC 201</span>
           </div>
           <div class="mt-3">
             <h3 class="font-extrabold text-sm text-slate-900">Environmental Science</h3>
             <p class="text-xs text-slate-500 mt-0.5">Faculty: Dr. Dasarathy</p>
           </div>
-          <a href="https://drive.google.com/drive/folders/19suFBCio45OhnbdmrMoEScQK3ndeVblT?usp=drive_link" target="_blank" rel="noopener noreferrer" class="mt-4 w-full py-2 px-3 bg-emerald-50 hover:bg-emerald-100 text-emerald-800 text-xs font-bold rounded-xl flex items-center justify-center gap-2 transition active:scale-95">
-            <i class="fa-brands fa-google-drive text-sm"></i> Open Drive Folder <i class="fa-solid fa-arrow-up-right-from-square text-[10px]"></i>
+          <a href="https://drive.google.com/drive/folders/19suFBCio45OhnbdmrMoEScQK3ndeVblT?usp=drive_link" target="_blank" rel="noopener noreferrer" class="notes-btn-drive mt-4 w-full py-2.5 px-3 bg-gradient-to-r from-amber-50 to-yellow-100 hover:from-amber-100 hover:to-yellow-200 text-amber-900 border border-amber-200 text-xs font-bold rounded-xl flex items-center justify-center gap-2 transition active:scale-95 shadow-2xs">
+            <i class="fa-brands fa-google-drive text-amber-600 text-sm"></i> Open Drive Folder <i class="fa-solid fa-arrow-up-right-from-square text-[10px]"></i>
           </a>
         </div>
 
-        <!-- 6. Signals and Systems -->
-        <div class="bg-white border border-slate-200 rounded-2xl p-4 shadow-xs flex flex-col justify-between hover:shadow-md transition">
+        <!-- Signals and Systems -->
+        <div class="bg-white border border-slate-200 rounded-2xl p-4 shadow-xs flex flex-col justify-between hover:border-blue-400 hover:shadow-md transition">
           <div class="flex items-start justify-between gap-3">
             <div class="w-10 h-10 rounded-xl bg-blue-50 text-blue-600 flex items-center justify-center shrink-0 border border-blue-200">
               <i class="fa-solid fa-chart-line text-lg"></i>
             </div>
-            <span class="text-[10px] font-mono font-bold bg-slate-100 text-slate-600 px-2 py-0.5 rounded">ESC 201</span>
+            <span class="text-[10px] font-mono font-bold bg-blue-50 text-blue-800 border border-blue-200 px-2 py-0.5 rounded">ESC 201</span>
           </div>
           <div class="mt-3">
             <h3 class="font-extrabold text-sm text-slate-900">Signals and Systems</h3>
             <p class="text-xs text-slate-500 mt-0.5">Faculty: Dr. Sunil Kumar</p>
           </div>
-          <a href="https://drive.google.com/drive/folders/1JbKCXonZGk7zmqNn_SWFJDM5fk2K8OzO?usp=drive_link" target="_blank" rel="noopener noreferrer" class="mt-4 w-full py-2 px-3 bg-emerald-50 hover:bg-emerald-100 text-emerald-800 text-xs font-bold rounded-xl flex items-center justify-center gap-2 transition active:scale-95">
-            <i class="fa-brands fa-google-drive text-sm"></i> Open Drive Folder <i class="fa-solid fa-arrow-up-right-from-square text-[10px]"></i>
+          <a href="https://drive.google.com/drive/folders/1JbKCXonZGk7zmqNn_SWFJDM5fk2K8OzO?usp=drive_link" target="_blank" rel="noopener noreferrer" class="notes-btn-drive mt-4 w-full py-2.5 px-3 bg-gradient-to-r from-amber-50 to-yellow-100 hover:from-amber-100 hover:to-yellow-200 text-amber-900 border border-amber-200 text-xs font-bold rounded-xl flex items-center justify-center gap-2 transition active:scale-95 shadow-2xs">
+            <i class="fa-brands fa-google-drive text-amber-600 text-sm"></i> Open Drive Folder <i class="fa-solid fa-arrow-up-right-from-square text-[10px]"></i>
           </a>
         </div>
 
-        <!-- 7. Sports and Yoga -->
-        <div class="bg-white border border-slate-200 rounded-2xl p-4 shadow-xs flex flex-col justify-between hover:shadow-md transition">
+        <!-- Sports and Yoga -->
+        <div class="bg-white border border-slate-200 rounded-2xl p-4 shadow-xs flex flex-col justify-between hover:border-sky-400 hover:shadow-md transition">
           <div class="flex items-start justify-between gap-3">
             <div class="w-10 h-10 rounded-xl bg-sky-50 text-sky-600 flex items-center justify-center shrink-0 border border-sky-200">
               <i class="fa-solid fa-person-running text-lg"></i>
             </div>
-            <span class="text-[10px] font-mono font-bold bg-slate-100 text-slate-600 px-2 py-0.5 rounded">HSMC 201</span>
+            <span class="text-[10px] font-mono font-bold bg-sky-50 text-sky-800 border border-sky-200 px-2 py-0.5 rounded">HSMC 201</span>
           </div>
           <div class="mt-3">
             <h3 class="font-extrabold text-sm text-slate-900">Sports and Yoga</h3>
             <p class="text-xs text-slate-500 mt-0.5">Faculty: Dr. Srinivas M</p>
           </div>
-          <a href="https://drive.google.com/drive/folders/1Cw_v5LUZ_EDjKBPpKRjyAIIDOUT5bfCE?usp=drive_link" target="_blank" rel="noopener noreferrer" class="mt-4 w-full py-2 px-3 bg-emerald-50 hover:bg-emerald-100 text-emerald-800 text-xs font-bold rounded-xl flex items-center justify-center gap-2 transition active:scale-95">
-            <i class="fa-brands fa-google-drive text-sm"></i> Open Drive Folder <i class="fa-solid fa-arrow-up-right-from-square text-[10px]"></i>
+          <a href="https://drive.google.com/drive/folders/1Cw_v5LUZ_EDjKBPpKRjyAIIDOUT5bfCE?usp=drive_link" target="_blank" rel="noopener noreferrer" class="notes-btn-drive mt-4 w-full py-2.5 px-3 bg-gradient-to-r from-amber-50 to-yellow-100 hover:from-amber-100 hover:to-yellow-200 text-amber-900 border border-amber-200 text-xs font-bold rounded-xl flex items-center justify-center gap-2 transition active:scale-95 shadow-2xs">
+            <i class="fa-brands fa-google-drive text-amber-600 text-sm"></i> Open Drive Folder <i class="fa-solid fa-arrow-up-right-from-square text-[10px]"></i>
           </a>
         </div>
 
-        <!-- 8. Statistical & Numerical Methods -->
-        <div class="bg-white border border-slate-200 rounded-2xl p-4 shadow-xs flex flex-col justify-between hover:shadow-md transition">
+        <!-- Statistical & Numerical Methods -->
+        <div class="bg-white border border-slate-200 rounded-2xl p-4 shadow-xs flex flex-col justify-between hover:border-purple-400 hover:shadow-md transition">
           <div class="flex items-start justify-between gap-3">
             <div class="w-10 h-10 rounded-xl bg-purple-50 text-purple-600 flex items-center justify-center shrink-0 border border-purple-200">
               <i class="fa-solid fa-calculator text-lg"></i>
             </div>
-            <span class="text-[10px] font-mono font-bold bg-slate-100 text-slate-600 px-2 py-0.5 rounded">BSC 202</span>
+            <span class="text-[10px] font-mono font-bold bg-purple-50 text-purple-800 border border-purple-200 px-2 py-0.5 rounded">BSC 202</span>
           </div>
           <div class="mt-3">
             <h3 class="font-extrabold text-sm text-slate-900">Statistical & Numerical Methods</h3>
             <p class="text-xs text-slate-500 mt-0.5">Faculty: Prof. Ajeya Kashi</p>
           </div>
-          <a href="https://drive.google.com/drive/folders/1nSwNYZUXR8kMsej-ebTtRZOZIUZObJya?usp=drive_link" target="_blank" rel="noopener noreferrer" class="mt-4 w-full py-2 px-3 bg-emerald-50 hover:bg-emerald-100 text-emerald-800 text-xs font-bold rounded-xl flex items-center justify-center gap-2 transition active:scale-95">
-            <i class="fa-brands fa-google-drive text-sm"></i> Open Drive Folder <i class="fa-solid fa-arrow-up-right-from-square text-[10px]"></i>
+          <a href="https://drive.google.com/drive/folders/1nSwNYZUXR8kMsej-ebTtRZOZIUZObJya?usp=drive_link" target="_blank" rel="noopener noreferrer" class="notes-btn-drive mt-4 w-full py-2.5 px-3 bg-gradient-to-r from-amber-50 to-yellow-100 hover:from-amber-100 hover:to-yellow-200 text-amber-900 border border-amber-200 text-xs font-bold rounded-xl flex items-center justify-center gap-2 transition active:scale-95 shadow-2xs">
+            <i class="fa-brands fa-google-drive text-amber-600 text-sm"></i> Open Drive Folder <i class="fa-solid fa-arrow-up-right-from-square text-[10px]"></i>
           </a>
         </div>
 
       </div>
 
-      <div class="bg-white border border-slate-200 rounded-xl p-4 flex items-start gap-3 shadow-xs mt-2">
-        <i class="fa-solid fa-shield-halved text-emerald-600 mt-0.5"></i>
-        <p class="text-xs text-slate-600 leading-relaxed">
-          <strong>Access Notes:</strong> Folders open directly in Google Drive to prevent file preview errors and preserve original formatting for PDFs, PPTs, lab manuals, and assignments.
+      <div class="bg-gradient-to-r from-amber-50/70 to-yellow-50/70 border border-amber-200 rounded-2xl p-4 flex items-start gap-3 shadow-xs mt-2">
+        <i class="fa-solid fa-shield-halved text-amber-600 mt-0.5 text-base"></i>
+        <p class="text-xs text-amber-950 leading-relaxed font-medium">
+          <strong>Access Notes:</strong> Folders open directly in Google Drive to ensure original formatting for PDFs, PPTs, lab manuals, and assignments without preview issues.
         </p>
       </div>
     </section>
 
-    <!-- TAB 2: CALENDAR OF EVENTS -->
+    <!-- 4. Calendar of Events (COE) -->
     <section id="view-coe" class="tab-view hidden space-y-4">
-      <div class="grid grid-cols-2 gap-2.5">
-        <div class="bg-white p-3.5 rounded-2xl border border-slate-200 shadow-xs">
-          <p class="text-[10px] font-bold uppercase text-slate-400">Total Working Days</p>
+      <div class="grid grid-cols-2 sm:grid-cols-4 gap-2.5">
+        <div class="bg-white p-4 rounded-2xl border border-blue-200 shadow-xs">
+          <p class="text-[10px] font-bold uppercase text-blue-500">Total Working Days</p>
           <p class="text-2xl font-black text-blue-600 mt-0.5">89</p>
           <p class="text-[10px] text-slate-500">Odd Term (July–Nov)</p>
         </div>
-        <div class="bg-white p-3.5 rounded-2xl border border-slate-200 shadow-xs">
-          <p class="text-[10px] font-bold uppercase text-slate-400">General Holidays</p>
+        <div class="bg-white p-4 rounded-2xl border border-rose-200 shadow-xs">
+          <p class="text-[10px] font-bold uppercase text-rose-500">General Holidays</p>
           <p class="text-2xl font-black text-rose-500 mt-0.5">15</p>
           <p class="text-[10px] text-slate-500">Festivals & State</p>
         </div>
-        <div class="bg-white p-3.5 rounded-2xl border border-slate-200 shadow-xs">
-          <p class="text-[10px] font-bold uppercase text-slate-400">Semester Exam (SEE)</p>
+        <div class="bg-white p-4 rounded-2xl border border-emerald-200 shadow-xs">
+          <p class="text-[10px] font-bold uppercase text-emerald-500">Semester Exam (SEE)</p>
           <p class="text-sm font-bold text-emerald-600 mt-1">Dec 4, 2026</p>
           <p class="text-[10px] text-slate-500">Commencement</p>
         </div>
-        <div class="bg-white p-3.5 rounded-2xl border border-slate-200 shadow-xs">
-          <p class="text-[10px] font-bold uppercase text-slate-400">Even Semester</p>
-          <p class="text-sm font-bold text-indigo-600 mt-1">Jan 2, 2027</p>
+        <div class="bg-white p-4 rounded-2xl border border-purple-200 shadow-xs">
+          <p class="text-[10px] font-bold uppercase text-purple-500">Even Semester</p>
+          <p class="text-sm font-bold text-purple-600 mt-1">Jan 2, 2027</p>
           <p class="text-[10px] text-slate-500">Commencement</p>
         </div>
       </div>
 
-      <!-- Month Cards -->
       <div class="space-y-3">
         <div class="bg-white rounded-2xl p-4 border border-slate-200 shadow-xs">
           <div class="flex justify-between items-center mb-2">
@@ -402,11 +466,11 @@
             <span class="text-[11px] font-bold text-blue-700 bg-blue-50 px-2 py-0.5 rounded-md">1 Working Day</span>
           </div>
           <div class="space-y-1.5 text-xs">
-            <div class="p-2 rounded-xl bg-slate-50 border border-slate-100 flex items-start gap-2">
+            <div class="p-2.5 rounded-xl bg-slate-50 border border-slate-100 flex items-start gap-2">
               <span class="font-bold text-slate-800 whitespace-nowrap">Jul 15</span>
               <span class="text-slate-600">Course Matrix Finalization</span>
             </div>
-            <div class="p-2 rounded-xl bg-emerald-50 border border-emerald-100 text-emerald-900 flex items-start gap-2 font-medium">
+            <div class="p-2.5 rounded-xl bg-emerald-50 border border-emerald-200 text-emerald-900 flex items-start gap-2 font-medium">
               <span class="font-bold whitespace-nowrap">Jul 20–21</span>
               <span>Induction & Commencement of Classes (Sem 3, 5, 7)</span>
             </div>
@@ -419,19 +483,19 @@
             <span class="text-[11px] font-bold text-blue-700 bg-blue-50 px-2 py-0.5 rounded-md">22 Working Days</span>
           </div>
           <div class="space-y-1.5 text-xs">
-            <div class="p-2 rounded-xl bg-slate-50 border border-slate-100 flex items-start gap-2">
+            <div class="p-2.5 rounded-xl bg-slate-50 border border-slate-100 flex items-start gap-2">
               <span class="font-bold text-slate-800 whitespace-nowrap">Aug 03</span>
               <span class="text-slate-600">TDPCL / Project batch finalization</span>
             </div>
-            <div class="p-2 rounded-xl bg-rose-50 border border-rose-100 text-rose-800 flex items-start gap-2">
+            <div class="p-2.5 rounded-xl bg-rose-50 border border-rose-200 text-rose-800 flex items-start gap-2">
               <span class="font-bold whitespace-nowrap">Aug 15</span>
               <span>Holiday: Independence Day</span>
             </div>
-            <div class="p-2 rounded-xl bg-rose-50 border border-rose-100 text-rose-800 flex items-start gap-2">
+            <div class="p-2.5 rounded-xl bg-rose-50 border border-rose-200 text-rose-800 flex items-start gap-2">
               <span class="font-bold whitespace-nowrap">Aug 21</span>
               <span>Holiday: Varamahalakshmi Vrata</span>
             </div>
-            <div class="p-2 rounded-xl bg-rose-50 border border-rose-100 text-rose-800 flex items-start gap-2">
+            <div class="p-2.5 rounded-xl bg-rose-50 border border-rose-200 text-rose-800 flex items-start gap-2">
               <span class="font-bold whitespace-nowrap">Aug 26</span>
               <span>Holiday: Eid-Milad</span>
             </div>
@@ -444,15 +508,15 @@
             <span class="text-[11px] font-bold text-blue-700 bg-blue-50 px-2 py-0.5 rounded-md">23 Working Days</span>
           </div>
           <div class="space-y-1.5 text-xs">
-            <div class="p-2 rounded-xl bg-purple-50 border border-purple-100 text-purple-900 font-semibold flex items-start gap-2">
+            <div class="p-2.5 rounded-xl bg-purple-50 border border-purple-200 text-purple-900 font-semibold flex items-start gap-2">
               <span class="font-bold whitespace-nowrap">Sep 7–12</span>
               <span>Internal Test Week 1 (5th/7th UG & 3rd PG) & E-Fest</span>
             </div>
-            <div class="p-2 rounded-xl bg-rose-50 border border-rose-100 text-rose-800 flex items-start gap-2">
+            <div class="p-2.5 rounded-xl bg-rose-50 border border-rose-200 text-rose-800 flex items-start gap-2">
               <span class="font-bold whitespace-nowrap">Sep 14</span>
               <span>Holiday: Vinayaka Chaturthi</span>
             </div>
-            <div class="p-2 rounded-xl bg-indigo-50 border border-indigo-100 text-indigo-900 flex items-start gap-2">
+            <div class="p-2.5 rounded-xl bg-indigo-50 border border-indigo-200 text-indigo-900 flex items-start gap-2">
               <span class="font-bold whitespace-nowrap">Sep 21–26</span>
               <span>TDPCL Review-1 & Parent-Teacher Meeting (PTM 1)</span>
             </div>
@@ -465,53 +529,28 @@
             <span class="text-[11px] font-bold text-blue-700 bg-blue-50 px-2 py-0.5 rounded-md">22 Working Days</span>
           </div>
           <div class="space-y-1.5 text-xs">
-            <div class="p-2 rounded-xl bg-rose-50 border border-rose-100 text-rose-800 flex items-start gap-2">
+            <div class="p-2.5 rounded-xl bg-rose-50 border border-rose-200 text-rose-800 flex items-start gap-2">
               <span class="font-bold whitespace-nowrap">Oct 02</span>
               <span>Holiday: Gandhi Jayanthi</span>
             </div>
-            <div class="p-2 rounded-xl bg-rose-50 border border-rose-100 text-rose-800 flex items-start gap-2">
+            <div class="p-2.5 rounded-xl bg-rose-50 border border-rose-200 text-rose-800 flex items-start gap-2">
               <span class="font-bold whitespace-nowrap">Oct 10</span>
               <span>Holiday: Mahalaya Amavasya</span>
             </div>
-            <div class="p-2 rounded-xl bg-rose-50 border border-rose-100 text-rose-800 flex items-start gap-2">
+            <div class="p-2.5 rounded-xl bg-rose-50 border border-rose-200 text-rose-800 flex items-start gap-2">
               <span class="font-bold whitespace-nowrap">Oct 20–21</span>
-              <span>Holiday: Mahanavami & Vijayadashami</span>
+              <span>Holiday: Regional Festivities</span>
             </div>
-            <div class="p-2 rounded-xl bg-purple-50 border border-purple-100 text-purple-900 font-semibold flex items-start gap-2">
+            <div class="p-2.5 rounded-xl bg-purple-50 border border-purple-200 text-purple-900 font-semibold flex items-start gap-2">
               <span class="font-bold whitespace-nowrap">Oct 26–31</span>
-              <span>Internal Test Week 2 (5th/7th UG & 3rd PG)</span>
-            </div>
-          </div>
-        </div>
-
-        <div class="bg-white rounded-2xl p-4 border border-slate-200 shadow-xs">
-          <div class="flex justify-between items-center mb-2">
-            <span class="font-extrabold text-sm text-slate-900">November 2026</span>
-            <span class="text-[11px] font-bold text-blue-700 bg-blue-50 px-2 py-0.5 rounded-md">21 Working Days</span>
-          </div>
-          <div class="space-y-1.5 text-xs">
-            <div class="p-2 rounded-xl bg-rose-50 border border-rose-100 text-rose-800 flex items-start gap-2">
-              <span class="font-bold whitespace-nowrap">Nov 10</span>
-              <span>Holiday: Balipadyami</span>
-            </div>
-            <div class="p-2 rounded-xl bg-slate-50 border border-slate-100 flex items-start gap-2">
-              <span class="font-bold text-slate-800 whitespace-nowrap">Nov 16–21</span>
-              <span class="text-slate-600">PTM Week 2</span>
-            </div>
-            <div class="p-2 rounded-xl bg-rose-50 border border-rose-100 text-rose-800 flex items-start gap-2">
-              <span class="font-bold whitespace-nowrap">Nov 27</span>
-              <span>Holiday: Kanakadasa Jayanthi</span>
-            </div>
-            <div class="p-2 rounded-xl bg-amber-50 border border-amber-200 text-amber-900 font-bold flex items-start gap-2">
-              <span class="whitespace-nowrap">Nov 28</span>
-              <span>Last Day of Instruction (UG/PG)</span>
+              <span>Internal Test Week 2</span>
             </div>
           </div>
         </div>
       </div>
     </section>
 
-    <!-- TAB 3: COURSE MATRIX -->
+    <!-- 5. Course Matrix -->
     <section id="view-matrix" class="tab-view hidden space-y-4">
       <div class="space-y-2">
         <div class="relative">
@@ -530,7 +569,7 @@
         </div>
       </div>
 
-      <div class="bg-blue-50 border border-blue-100 rounded-xl px-4 py-2.5 flex justify-between items-center text-xs">
+      <div class="bg-gradient-to-r from-blue-50 to-indigo-50 border border-blue-200 rounded-2xl px-4 py-3 flex justify-between items-center text-xs shadow-2xs">
         <div>
           <span class="text-slate-500">Semester Credits:</span>
           <span id="m-total-cr" class="font-extrabold text-blue-700 ml-1">23</span>
@@ -544,74 +583,70 @@
       <div id="m-course-container" class="space-y-2.5"></div>
     </section>
 
-    <!-- TAB 4: STUDENT DIRECTORY -->
+    <!-- 6. Student Directory (NOW RE-COLORED: Vibrant Indigo & Royal Purple Theme) -->
     <section id="view-students" class="tab-view hidden space-y-4">
       
-      <!-- Student Directory Summary Header -->
+      <!-- Vibrant Indigo Student Overview Cards -->
       <div class="grid grid-cols-3 gap-2.5">
-        <div class="bg-white p-3 rounded-2xl border border-slate-200 shadow-xs text-center">
-          <p class="text-[10px] font-bold uppercase text-slate-400">Total Enrolled</p>
-          <p class="text-xl font-black text-slate-900 mt-0.5">65</p>
+        <div class="bg-white p-3.5 rounded-2xl border border-indigo-200 shadow-xs text-center">
+          <p class="text-[10px] font-bold uppercase text-indigo-500">Total Enrolled</p>
+          <p class="text-xl font-black text-indigo-950 mt-0.5">65</p>
           <p class="text-[10px] text-slate-500">Class Strength</p>
         </div>
-        <div class="bg-white p-3 rounded-2xl border border-slate-200 shadow-xs text-center">
-          <p class="text-[10px] font-bold uppercase text-slate-400">Regular (25BTR)</p>
+        <div class="bg-white p-3.5 rounded-2xl border border-blue-200 shadow-xs text-center">
+          <p class="text-[10px] font-bold uppercase text-blue-500">Regular (25BTR)</p>
           <p class="text-xl font-black text-blue-600 mt-0.5">55</p>
           <p class="text-[10px] text-slate-500">Batch 2025-29</p>
         </div>
-        <div class="bg-white p-3 rounded-2xl border border-slate-200 shadow-xs text-center">
-          <p class="text-[10px] font-bold uppercase text-slate-400">Lateral Entry</p>
+        <div class="bg-white p-3.5 rounded-2xl border border-amber-200 shadow-xs text-center">
+          <p class="text-[10px] font-bold uppercase text-amber-600">Lateral Entry</p>
           <p class="text-xl font-black text-amber-600 mt-0.5">10</p>
           <p class="text-[10px] text-slate-500">Diploma Direct</p>
         </div>
       </div>
 
-      <!-- Student Search & Filter Bar -->
       <div class="space-y-2">
         <div class="relative">
           <i class="fa-solid fa-magnifying-glass absolute left-3.5 top-1/2 -translate-y-1/2 text-slate-400 text-xs"></i>
-          <input type="text" id="student-search" oninput="handleStudentSearch()" placeholder="Search by student name or USN..." class="w-full pl-9 pr-3.5 py-2.5 text-xs bg-white border border-slate-200 rounded-xl focus:outline-none focus:ring-2 focus:ring-blue-500 shadow-xs" />
+          <input type="text" id="student-search" oninput="handleStudentSearch()" placeholder="Search by student name or USN..." class="w-full pl-9 pr-3.5 py-2.5 text-xs bg-white border border-slate-200 rounded-xl focus:outline-none focus:ring-2 focus:ring-indigo-500 shadow-xs" />
         </div>
 
         <div class="flex items-center gap-1.5 overflow-x-auto no-scrollbar py-1">
-          <button onclick="filterStudentCategory('all')" class="student-filter-btn px-3.5 py-1.5 rounded-xl text-xs font-bold bg-blue-600 text-white whitespace-nowrap shadow-xs" data-filter="all">All (65)</button>
+          <button onclick="filterStudentCategory('all')" class="student-filter-btn px-3.5 py-1.5 rounded-xl text-xs font-bold bg-indigo-600 text-white whitespace-nowrap shadow-xs" data-filter="all">All (65)</button>
           <button onclick="filterStudentCategory('regular')" class="student-filter-btn px-3.5 py-1.5 rounded-xl text-xs font-bold bg-white text-slate-700 border border-slate-200 whitespace-nowrap" data-filter="regular">Regular</button>
           <button onclick="filterStudentCategory('lateral')" class="student-filter-btn px-3.5 py-1.5 rounded-xl text-xs font-bold bg-white text-slate-700 border border-slate-200 whitespace-nowrap" data-filter="lateral">Lateral Entry (Diploma)</button>
           <button onclick="filterStudentCategory('tc')" class="student-filter-btn px-3.5 py-1.5 rounded-xl text-xs font-bold bg-white text-slate-700 border border-slate-200 whitespace-nowrap" data-filter="tc">TC Issued</button>
         </div>
       </div>
 
-      <!-- Student Cards Container -->
-      <div id="student-list-container" class="space-y-2">
-        <!-- Rendered dynamically -->
-      </div>
+      <div id="student-list-container" class="space-y-2"></div>
     </section>
 
-    <!-- TAB: OFFICIAL ERP PORTAL -->
+    <!-- 7. Official ERP Portal -->
     <section id="view-erp" class="tab-view hidden space-y-4">
-      <div class="bg-gradient-to-r from-orange-600 to-amber-700 rounded-2xl p-6 text-white shadow-md flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4">
+      <div class="bg-gradient-to-r from-orange-600 via-amber-600 to-amber-700 rounded-2xl p-6 text-white shadow-lg flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4">
         <div>
           <h2 class="text-xl font-extrabold flex items-center gap-2">
-            <i class="fa-solid fa-building-columns"></i> Official ERP Portal
+            <i class="fa-solid fa-landmark"></i> Official ERP Portal
           </h2>
           <p class="text-xs text-orange-100 font-medium mt-1.5">Access your JAIN University student dashboard, grades, and attendance.</p>
         </div>
-        <a href="https://erpfet.jainuniversity.ac.in/Login" target="_blank" rel="noopener noreferrer" class="px-5 py-2.5 bg-white text-orange-700 text-sm font-bold rounded-xl shadow-sm hover:bg-orange-50 transition flex items-center justify-center gap-2 active:scale-95 whitespace-nowrap w-full sm:w-auto">
+        <a href="https://erpfet.jainuniversity.ac.in/Login" target="_blank" rel="noopener noreferrer" class="px-5 py-2.5 bg-white text-orange-700 text-sm font-bold rounded-xl shadow-md hover:bg-orange-50 transition flex items-center justify-center gap-2 active:scale-95 whitespace-nowrap w-full sm:w-auto">
           Go to ERP Login <i class="fa-solid fa-arrow-up-right-from-square text-xs"></i>
         </a>
       </div>
       
-      <div class="bg-white border border-slate-200 rounded-xl p-4 flex items-start gap-3 shadow-xs">
-        <i class="fa-solid fa-shield-halved text-blue-500 mt-0.5"></i>
+      <div class="bg-white border border-slate-200 rounded-2xl p-4 flex items-start gap-3 shadow-xs">
+        <i class="fa-solid fa-shield-halved text-orange-500 mt-0.5 text-base"></i>
         <p class="text-xs text-slate-600 leading-relaxed">
           <strong>Secure Login:</strong> You are being redirected to the official JAIN (Deemed-to-be University) ERP system. Ensure you have your official student credentials ready to sign in.
         </p>
       </div>
     </section>
 
-    <!-- TAB: CLASS CHAT -->
+    <!-- 8. Class Chat -->
     <section id="view-chat" class="tab-view hidden space-y-4 h-[75vh] flex flex-col">
-      <div class="bg-gradient-to-r from-purple-600 to-pink-700 rounded-2xl p-6 text-white shadow-md shrink-0">
+      <div class="bg-gradient-to-r from-purple-600 via-pink-600 to-rose-600 rounded-2xl p-6 text-white shadow-lg shrink-0">
         <div>
           <h2 class="text-xl font-extrabold flex items-center gap-2">
             <i class="fa-solid fa-comments"></i> Chat with your classmates
@@ -620,42 +655,43 @@
         </div>
       </div>
       
-      <!-- Chatango Embed -->
-      <div class="bg-white border border-slate-200 rounded-xl p-2 shadow-xs flex-1 w-full overflow-hidden">
-        <iframe src="https://65box.chatango.com/" class="w-full h-full rounded-lg border-0" title="Class Chat"></iframe>
+      <div class="bg-white border border-slate-200 rounded-2xl p-2 shadow-xs flex-1 w-full overflow-hidden">
+        <iframe src="https://65box.chatango.com/" class="w-full h-full rounded-xl border-0" title="Class Chat"></iframe>
       </div>
     </section>
 
   </main>
 
   <!-- Mobile Bottom Navigation Bar -->
-  <div class="md:hidden fixed bottom-0 left-0 right-0 bg-white/95 backdrop-blur-md border-t border-slate-200 z-30 px-2 py-2 flex justify-between items-center overflow-x-auto no-scrollbar gap-1">
+  <div class="md:hidden fixed bottom-0 left-0 right-0 bg-white/95 backdrop-blur-md border-t border-slate-200 z-30 px-2 py-2 flex justify-between items-center overflow-x-auto no-scrollbar gap-1 shadow-lg">
     <button onclick="switchTab('timetable')" id="bot-tab-timetable" class="bot-nav-btn flex flex-col items-center gap-0.5 text-blue-600 min-w-[52px]">
-      <i class="fa-solid fa-calendar-week text-base"></i>
+      <i class="fa-regular fa-clock text-base"></i>
       <span class="text-[10px] font-bold">Timetable</span>
     </button>
     <button onclick="switchTab('leave')" id="bot-tab-leave" class="bot-nav-btn flex flex-col items-center gap-0.5 text-slate-400 hover:text-slate-600 min-w-[52px]">
       <i class="fa-brands fa-whatsapp text-base"></i>
       <span class="text-[10px] font-bold">Leave</span>
     </button>
+    <!-- Notes is now distinct Amber / Gold -->
     <button onclick="switchTab('notes')" id="bot-tab-notes" class="bot-nav-btn flex flex-col items-center gap-0.5 text-slate-400 hover:text-slate-600 min-w-[52px]">
       <i class="fa-brands fa-google-drive text-base"></i>
       <span class="text-[10px] font-bold">Notes</span>
     </button>
     <button onclick="switchTab('coe')" id="bot-tab-coe" class="bot-nav-btn flex flex-col items-center gap-0.5 text-slate-400 hover:text-slate-600 min-w-[52px]">
-      <i class="fa-solid fa-calendar-days text-base"></i>
+      <i class="fa-regular fa-calendar text-base"></i>
       <span class="text-[10px] font-bold">Calendar</span>
     </button>
     <button onclick="switchTab('matrix')" id="bot-tab-matrix" class="bot-nav-btn flex flex-col items-center gap-0.5 text-slate-400 hover:text-slate-600 min-w-[52px]">
-      <i class="fa-solid fa-graduation-cap text-base"></i>
+      <i class="fa-solid fa-book-bookmark text-base"></i>
       <span class="text-[10px] font-bold">Courses</span>
     </button>
+    <!-- Students is now distinct Indigo -->
     <button onclick="switchTab('students')" id="bot-tab-students" class="bot-nav-btn flex flex-col items-center gap-0.5 text-slate-400 hover:text-slate-600 min-w-[52px]">
       <i class="fa-solid fa-users text-base"></i>
       <span class="text-[10px] font-bold">Students</span>
     </button>
     <button onclick="switchTab('erp')" id="bot-tab-erp" class="bot-nav-btn flex flex-col items-center gap-0.5 text-slate-400 hover:text-slate-600 min-w-[52px]">
-      <i class="fa-solid fa-building-columns text-base"></i>
+      <i class="fa-solid fa-landmark text-base"></i>
       <span class="text-[10px] font-bold">ERP</span>
     </button>
     <button onclick="switchTab('chat')" id="bot-tab-chat" class="bot-nav-btn flex flex-col items-center gap-0.5 text-slate-400 hover:text-slate-600 min-w-[52px]">
@@ -664,19 +700,18 @@
     </button>
   </div>
 
-  <!-- FLOATING AI AGENT DRAWER / MODAL -->
-  <div id="ai-modal" class="fixed inset-0 z-50 bg-slate-900/60 backdrop-blur-xs flex flex-col justify-end md:justify-center md:items-center hidden transition-opacity duration-300">
+  <!-- AI Drawer Modal -->
+  <div id="ai-modal" class="fixed inset-0 z-50 bg-slate-950/70 backdrop-blur-xs flex flex-col justify-end md:justify-center md:items-center hidden transition-opacity duration-300">
     <div class="bg-white w-full md:max-w-xl h-[88vh] md:h-[620px] rounded-t-3xl md:rounded-2xl shadow-2xl flex flex-col overflow-hidden">
       
-      <!-- AI Header -->
-      <div class="bg-gradient-to-r from-blue-700 to-indigo-700 px-4 py-3.5 text-white flex items-center justify-between">
+      <div class="bg-gradient-to-r from-blue-700 via-indigo-700 to-purple-700 px-4 py-3.5 text-white flex items-center justify-between shadow-md">
         <div class="flex items-center space-x-2.5">
           <div class="w-8 h-8 rounded-full bg-white/20 flex items-center justify-center text-amber-300 text-sm shadow-inner">
             <i class="fa-solid fa-robot"></i>
           </div>
           <div>
             <h3 class="text-sm font-bold leading-tight">ECE Academic Agent</h3>
-            <p class="text-[10px] text-blue-200">Ask about timetable, teachers, students & exams</p>
+            <p class="text-[10px] text-blue-200">Ask about timetable, teachers, notes, students & exams</p>
           </div>
         </div>
         <button onclick="toggleAiDrawer()" class="w-8 h-8 rounded-full bg-white/10 hover:bg-white/20 flex items-center justify-center text-white text-sm transition">
@@ -684,31 +719,27 @@
         </button>
       </div>
 
-      <!-- Quick Suggestion Pills -->
       <div class="bg-slate-50 border-b border-slate-200 px-3 py-2 flex items-center gap-1.5 overflow-x-auto no-scrollbar">
         <span class="text-[10px] font-bold text-slate-400 uppercase whitespace-nowrap mr-1">Suggestions:</span>
         <button onclick="sendPreset('Find student USN for Preetham')" class="text-[11px] px-2.5 py-1 rounded-full bg-white text-blue-700 border border-blue-200 whitespace-nowrap hover:bg-blue-50 font-medium">USN of Preetham?</button>
         <button onclick="sendPreset('List lateral entry students')" class="text-[11px] px-2.5 py-1 rounded-full bg-white text-blue-700 border border-blue-200 whitespace-nowrap hover:bg-blue-50 font-medium">Lateral Entry list?</button>
+        <button onclick="sendPreset('Where are Digital Logic Design notes?')" class="text-[11px] px-2.5 py-1 rounded-full bg-white text-amber-700 border border-amber-200 whitespace-nowrap hover:bg-amber-50 font-medium">DLD Notes Drive?</button>
         <button onclick="sendPreset('When do Semester End Exams begin?')" class="text-[11px] px-2.5 py-1 rounded-full bg-white text-blue-700 border border-blue-200 whitespace-nowrap hover:bg-blue-50 font-medium">SEE Exam Date?</button>
-        <button onclick="sendPreset('What classes do I have on Friday?')" class="text-[11px] px-2.5 py-1 rounded-full bg-white text-blue-700 border border-blue-200 whitespace-nowrap hover:bg-blue-50 font-medium">Friday Schedule?</button>
-        <button onclick="sendPreset('Who teaches Analog Electronics Circuits?')" class="text-[11px] px-2.5 py-1 rounded-full bg-white text-blue-700 border border-blue-200 whitespace-nowrap hover:bg-blue-50 font-medium">Who teaches Analog?</button>
       </div>
 
-      <!-- Chat Message Stream -->
       <div id="chat-stream" class="flex-1 overflow-y-auto p-4 space-y-3 bg-slate-50 text-xs">
         <div class="flex items-start gap-2.5 max-w-[85%]">
           <div class="w-6 h-6 rounded-full bg-blue-600 text-white flex items-center justify-center text-[10px] shrink-0 mt-0.5">
             <i class="fa-solid fa-robot"></i>
           </div>
           <div class="bg-white p-3 rounded-2xl rounded-tl-none border border-slate-200 shadow-xs leading-relaxed text-slate-800">
-            Hello! I am your <strong>ECE Academic AI Assistant</strong>. Ask me about your <strong>3rd sem timetable</strong>, <strong>academic calendar & exam dates</strong>, <strong>faculty WhatsApp leave permission</strong>, or <strong>student USN directory</strong>!
+            Hello! I am your <strong>ECE Academic AI Assistant</strong>. Ask me about your <strong>3rd sem timetable</strong>, <strong>academic calendar</strong>, <strong>classroom notes in Drive</strong>, <strong>leave permissions</strong>, or <strong>student directory</strong>!
           </div>
         </div>
       </div>
 
-      <!-- Chat Input Bar -->
       <div class="p-3 bg-white border-t border-slate-200 flex items-center gap-2">
-        <input type="text" id="ai-user-input" onkeydown="if(event.key === 'Enter') handleAiSend()" placeholder="Type your doubt or student name..." class="flex-1 text-xs bg-slate-100 border border-slate-200 rounded-xl px-3.5 py-2.5 focus:outline-none focus:ring-2 focus:ring-blue-600 font-medium" />
+        <input type="text" id="ai-user-input" onkeydown="if(event.key === 'Enter') handleAiSend()" placeholder="Type your doubt or query..." class="flex-1 text-xs bg-slate-100 border border-slate-200 rounded-xl px-3.5 py-2.5 focus:outline-none focus:ring-2 focus:ring-blue-600 font-medium" />
         <button onclick="handleAiSend()" class="w-9 h-9 bg-blue-600 hover:bg-blue-700 text-white rounded-xl flex items-center justify-center transition shrink-0 active:scale-95 shadow-sm">
           <i class="fa-solid fa-paper-plane text-xs"></i>
         </button>
@@ -723,12 +754,12 @@
       isDarkMode = !isDarkMode;
       if (isDarkMode) {
         document.documentElement.classList.add('dark');
-        document.getElementById('theme-icon-header').className = 'fa-solid fa-sun';
-        document.getElementById('theme-icon-login').className = 'fa-solid fa-sun';
+        document.getElementById('theme-icon-header').className = 'fa-solid fa-sun text-amber-300';
+        document.getElementById('theme-icon-login').className = 'fa-solid fa-sun text-amber-300';
       } else {
         document.documentElement.classList.remove('dark');
-        document.getElementById('theme-icon-header').className = 'fa-solid fa-moon';
-        document.getElementById('theme-icon-login').className = 'fa-solid fa-moon';
+        document.getElementById('theme-icon-header').className = 'fa-solid fa-moon text-slate-600';
+        document.getElementById('theme-icon-login').className = 'fa-solid fa-moon text-slate-600';
       }
     }
 
@@ -771,7 +802,7 @@
         bgBadge: "bg-purple-50 text-purple-900 border-purple-200"
       },
       {
-        name: "Dr. Dasarathy",
+        name: "Dr.破 Dasarathy",
         role: "Faculty (HOD Civil)",
         subject: "Environmental Science (BSC 201)",
         phone: "919840062899",
@@ -825,7 +856,7 @@
         { period: "3", time: "11:00 - 12:00", title: "Digital Logic Design", faculty: "Prof. Chethan G S", type: "Theory", color: "bg-amber-50 text-amber-900 border-amber-200" },
         { period: "4", time: "12:00 - 1:00", title: "Analog Electronics Circuits", faculty: "Dr. Buddha Dharani", type: "Theory", color: "bg-violet-50 text-violet-900 border-violet-200" },
         { period: "Lunch", time: "1:00 - 1:50", title: "Lunch Break", faculty: "", type: "Break", color: "bg-emerald-50 text-emerald-800 border-emerald-200" },
-        { period: "5 & 6", time: "1:50 - 3:50", title: "Environment Science", faculty: "Dr. Dasarathy", type: "Core", color: "bg-red-50 text-red-700 border-red-200" },
+        { period: "5 & 6", time: "1:50 - 3:50", title: "Environment Science", faculty: "Dr. Dasarathy", type: "Core", color: "bg-rose-50 text-rose-800 border-rose-200" },
       ],
       Wed: [
         { period: "1", time: "8:45 - 9:45", title: "Analog Electronics Circuits", faculty: "Dr. Buddha Dharani", type: "Theory", color: "bg-violet-50 text-violet-900 border-violet-200" },
@@ -894,21 +925,21 @@
       { sem: 6, no: 2, code: "PCC 309", name: "Embedded System and PCB Design Lab", type: "PCC", ltpe: "0-0-2-0", cr: 1, nh: 30, l: 0, t: 0, p: 30 },
       { sem: 6, no: 3, code: "PCC 310", name: "Antennas and Wave Propagation", type: "PCC", ltpe: "3-0-0-0", cr: 3, nh: 45, l: 45, t: 0, p: 0 },
       { sem: 6, no: 4, code: "PCC 311", name: "Microwave and Antennas Lab", type: "PCC", ltpe: "0-0-2-0", cr: 1, nh: 30, l: 0, t: 0, p: 30 },
-      { sem: 6, no: 5, code: "PEC 1", name: "Professional Elective-1/Track Based Elective-1", type: "PEC", ltpe: "2-0-0-3", cr: 3, nh: 75, l: 30, t: 0, p: 0 },
+      { sem: 6, no: 5, code: "PEC 1", name: "Professional Elective-1", type: "PEC", ltpe: "2-0-0-3", cr: 3, nh: 75, l: 30, t: 0, p: 0 },
       { sem: 6, no: 6, code: "PCC 312", name: "Control Systems", type: "PCC", ltpe: "3-0-0-0", cr: 3, nh: 45, l: 45, t: 0, p: 0 },
       { sem: 6, no: 7, code: "PCC 313", name: "Level 2: Product Innovation & Entrepreneurship", type: "PCC", ltpe: "1-0-2-3", cr: 3, nh: 90, l: 15, t: 0, p: 30 },
       { sem: 6, no: 8, code: "HSMC 302", name: "Grassroot innovation and engineering practice", type: "HSMC", ltpe: "1-0-2-0", cr: 2, nh: 60, l: 15, t: 0, p: 30 },
       { sem: 6, no: 9, code: "PROJ 1", name: "Engineering Project-1", type: "PROJ", ltpe: "0-0-4-0", cr: 2, nh: 60, l: 0, t: 0, p: 60 },
       { sem: 7, no: 1, code: "OEC 1", name: "Open Elective-1", type: "OEC", ltpe: "2-0-0-3", cr: 3, nh: 90, l: 30, t: 0, p: 0 },
-      { sem: 7, no: 2, code: "PEC 2", name: "Professional Elective-2/Track Based Elective-2", type: "PEC", ltpe: "2-0-0-3", cr: 3, nh: 75, l: 30, t: 0, p: 0 },
+      { sem: 7, no: 2, code: "PEC 2", name: "Professional Elective-2", type: "PEC", ltpe: "2-0-0-3", cr: 3, nh: 75, l: 30, t: 0, p: 0 },
       { sem: 7, no: 3, code: "PCC 401", name: "Wireless Communication", type: "PCC", ltpe: "3-0-0-0", cr: 3, nh: 45, l: 45, t: 0, p: 0 },
       { sem: 7, no: 4, code: "PCC 402", name: "Engineering Ethics & Professional Practice", type: "PCC", ltpe: "3-0-0-3", cr: 4, nh: 120, l: 45, t: 0, p: 0 },
       { sem: 7, no: 5, code: "PROJ 2", name: "Engineering Project-2", type: "PROJ", ltpe: "0-0-8-0", cr: 4, nh: 120, l: 0, t: 0, p: 120 },
       { sem: 7, no: 6, code: "INT 2", name: "Internship-2", type: "PROJ", ltpe: "0-0-0-6", cr: 2, nh: 90, l: 0, t: 0, p: 0 },
-      { sem: 8, no: 1, code: "PEC 3", name: "Professional Elective-3/Track Based Elective-3", type: "PEC", ltpe: "2-0-0-3", cr: 3, nh: 75, l: 30, t: 0, p: 0 },
+      { sem: 8, no: 1, code: "PEC 3", name: "Professional Elective-3", type: "PEC", ltpe: "2-0-0-3", cr: 3, nh: 75, l: 30, t: 0, p: 0 },
       { sem: 8, no: 2, code: "OEC 2", name: "Open Elective-2", type: "OEC", ltpe: "2-0-0-3", cr: 3, nh: 90, l: 30, t: 0, p: 0 },
       { sem: 8, no: 3, code: "OEC 3", name: "Open Elective-3", type: "OEC", ltpe: "2-0-0-3", cr: 3, nh: 90, l: 30, t: 0, p: 0 },
-      { sem: 8, no: 4, code: "PROJ 3", name: "Engineering Project-3 (Testing & Social outreach)", type: "PROJ", ltpe: "0-0-12-0", cr: 6, nh: 180, l: 0, t: 0, p: 180 },
+      { sem: 8, no: 4, code: "PROJ 3", name: "Engineering Project-3", type: "PROJ", ltpe: "0-0-12-0", cr: 6, nh: 180, l: 0, t: 0, p: 180 },
     ];
 
     // 3. Complete ECE Student List (65 STUDENTS)
@@ -1027,24 +1058,35 @@
       const activeView = document.getElementById('view-' + tabId);
       if (activeView) activeView.classList.remove('hidden');
 
+      // Desktop Pill Updates
       document.querySelectorAll('.desk-nav-btn').forEach(b => {
-        b.classList.remove('border-blue-600', 'text-blue-600');
-        b.classList.add('border-transparent', 'text-slate-500');
+        b.classList.remove('active-pill');
+        b.classList.add('inactive-pill');
       });
       const deskTab = document.getElementById('desk-tab-' + tabId);
       if (deskTab) {
-        deskTab.classList.add('border-blue-600', 'text-blue-600');
-        deskTab.classList.remove('border-transparent', 'text-slate-500');
+        deskTab.classList.remove('inactive-pill');
+        deskTab.classList.add('active-pill');
       }
 
+      // Bottom Bar Navigation Updates
       document.querySelectorAll('.bot-nav-btn').forEach(b => {
-        b.classList.remove('text-blue-600');
+        b.classList.remove('text-blue-600', 'text-amber-500', 'text-indigo-600', 'text-emerald-600');
         b.classList.add('text-slate-400');
       });
+      
       const botTab = document.getElementById('bot-tab-' + tabId);
       if (botTab) {
-        botTab.classList.add('text-blue-600');
         botTab.classList.remove('text-slate-400');
+        if (tabId === 'notes') {
+          botTab.classList.add('text-amber-500');
+        } else if (tabId === 'students') {
+          botTab.classList.add('text-indigo-600');
+        } else if (tabId === 'leave') {
+          botTab.classList.add('text-emerald-600');
+        } else {
+          botTab.classList.add('text-blue-600');
+        }
       }
       window.scrollTo({ top: 0, behavior: 'smooth' });
     }
@@ -1052,7 +1094,7 @@
     function selectDay(day) {
       document.querySelectorAll('.day-btn').forEach(btn => {
         if (btn.getAttribute('data-day') === day) {
-          btn.className = 'day-btn px-4 py-2 rounded-xl text-xs font-bold transition bg-blue-600 text-white shadow-sm flex-1 min-w-[62px] text-center';
+          btn.className = 'day-btn px-4 py-2 rounded-xl text-xs font-bold transition bg-blue-600 text-white shadow-md flex-1 min-w-[62px] text-center';
         } else {
           btn.className = 'day-btn px-4 py-2 rounded-xl text-xs font-bold transition bg-white text-slate-700 border border-slate-200 flex-1 min-w-[62px] text-center';
         }
@@ -1064,20 +1106,20 @@
       container.innerHTML = list.map(item => {
         if (item.type === 'Break') {
           return `
-            <div class="bg-amber-50/70 border border-amber-200/80 rounded-xl px-3.5 py-2 flex items-center justify-between text-xs text-amber-800">
-              <span class="font-bold flex items-center gap-1.5"><i class="fa-solid fa-mug-hot text-[11px]"></i> ${item.title}</span>
-              <span class="font-mono text-[11px] text-amber-700">${item.time}</span>
+            <div class="bg-amber-50/70 border border-amber-200/80 rounded-2xl px-3.5 py-2 flex items-center justify-between text-xs text-amber-900">
+              <span class="font-bold flex items-center gap-1.5"><i class="fa-solid fa-mug-hot text-[11px] text-amber-600"></i> ${item.title}</span>
+              <span class="font-mono text-[11px] text-amber-700 font-bold">${item.time}</span>
             </div>
           `;
         }
         return `
-          <div class="bg-white rounded-2xl p-3.5 border border-slate-200 shadow-xs flex flex-col gap-1.5">
+          <div class="bg-white rounded-2xl p-3.5 border border-slate-200 shadow-xs flex flex-col gap-1.5 hover:border-blue-300 transition">
             <div class="flex justify-between items-center">
-              <span class="text-[10px] font-extrabold uppercase px-2 py-0.5 rounded-md ${item.color}">${item.type} • Period ${item.period}</span>
+              <span class="text-[10px] font-extrabold uppercase px-2.5 py-1 rounded-lg ${item.color}">${item.type} • Period ${item.period}</span>
               <span class="text-[11px] font-bold font-mono text-slate-500">${item.time}</span>
             </div>
             <h4 class="font-extrabold text-sm text-slate-900 leading-snug mt-0.5">${item.title}</h4>
-            ${item.faculty ? `<p class="text-xs text-slate-500 flex items-center gap-1.5 font-medium"><i class="fa-solid fa-chalkboard-user text-[11px] text-slate-400"></i> ${item.faculty}</p>` : ''}
+            ${item.faculty ? `<p class="text-xs text-slate-500 flex items-center gap-1.5 font-medium"><i class="fa-solid fa-chalkboard-user text-[11px] text-blue-500"></i> ${item.faculty}</p>` : ''}
           </div>
         `;
       }).join('');
@@ -1086,11 +1128,11 @@
     // Render Faculty Leave Directory Cards
     function renderFacultyCards() {
       const container = document.getElementById('faculty-cards-container');
-      container.innerHTML = facultyList.map((fac, idx) => `
-        <div class="bg-white border border-slate-200 rounded-2xl p-4 shadow-xs hover:shadow-md transition flex flex-col justify-between">
+      container.innerHTML = facultyList.map((fac) => `
+        <div class="bg-white border border-slate-200 rounded-2xl p-4 shadow-xs hover:border-emerald-300 hover:shadow-md transition flex flex-col justify-between">
           <div>
             <div class="flex items-start justify-between gap-2">
-              <div class="w-10 h-10 rounded-xl bg-emerald-50 text-emerald-600 flex items-center justify-center text-lg shrink-0 border border-emerald-200">
+              <div class="w-10 h-10 rounded-xl bg-emerald-50 text-emerald-600 flex items-center justify-center text-lg shrink-0 border border-emerald-200 shadow-2xs">
                 <i class="fa-solid ${fac.icon}"></i>
               </div>
               <span class="text-[10px] font-bold px-2 py-0.5 rounded-md ${fac.bgBadge}">${fac.role}</span>
@@ -1098,17 +1140,16 @@
             <div class="mt-3">
               <h3 class="font-extrabold text-sm text-slate-900 leading-snug">${fac.name}</h3>
               <p class="text-xs text-slate-500 font-medium mt-0.5">${fac.subject}</p>
-              <p class="text-[11px] font-mono text-slate-400 mt-1"><i class="fa-solid fa-phone text-[10px] mr-1"></i> ${fac.formattedPhone}</p>
+              <p class="text-[11px] font-mono text-slate-400 mt-1"><i class="fa-solid fa-phone text-[10px] mr-1 text-emerald-500"></i> ${fac.formattedPhone}</p>
             </div>
           </div>
-          <button onclick="requestLeave('${fac.name}', '${fac.subject}', '${fac.phone}')" class="mt-4 w-full py-2.5 px-3 bg-emerald-600 hover:bg-emerald-700 text-white text-xs font-bold rounded-xl flex items-center justify-center gap-2 transition active:scale-95 shadow-sm">
+          <button onclick="requestLeave('${fac.name}', '${fac.subject}', '${fac.phone}')" class="mt-4 w-full py-2.5 px-3 bg-gradient-to-r from-emerald-600 to-teal-600 hover:from-emerald-700 hover:to-teal-700 text-white text-xs font-bold rounded-xl flex items-center justify-center gap-2 transition active:scale-95 shadow-sm">
             <i class="fa-brands fa-whatsapp text-sm"></i> Request Leave on WhatsApp
           </button>
         </div>
       `).join('');
     }
 
-    // Function to generate and open WhatsApp link
     function requestLeave(facultyName, subject, phone) {
       const studentName = loggedInStudent ? loggedInStudent.name : 'Student';
       const studentUsn = loggedInStudent ? loggedInStudent.usn : '3rd Sem ECE';
@@ -1159,7 +1200,7 @@
       }
 
       container.innerHTML = filtered.map(item => `
-        <div class="bg-white rounded-2xl p-3.5 border border-slate-200 shadow-xs flex flex-col gap-2">
+        <div class="bg-white rounded-2xl p-3.5 border border-slate-200 shadow-xs flex flex-col gap-2 hover:border-blue-300 transition">
           <div class="flex justify-between items-start gap-2">
             <div>
               <span class="text-[10px] font-mono font-black text-blue-700 bg-blue-50 border border-blue-200 px-2 py-0.5 rounded-md">${item.code}</span>
@@ -1186,12 +1227,11 @@
       `).join('');
     }
 
-    // Student Directory Functions
     function filterStudentCategory(filter) {
       currentStudentFilter = filter;
       document.querySelectorAll('.student-filter-btn').forEach(btn => {
         if (btn.getAttribute('data-filter') === filter) {
-          btn.className = 'student-filter-btn px-3.5 py-1.5 rounded-xl text-xs font-bold bg-blue-600 text-white whitespace-nowrap shadow-xs';
+          btn.className = 'student-filter-btn px-3.5 py-1.5 rounded-xl text-xs font-bold bg-indigo-600 text-white whitespace-nowrap shadow-xs';
         } else {
           btn.className = 'student-filter-btn px-3.5 py-1.5 rounded-xl text-xs font-bold bg-white text-slate-700 border border-slate-200 whitespace-nowrap';
         }
@@ -1204,6 +1244,7 @@
       renderStudentList();
     }
 
+    // Render Student Directory with Distinct Indigo Palette
     function renderStudentList() {
       const container = document.getElementById('student-list-container');
       const filtered = studentList.filter(s => {
@@ -1220,21 +1261,24 @@
       container.innerHTML = filtered.map(s => {
         let badge = '';
         let cardBg = 'bg-white border-slate-200';
+        let rollBg = 'bg-indigo-50 text-indigo-600 border border-indigo-100';
 
         if (s.type === 'lateral') {
           badge = '<span class="text-[10px] font-black uppercase px-2 py-0.5 rounded-md bg-amber-100 text-amber-900 border border-amber-300">Lateral Entry</span>';
           cardBg = 'bg-amber-50/40 border-amber-200';
+          rollBg = 'bg-amber-100 text-amber-800 border-amber-200';
         } else if (s.type === 'tc') {
           badge = '<span class="text-[10px] font-black uppercase px-2 py-0.5 rounded-md bg-rose-100 text-rose-800 border border-rose-300">TC Issued</span>';
           cardBg = 'bg-rose-50/30 border-rose-200';
+          rollBg = 'bg-rose-100 text-rose-800 border-rose-200';
         } else {
-          badge = '<span class="text-[10px] font-bold uppercase px-2 py-0.5 rounded-md bg-blue-50 text-blue-700 border border-blue-200">Regular</span>';
+          badge = '<span class="text-[10px] font-bold uppercase px-2 py-0.5 rounded-md bg-indigo-50 text-indigo-700 border border-indigo-200">Regular</span>';
         }
 
         return `
-          <div class="${cardBg} rounded-2xl p-3 border shadow-xs flex items-center justify-between gap-2.5">
+          <div class="${cardBg} rounded-2xl p-3 border shadow-xs flex items-center justify-between gap-2.5 hover:border-indigo-400 transition student-card-border">
             <div class="flex items-center space-x-3 min-w-0">
-              <div class="w-8 h-8 rounded-xl bg-slate-100 text-slate-600 flex items-center justify-center font-bold text-xs shrink-0">
+              <div class="w-8 h-8 rounded-xl ${rollBg} flex items-center justify-center font-black text-xs shrink-0 shadow-2xs">
                 ${s.sr}
               </div>
               <div class="min-w-0">
@@ -1250,7 +1294,6 @@
       }).join('');
     }
 
-    // AI AGENT QUERY ENGINE
     function toggleAiDrawer() {
       const modal = document.getElementById('ai-modal');
       modal.classList.toggle('hidden');
@@ -1312,12 +1355,10 @@
     function generateAIResponse(query) {
       const q = query.toLowerCase();
 
-      // Leave / WhatsApp queries
       if (q.includes('leave') || q.includes('permission') || q.includes('whatsapp') || q.includes('contact faculty') || q.includes('phone') || q.includes('mobile')) {
         return `📱 <strong>Faculty WhatsApp Contacts for Leave:</strong><br>Switch to the <strong>Leave</strong> tab to open WhatsApp directly with pre-drafted leave messages for any of your 8 teachers!`;
       }
 
-      // 1. Student queries
       if (q.includes('student') || q.includes('usn') || q.includes('roll') || q.includes('lateral') || q.includes('tc') || q.includes('who is') || q.includes('find')) {
         if (q.includes('lateral')) {
           const laterals = studentList.filter(s => s.type === 'lateral');
@@ -1337,46 +1378,28 @@
         if (matched.length > 0) {
           let resp = `👤 <strong>Found Student Record(s):</strong><br>`;
           matched.slice(0, 4).forEach(s => {
-            resp += `• <strong>${s.name}</strong><br>&nbsp;&nbsp;USN: <code class="bg-slate-200 text-slate-800 px-1.5 py-0.5 rounded font-bold">${s.usn}</code> | Roll: #${s.sr} ${s.remark ? `(${s.remark})` : ''}<br>`;
+            resp += `• <strong>${s.name}</strong><br>&nbsp;&nbsp;USN: <code class="bg-indigo-100 text-indigo-900 px-1.5 py-0.5 rounded font-bold">${s.usn}</code> | Roll: #${s.sr} ${s.remark ? `(${s.remark})` : ''}<br>`;
           });
           return resp;
         }
 
         if (q.includes('how many students') || q.includes('total students') || q.includes('class strength')) {
-          return `📊 <strong>Class Strength Breakdown:</strong><br>• <strong>Total Students:</strong> 65<br>• <strong>Regular B.Tech (25BTREC...):</strong> 55<br>• <strong>Lateral Entry (JUUG26L...):</strong> 10<br>• <strong>TC Issued:</strong> 1 (Sri Ram K G).`;
+          return `📊 <strong>Class Strength Breakdown:</strong><br>• <strong>Total Students:</strong> 65<br>• <strong>Regular B.Tech:</strong> 55<br>• <strong>Lateral Entry:</strong> 10<br>• <strong>TC Issued:</strong> 1.`;
         }
       }
 
-      // 2. Notes / Drive queries
       if (q.includes('note') || q.includes('notes') || q.includes('drive') || q.includes('material') || q.includes('study')) {
-        return `📁 <strong>Classroom Notes & Drive Links:</strong><br>Switch to the <strong>Notes</strong> tab on the navigation bar to access separate direct Google Drive folders for all 8 subjects including Digital Logic Design, Analog Electronics, Signals and Systems, and more!`;
+        return `📁 <strong>Classroom Notes & Drive Links:</strong><br>Open the <strong>Notes</strong> tab on the navigation bar to access cloud folders for all 8 subjects!`;
       }
 
-      // 3. Semester End Exam Queries
       if (q.includes('see') || q.includes('semester exam') || q.includes('exam start') || q.includes('exam date') || q.includes('end exam')) {
         return `📅 <strong>Semester End Examinations (SEE):</strong><br>• Commencement date: <strong>December 4, 2026</strong> for UG/PG programs.<br>• Last day of instruction: <strong>November 28, 2026</strong>.<br>• Even Semester starts: <strong>January 2, 2027</strong>.`;
       }
 
-      // 4. Internal Test Schedule
       if (q.includes('internal') || q.includes('test 1') || q.includes('test 2') || q.includes('iat') || q.includes('test week')) {
-        return `📝 <strong>Internal Test Schedule (2026 Odd Sem):</strong><br>• <strong>Internal Test Week 1:</strong> September 7–12, 2026 (also includes JAIN Entrepreneurship Fest on Sep 11-12)<br>• <strong>Internal Test Week 2:</strong> October 26–31, 2026.`;
+        return `📝 <strong>Internal Test Schedule (2026 Odd Sem):</strong><br>• <strong>Internal Test Week 1:</strong> September 7–12, 2026<br>• <strong>Internal Test Week 2:</strong> October 26–31, 2026.`;
       }
 
-      // 5. Holidays Queries
-      if (q.includes('holiday') || q.includes('holidays')) {
-        if (q.includes('oct')) {
-          return `🏖️ <strong>General Holidays in October 2026 (5 Days):</strong><br>• <strong>Oct 2:</strong> Gandhi Jayanthi<br>• <strong>Oct 10:</strong> Mahalaya Amavasya<br>• <strong>Oct 20–21:</strong> Mahanavami & Vijayadashami.`;
-        }
-        if (q.includes('aug')) {
-          return `🏖️ <strong>General Holidays in August 2026 (4 Days):</strong><br>• <strong>Aug 15:</strong> Independence Day<br>• <strong>Aug 21:</strong> Varamahalakshmi Vrata<br>• <strong>Aug 26:</strong> Eid-Milad.`;
-        }
-        if (q.includes('nov')) {
-          return `🏖️ <strong>General Holidays in November 2026 (3 Days):</strong><br>• <strong>Nov 10:</strong> Balipadyami<br>• <strong>Nov 27:</strong> Kanakadasa Jayanthi.`;
-        }
-        return `🏖️ <strong>Key Upcoming General Holidays:</strong><br>• <strong>Aug 15:</strong> Independence Day<br>• <strong>Aug 21:</strong> Varamahalakshmi Vrata<br>• <strong>Aug 26:</strong> Eid-Milad<br>• <strong>Sep 14:</strong> Vinayaka Chaturthi<br>• <strong>Oct 2:</strong> Gandhi Jayanthi<br>• <strong>Oct 20-21:</strong> Mahanavami / Vijayadashami<br>• <strong>Nov 10:</strong> Balipadyami<br>• <strong>Nov 27:</strong> Kanakadasa Jayanthi<br>• <strong>Dec 25:</strong> Christmas.`;
-      }
-
-      // 6. Timetable Day Specific Queries
       const days = ['monday', 'tuesday', 'wednesday', 'thursday', 'friday', 'saturday'];
       for (const d of days) {
         if (q.includes(d)) {
@@ -1390,36 +1413,7 @@
         }
       }
 
-      // 7. Faculty / Subject Teachers queries
-      if (q.includes('who teaches') || q.includes('faculty') || q.includes('teacher') || q.includes('sir') || q.includes('madam') || q.includes('prof') || q.includes('dr.')) {
-        if (q.includes('analog') || q.includes('aec')) {
-          return `👨‍🏫 <strong>Analog Electronics Circuits (ESC 202 / 203):</strong><br>• Faculty: <strong>Dr. Buddha Dharani</strong> (Theory & Lab)<br>• WhatsApp: +91 91601 61822`;
-        }
-        if (q.includes('signal') || q.includes('signals')) {
-          return `👨‍🏫 <strong>Signals and Systems (ESC 201):</strong><br>• Faculty: <strong>Dr. Sunil Kumar</strong><br>• WhatsApp: +91 83759 55075`;
-        }
-        if (q.includes('digital') || q.includes('dld')) {
-          return `👨‍🏫 <strong>Digital Logic Design (ESC 204):</strong><br>• Faculty: <strong>Prof. Chethan G S</strong> (Section Incharge)<br>• WhatsApp: +91 91644 46170`;
-        }
-        if (q.includes('math') || q.includes('statistical') || q.includes('numerical') || q.includes('pde')) {
-          return `👨‍🏫 <strong>Statistical & Numerical Methods / Maths-3 (BSC 202):</strong><br>• Faculty: <strong>Prof. Ajeya Kashi</strong><br>• WhatsApp: +91 74117 76949`;
-        }
-        if (q.includes('biology') || q.includes('bio')) {
-          return `👨‍🏫 <strong>Biology for Engineers (BSC 203):</strong><br>• Faculty: <strong>Dr. Tamilvelan</strong><br>• WhatsApp: +91 96292 84534`;
-        }
-        if (q.includes('design thinking')) {
-          return `👨‍🏫 <strong>Design Thinking (ESC 205):</strong><br>• Faculty: <strong>Prof. Hari Krishna Moorthy</strong><br>• WhatsApp: +91 99867 68390`;
-        }
-        if (q.includes('sports') || q.includes('yoga')) {
-          return `👨‍🏫 <strong>Sports and Yoga (HSMC201):</strong><br>• Faculty: <strong>Dr. Srinivas M</strong><br>• WhatsApp: +91 98802 86653`;
-        }
-        if (q.includes('environment') || q.includes('evs')) {
-          return `👨‍🏫 <strong>Environment Science (BSC 201):</strong><br>• Faculty: <strong>Dr. Dasarathy</strong><br>• WhatsApp: +91 98400 62899`;
-        }
-      }
-
-      // Default fallback
-      return `💡 I couldn't find an exact match for your query. Try asking:<br>• <em>"How do I request leave?"</em><br>• <em>"What is the USN of Akshatha?"</em><br>• <em>"Where can I find DLD notes?"</em><br>• <em>"What classes do I have on Tuesday?"</em><br>• <em>"Who teaches Digital Logic Design?"</em>`;
+      return `💡 I couldn't find an exact match for your query. Try asking:<br>• <em>"Where are the notes?"</em><br>• <em>"What is the USN of Akshatha?"</em><br>• <em>"What classes do I have on Friday?"</em><br>• <em>"Who teaches Digital Logic Design?"</em>`;
     }
 
     // Initialize View Defaults
