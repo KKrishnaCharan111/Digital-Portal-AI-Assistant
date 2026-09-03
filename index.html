@@ -126,6 +126,9 @@
       <button onclick="switchTab('timetable')" id="desk-tab-timetable" class="desk-nav-btn py-3 px-4 border-b-2 border-blue-600 text-blue-600 whitespace-nowrap">
         <i class="fa-solid fa-clock mr-1.5"></i> Class Schedule
       </button>
+      <button onclick="switchTab('leave')" id="desk-tab-leave" class="desk-nav-btn py-3 px-4 border-b-2 border-transparent text-slate-500 hover:text-slate-800 whitespace-nowrap">
+        <i class="fa-brands fa-whatsapp text-emerald-600 mr-1.5"></i> Leave Permission
+      </button>
       <button onclick="switchTab('notes')" id="desk-tab-notes" class="desk-nav-btn py-3 px-4 border-b-2 border-transparent text-slate-500 hover:text-slate-800 whitespace-nowrap">
         <i class="fa-brands fa-google-drive mr-1.5"></i> Classroom Notes
       </button>
@@ -177,6 +180,33 @@
 
       <!-- Periods List -->
       <div id="day-schedule-list" class="space-y-2.5"></div>
+    </section>
+
+    <!-- TAB: LEAVE PERMISSION (FACULTY WHATSAPP DIRECTORY) -->
+    <section id="view-leave" class="tab-view hidden space-y-4">
+      <div class="bg-gradient-to-r from-emerald-600 to-teal-800 rounded-2xl p-6 text-white shadow-md">
+        <div class="flex items-center gap-3">
+          <div class="w-12 h-12 rounded-2xl bg-white/20 flex items-center justify-center text-white text-2xl backdrop-blur-xs">
+            <i class="fa-brands fa-whatsapp"></i>
+          </div>
+          <div>
+            <h2 class="text-xl font-extrabold leading-tight">Faculty Leave Permission</h2>
+            <p class="text-xs text-emerald-100 mt-1 font-medium">Click any faculty member to open WhatsApp with an auto-drafted leave request.</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="bg-blue-50 border border-blue-200 rounded-xl p-3.5 flex items-start gap-3 shadow-xs">
+        <i class="fa-solid fa-circle-info text-blue-600 text-sm mt-0.5"></i>
+        <p class="text-xs text-blue-900 leading-relaxed font-medium">
+          <strong>Tip:</strong> Always remember to send leave notifications in advance to your subject teachers and keep your Section Incharge (Prof. Chethan G S) informed.
+        </p>
+      </div>
+
+      <!-- Faculty Cards Grid -->
+      <div id="faculty-cards-container" class="grid grid-cols-1 sm:grid-cols-2 gap-3.5">
+        <!-- Injected via JavaScript -->
+      </div>
     </section>
 
     <!-- TAB: GOOGLE CLASSROOM NOTES -->
@@ -600,31 +630,35 @@
 
   <!-- Mobile Bottom Navigation Bar -->
   <div class="md:hidden fixed bottom-0 left-0 right-0 bg-white/95 backdrop-blur-md border-t border-slate-200 z-30 px-2 py-2 flex justify-between items-center overflow-x-auto no-scrollbar gap-1">
-    <button onclick="switchTab('timetable')" id="bot-tab-timetable" class="bot-nav-btn flex flex-col items-center gap-0.5 text-blue-600 min-w-[50px]">
+    <button onclick="switchTab('timetable')" id="bot-tab-timetable" class="bot-nav-btn flex flex-col items-center gap-0.5 text-blue-600 min-w-[52px]">
       <i class="fa-solid fa-calendar-week text-base"></i>
       <span class="text-[10px] font-bold">Timetable</span>
     </button>
-    <button onclick="switchTab('notes')" id="bot-tab-notes" class="bot-nav-btn flex flex-col items-center gap-0.5 text-slate-400 hover:text-slate-600 min-w-[50px]">
+    <button onclick="switchTab('leave')" id="bot-tab-leave" class="bot-nav-btn flex flex-col items-center gap-0.5 text-slate-400 hover:text-slate-600 min-w-[52px]">
+      <i class="fa-brands fa-whatsapp text-base"></i>
+      <span class="text-[10px] font-bold">Leave</span>
+    </button>
+    <button onclick="switchTab('notes')" id="bot-tab-notes" class="bot-nav-btn flex flex-col items-center gap-0.5 text-slate-400 hover:text-slate-600 min-w-[52px]">
       <i class="fa-brands fa-google-drive text-base"></i>
       <span class="text-[10px] font-bold">Notes</span>
     </button>
-    <button onclick="switchTab('coe')" id="bot-tab-coe" class="bot-nav-btn flex flex-col items-center gap-0.5 text-slate-400 hover:text-slate-600 min-w-[50px]">
+    <button onclick="switchTab('coe')" id="bot-tab-coe" class="bot-nav-btn flex flex-col items-center gap-0.5 text-slate-400 hover:text-slate-600 min-w-[52px]">
       <i class="fa-solid fa-calendar-days text-base"></i>
       <span class="text-[10px] font-bold">Calendar</span>
     </button>
-    <button onclick="switchTab('matrix')" id="bot-tab-matrix" class="bot-nav-btn flex flex-col items-center gap-0.5 text-slate-400 hover:text-slate-600 min-w-[50px]">
+    <button onclick="switchTab('matrix')" id="bot-tab-matrix" class="bot-nav-btn flex flex-col items-center gap-0.5 text-slate-400 hover:text-slate-600 min-w-[52px]">
       <i class="fa-solid fa-graduation-cap text-base"></i>
       <span class="text-[10px] font-bold">Courses</span>
     </button>
-    <button onclick="switchTab('students')" id="bot-tab-students" class="bot-nav-btn flex flex-col items-center gap-0.5 text-slate-400 hover:text-slate-600 min-w-[50px]">
+    <button onclick="switchTab('students')" id="bot-tab-students" class="bot-nav-btn flex flex-col items-center gap-0.5 text-slate-400 hover:text-slate-600 min-w-[52px]">
       <i class="fa-solid fa-users text-base"></i>
       <span class="text-[10px] font-bold">Students</span>
     </button>
-    <button onclick="switchTab('erp')" id="bot-tab-erp" class="bot-nav-btn flex flex-col items-center gap-0.5 text-slate-400 hover:text-slate-600 min-w-[50px]">
+    <button onclick="switchTab('erp')" id="bot-tab-erp" class="bot-nav-btn flex flex-col items-center gap-0.5 text-slate-400 hover:text-slate-600 min-w-[52px]">
       <i class="fa-solid fa-building-columns text-base"></i>
       <span class="text-[10px] font-bold">ERP</span>
     </button>
-    <button onclick="switchTab('chat')" id="bot-tab-chat" class="bot-nav-btn flex flex-col items-center gap-0.5 text-slate-400 hover:text-slate-600 min-w-[50px]">
+    <button onclick="switchTab('chat')" id="bot-tab-chat" class="bot-nav-btn flex flex-col items-center gap-0.5 text-slate-400 hover:text-slate-600 min-w-[52px]">
       <i class="fa-solid fa-comments text-base"></i>
       <span class="text-[10px] font-bold">Chat</span>
     </button>
@@ -632,7 +666,7 @@
 
   <!-- FLOATING AI AGENT DRAWER / MODAL -->
   <div id="ai-modal" class="fixed inset-0 z-50 bg-slate-900/60 backdrop-blur-xs flex flex-col justify-end md:justify-center md:items-center hidden transition-opacity duration-300">
-    <div class="bg-white w-full md:max-w-xl h-[88vh] md:h-[620px] rounded-t-3xl md:rounded-2xl shadow-2xl flex flex-col overflow-hidden animate-in slide-in-from-bottom duration-300">
+    <div class="bg-white w-full md:max-w-xl h-[88vh] md:h-[620px] rounded-t-3xl md:rounded-2xl shadow-2xl flex flex-col overflow-hidden">
       
       <!-- AI Header -->
       <div class="bg-gradient-to-r from-blue-700 to-indigo-700 px-4 py-3.5 text-white flex items-center justify-between">
@@ -667,7 +701,7 @@
             <i class="fa-solid fa-robot"></i>
           </div>
           <div class="bg-white p-3 rounded-2xl rounded-tl-none border border-slate-200 shadow-xs leading-relaxed text-slate-800">
-            Hello! I am your <strong>ECE Academic AI Assistant</strong>. Ask me about your <strong>3rd sem timetable</strong>, <strong>academic calendar & exam dates</strong>, <strong>course matrix & credits</strong>, or <strong>student USN & batch directory</strong>!
+            Hello! I am your <strong>ECE Academic AI Assistant</strong>. Ask me about your <strong>3rd sem timetable</strong>, <strong>academic calendar & exam dates</strong>, <strong>faculty WhatsApp leave permission</strong>, or <strong>student USN directory</strong>!
           </div>
         </div>
       </div>
@@ -697,6 +731,82 @@
         document.getElementById('theme-icon-login').className = 'fa-solid fa-moon';
       }
     }
+
+    // Faculty Directory with matched subjects, titles, and WhatsApp numbers
+    const facultyList = [
+      {
+        name: "Prof. Chethan G S",
+        role: "Section Incharge & Faculty",
+        subject: "Digital Logic Design (ESC 204)",
+        phone: "919164446170",
+        formattedPhone: "+91 91644 46170",
+        icon: "fa-microchip",
+        bgBadge: "bg-amber-50 text-amber-900 border-amber-200"
+      },
+      {
+        name: "Dr. Buddha Dharani",
+        role: "Faculty",
+        subject: "Analog Electronics Circuits (ESC 202)",
+        phone: "919160161822",
+        formattedPhone: "+91 91601 61822",
+        icon: "fa-wave-square",
+        bgBadge: "bg-violet-50 text-violet-900 border-violet-200"
+      },
+      {
+        name: "Dr. Sunil Kumar",
+        role: "Faculty",
+        subject: "Signals and Systems (ESC 201)",
+        phone: "918375955075",
+        formattedPhone: "+91 83759 55075",
+        icon: "fa-chart-line",
+        bgBadge: "bg-blue-50 text-blue-900 border-blue-200"
+      },
+      {
+        name: "Prof. Ajeya Kashi",
+        role: "Faculty",
+        subject: "Statistical & Numerical Methods (BSC 202)",
+        phone: "917411776949",
+        formattedPhone: "+91 74117 76949",
+        icon: "fa-calculator",
+        bgBadge: "bg-purple-50 text-purple-900 border-purple-200"
+      },
+      {
+        name: "Dr. Dasarathy",
+        role: "Faculty (HOD Civil)",
+        subject: "Environmental Science (BSC 201)",
+        phone: "919840062899",
+        formattedPhone: "+91 98400 62899",
+        icon: "fa-leaf",
+        bgBadge: "bg-emerald-50 text-emerald-900 border-emerald-200"
+      },
+      {
+        name: "Prof. Hari Krishna Moorthy",
+        role: "Faculty",
+        subject: "Design Thinking (ESC 205)",
+        phone: "919986768390",
+        formattedPhone: "+91 99867 68390",
+        icon: "fa-lightbulb",
+        bgBadge: "bg-yellow-50 text-yellow-900 border-yellow-200"
+      },
+      {
+        name: "Dr. Tamilvelan",
+        role: "Faculty",
+        subject: "Applied Biology / Biology for Engineers (BSC 203)",
+        phone: "919629284534",
+        formattedPhone: "+91 96292 84534",
+        icon: "fa-dna",
+        bgBadge: "bg-teal-50 text-teal-900 border-teal-200"
+      },
+      {
+        name: "Dr. Srinivas M",
+        role: "Faculty",
+        subject: "Sports and Yoga / UHV (HSMC 201)",
+        phone: "919880286653",
+        formattedPhone: "+91 98802 86653",
+        icon: "fa-person-running",
+        bgBadge: "bg-sky-50 text-sky-900 border-sky-200"
+      }
+    ];
 
     // 1. Timetable Data
     const timetableData = {
@@ -874,6 +984,7 @@
     let mobileSearchQuery = '';
     let currentStudentFilter = 'all';
     let studentSearchQuery = '';
+    let loggedInStudent = null;
 
     // -------- LOGIN SYSTEM --------
     function handleLogin() {
@@ -893,6 +1004,7 @@
       );
 
       if (matchedStudent) {
+        loggedInStudent = matchedStudent;
         errorMsg.classList.add('hidden');
         document.getElementById('user-display-name').textContent = matchedStudent.name.split(' ')[0];
         
@@ -912,7 +1024,8 @@
     // Switch Main Tabs
     function switchTab(tabId) {
       document.querySelectorAll('.tab-view').forEach(el => el.classList.add('hidden'));
-      document.getElementById('view-' + tabId).classList.remove('hidden');
+      const activeView = document.getElementById('view-' + tabId);
+      if (activeView) activeView.classList.remove('hidden');
 
       document.querySelectorAll('.desk-nav-btn').forEach(b => {
         b.classList.remove('border-blue-600', 'text-blue-600');
@@ -968,6 +1081,42 @@
           </div>
         `;
       }).join('');
+    }
+
+    // Render Faculty Leave Directory Cards
+    function renderFacultyCards() {
+      const container = document.getElementById('faculty-cards-container');
+      container.innerHTML = facultyList.map((fac, idx) => `
+        <div class="bg-white border border-slate-200 rounded-2xl p-4 shadow-xs hover:shadow-md transition flex flex-col justify-between">
+          <div>
+            <div class="flex items-start justify-between gap-2">
+              <div class="w-10 h-10 rounded-xl bg-emerald-50 text-emerald-600 flex items-center justify-center text-lg shrink-0 border border-emerald-200">
+                <i class="fa-solid ${fac.icon}"></i>
+              </div>
+              <span class="text-[10px] font-bold px-2 py-0.5 rounded-md ${fac.bgBadge}">${fac.role}</span>
+            </div>
+            <div class="mt-3">
+              <h3 class="font-extrabold text-sm text-slate-900 leading-snug">${fac.name}</h3>
+              <p class="text-xs text-slate-500 font-medium mt-0.5">${fac.subject}</p>
+              <p class="text-[11px] font-mono text-slate-400 mt-1"><i class="fa-solid fa-phone text-[10px] mr-1"></i> ${fac.formattedPhone}</p>
+            </div>
+          </div>
+          <button onclick="requestLeave('${fac.name}', '${fac.subject}', '${fac.phone}')" class="mt-4 w-full py-2.5 px-3 bg-emerald-600 hover:bg-emerald-700 text-white text-xs font-bold rounded-xl flex items-center justify-center gap-2 transition active:scale-95 shadow-sm">
+            <i class="fa-brands fa-whatsapp text-sm"></i> Request Leave on WhatsApp
+          </button>
+        </div>
+      `).join('');
+    }
+
+    // Function to generate and open WhatsApp link
+    function requestLeave(facultyName, subject, phone) {
+      const studentName = loggedInStudent ? loggedInStudent.name : 'Student';
+      const studentUsn = loggedInStudent ? loggedInStudent.usn : '3rd Sem ECE';
+      
+      const message = `Respected ${facultyName},\n\nI am ${studentName} (USN: ${studentUsn}) from 3rd Semester ECE. I would like to request leave permission for your class (${subject}) due to [mention reason here].\n\nKindly grant me permission.\n\nThank you,\n${studentName}`;
+      
+      const encodedMsg = encodeURI(message);
+      window.open(`https://wa.me/${phone}?text=${encodedMsg}`, '_blank');
     }
 
     function filterMobileSem(sem) {
@@ -1163,6 +1312,11 @@
     function generateAIResponse(query) {
       const q = query.toLowerCase();
 
+      // Leave / WhatsApp queries
+      if (q.includes('leave') || q.includes('permission') || q.includes('whatsapp') || q.includes('contact faculty') || q.includes('phone') || q.includes('mobile')) {
+        return `📱 <strong>Faculty WhatsApp Contacts for Leave:</strong><br>Switch to the <strong>Leave</strong> tab to open WhatsApp directly with pre-drafted leave messages for any of your 8 teachers!`;
+      }
+
       // 1. Student queries
       if (q.includes('student') || q.includes('usn') || q.includes('roll') || q.includes('lateral') || q.includes('tc') || q.includes('who is') || q.includes('find')) {
         if (q.includes('lateral')) {
@@ -1209,7 +1363,7 @@
       }
 
       // 5. Holidays Queries
-      if (q.includes('holiday') || q.includes('holidays') || q.includes('leave')) {
+      if (q.includes('holiday') || q.includes('holidays')) {
         if (q.includes('oct')) {
           return `🏖️ <strong>General Holidays in October 2026 (5 Days):</strong><br>• <strong>Oct 2:</strong> Gandhi Jayanthi<br>• <strong>Oct 10:</strong> Mahalaya Amavasya<br>• <strong>Oct 20–21:</strong> Mahanavami & Vijayadashami.`;
         }
@@ -1239,54 +1393,40 @@
       // 7. Faculty / Subject Teachers queries
       if (q.includes('who teaches') || q.includes('faculty') || q.includes('teacher') || q.includes('sir') || q.includes('madam') || q.includes('prof') || q.includes('dr.')) {
         if (q.includes('analog') || q.includes('aec')) {
-          return `👨‍🏫 <strong>Analog Electronics Circuits (ESC 202 / 203):</strong><br>• Faculty: <strong>Dr. Buddha Dharani</strong> (Theory & Lab)<br>• Lab Instructors: Prof. Chethan GS, Prof. Pramod R, Dr. Buddha Dharani, Dr. Eashwar S.`;
+          return `👨‍🏫 <strong>Analog Electronics Circuits (ESC 202 / 203):</strong><br>• Faculty: <strong>Dr. Buddha Dharani</strong> (Theory & Lab)<br>• WhatsApp: +91 91601 61822`;
         }
         if (q.includes('signal') || q.includes('signals')) {
-          return `👨‍🏫 <strong>Signals and Systems (ESC 201):</strong><br>• Faculty: <strong>Dr. Sunil Kumar</strong>`;
+          return `👨‍🏫 <strong>Signals and Systems (ESC 201):</strong><br>• Faculty: <strong>Dr. Sunil Kumar</strong><br>• WhatsApp: +91 83759 55075`;
         }
         if (q.includes('digital') || q.includes('dld')) {
-          return `👨‍🏫 <strong>Digital Logic Design (ESC 204):</strong><br>• Faculty: <strong>Prof. Chethan G S</strong> (Also Section Incharge).`;
+          return `👨‍🏫 <strong>Digital Logic Design (ESC 204):</strong><br>• Faculty: <strong>Prof. Chethan G S</strong> (Section Incharge)<br>• WhatsApp: +91 91644 46170`;
         }
         if (q.includes('math') || q.includes('statistical') || q.includes('numerical') || q.includes('pde')) {
-          return `👨‍🏫 <strong>Statistical & Numerical Methods / Maths-3 (BSC 202):</strong><br>• Faculty: <strong>Prof. Ajeya Kashi</strong>`;
+          return `👨‍🏫 <strong>Statistical & Numerical Methods / Maths-3 (BSC 202):</strong><br>• Faculty: <strong>Prof. Ajeya Kashi</strong><br>• WhatsApp: +91 74117 76949`;
         }
         if (q.includes('biology') || q.includes('bio')) {
-          return `👨‍🏫 <strong>Biology for Engineers (BSC 203):</strong><br>• Faculty: <strong>Dr. Tamilvelan</strong>`;
+          return `👨‍🏫 <strong>Biology for Engineers (BSC 203):</strong><br>• Faculty: <strong>Dr. Tamilvelan</strong><br>• WhatsApp: +91 96292 84534`;
         }
         if (q.includes('design thinking')) {
-          return `👨‍🏫 <strong>Design Thinking (ESC 205):</strong><br>• Faculty: <strong>Prof. Hari Krishna Moorthy</strong>`;
+          return `👨‍🏫 <strong>Design Thinking (ESC 205):</strong><br>• Faculty: <strong>Prof. Hari Krishna Moorthy</strong><br>• WhatsApp: +91 99867 68390`;
         }
         if (q.includes('sports') || q.includes('yoga')) {
-          return `👨‍🏫 <strong>Sports and Yoga (HSMC201):</strong><br>• Faculty: <strong>Dr. Srinivas M</strong>`;
+          return `👨‍🏫 <strong>Sports and Yoga (HSMC201):</strong><br>• Faculty: <strong>Dr. Srinivas M</strong><br>• WhatsApp: +91 98802 86653`;
         }
         if (q.includes('environment') || q.includes('evs')) {
-          return `👨‍🏫 <strong>Environment Science (BSC 201):</strong><br>• Faculty: <strong>Dr. Dasarathy</strong>`;
+          return `👨‍🏫 <strong>Environment Science (BSC 201):</strong><br>• Faculty: <strong>Dr. Dasarathy</strong><br>• WhatsApp: +91 98400 62899`;
         }
-      }
-
-      // 8. Course Matrix & Semester Credits
-      if (q.includes('sem 3') || q.includes('semester 3') || q.includes('3rd sem')) {
-        return `📚 <strong>Semester 3 Breakdown:</strong><br>• <strong>Total Credits:</strong> 23 Credits<br>• <strong>Notional Hours:</strong> 600 hrs (195 L, 180 P)<br>• <strong>Key Subjects:</strong> BSC 201 Env Sci, BSC 202 Maths-3, BSC 203 Bio, ESC 201 Signals, ESC 202 Analog, ESC 204 DLD, ESC 205 Design Thinking, HSMC201 Sports & Yoga.`;
-      }
-      if (q.includes('sem 4') || q.includes('semester 4') || q.includes('4th sem')) {
-        return `📚 <strong>Semester 4 Breakdown:</strong><br>• <strong>Total Credits:</strong> 21 Credits<br>• <strong>Notional Hours:</strong> 435 hrs (225 L, 150 P)<br>• <strong>Core Courses:</strong> PCC 201 HDL, PCC 202 Microprocessors & Microcontrollers, PCC 203 Computer Arch, PCC 204 Analog & Digital Comm, PCC 206 EMT, ESC 206 Engg in Society, ESC 207 3D Exp Lab.`;
-      }
-      if (q.includes('sem 5') || q.includes('semester 5') || q.includes('5th sem')) {
-        return `📚 <strong>Semester 5 Breakdown:</strong><br>• <strong>Total Credits:</strong> 24 Credits<br>• <strong>Notional Hours:</strong> 525 hrs (270 L, 90 P)<br>• <strong>Core Courses:</strong> HSMC 301 Finance, PCC 301 VLSI Design, PCC 302 DSP, Track Cores 1/2/3, PCC 306 IC Design Lab, PCC 307 Research Methods, INT-1 Internship-1.`;
-      }
-
-      if (q.includes('section incharge') || q.includes('incharge')) {
-        return `📍 <strong>Section Incharge:</strong> Prof. Chethan G S<br>• <strong>Session:</strong> Jan-June / July-Dec 2026`;
       }
 
       // Default fallback
-      return `💡 I couldn't find an exact match for your query. Try asking:<br>• <em>"What is the USN of Akshatha?"</em><br>• <em>"List lateral entry students"</em><br>• <em>"Where can I find DLD notes?"</em><br>• <em>"What classes do I have on Tuesday?"</em><br>• <em>"Who teaches Digital Logic Design?"</em>`;
+      return `💡 I couldn't find an exact match for your query. Try asking:<br>• <em>"How do I request leave?"</em><br>• <em>"What is the USN of Akshatha?"</em><br>• <em>"Where can I find DLD notes?"</em><br>• <em>"What classes do I have on Tuesday?"</em><br>• <em>"Who teaches Digital Logic Design?"</em>`;
     }
 
     // Initialize View Defaults
     selectDay('Mon');
     filterMobileSem('3');
     renderStudentList();
+    renderFacultyCards();
   </script>
 </body>
 </html>
