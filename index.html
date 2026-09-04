@@ -48,6 +48,7 @@
     /* Modals & Overlays */
     html.dark #login-overlay { background-color: #0b1120 !important; }
     html.dark #login-box { background-color: #131c2e !important; border-color: #27354f !important; }
+    html.dark #more-menu-sheet { background-color: #131c2e !important; border-color: #223049 !important; }
     
     /* Dynamic Pill and Alert Colors for Dark Mode */
     html.dark .bg-blue-50 { background-color: rgba(30, 58, 138, 0.4) !important; border-color: rgba(59, 130, 246, 0.4) !important; color: #bfdbfe !important; }
@@ -56,6 +57,9 @@
     html.dark .bg-emerald-50 { background-color: rgba(6, 78, 59, 0.4) !important; border-color: rgba(16, 185, 129, 0.4) !important; color: #a7f3d0 !important; }
     html.dark .bg-indigo-50 { background-color: rgba(49, 46, 129, 0.4) !important; border-color: rgba(99, 102, 241, 0.4) !important; color: #c7d2fe !important; }
     html.dark .bg-purple-50 { background-color: rgba(88, 28, 135, 0.4) !important; border-color: rgba(168, 85, 247, 0.4) !important; color: #e9d5ff !important; }
+    html.dark .bg-cyan-50 { background-color: rgba(8, 145, 178, 0.4) !important; border-color: rgba(6, 182, 212, 0.4) !important; color: #a5f3fc !important; }
+    html.dark .bg-orange-50 { background-color: rgba(194, 65, 12, 0.4) !important; border-color: rgba(249, 115, 22, 0.4) !important; color: #fed7aa !important; }
+    html.dark .bg-pink-50 { background-color: rgba(190, 24, 93, 0.4) !important; border-color: rgba(244, 63, 94, 0.4) !important; color: #fbcfe8 !important; }
     
     html.dark .text-blue-700 { color: #93c5fd !important; }
     html.dark .text-blue-600 { color: #60a5fa !important; }
@@ -276,18 +280,13 @@
         <div class="flex items-center gap-3">
           <i class="fa-brands fa-google-drive text-2xl"></i>
           <div>
-            <h2 class="text-xl font-black flex items-center gap-2">
-              Classroom Notes & Resources
-            </h2>
-            <p class="text-xs text-amber-950 font-medium mt-1">
-              Direct cloud access to lecture slides, assignments, lab manuals, and syllabus modules.
-            </p>
+            <h2 class="text-xl font-black flex items-center gap-2">Classroom Notes & Resources</h2>
+            <p class="text-xs text-amber-950 font-medium mt-1">Direct cloud access to lecture slides, assignments, lab manuals, and syllabus modules.</p>
           </div>
         </div>
       </div>
 
       <div class="grid grid-cols-1 sm:grid-cols-2 gap-3.5">
-        
         <div class="bg-white border border-slate-200 rounded-2xl p-4 shadow-xs flex flex-col justify-between hover:border-amber-400 hover:shadow-md transition">
           <div class="flex items-start justify-between gap-3">
             <div class="w-10 h-10 rounded-xl bg-amber-50 text-amber-600 flex items-center justify-center shrink-0 border border-amber-200">
@@ -415,7 +414,6 @@
             <i class="fa-brands fa-google-drive text-amber-600 text-sm"></i> Open Drive Folder <i class="fa-solid fa-arrow-up-right-from-square text-[10px]"></i>
           </a>
         </div>
-
       </div>
 
       <div class="bg-gradient-to-r from-amber-50/70 to-yellow-50/70 border border-amber-200 rounded-2xl p-4 flex items-start gap-3 shadow-xs mt-2">
@@ -647,39 +645,81 @@
 
   </main>
 
-  <div class="md:hidden fixed bottom-0 left-0 right-0 bg-white/95 backdrop-blur-md border-t border-slate-200 z-30 px-2 py-2 flex justify-between items-center overflow-x-auto no-scrollbar gap-1 shadow-lg">
-    <button onclick="switchTab('timetable')" id="bot-tab-timetable" class="bot-nav-btn flex flex-col items-center gap-0.5 text-blue-600 min-w-[52px]">
+  <div class="md:hidden fixed bottom-0 left-0 right-0 bg-white/95 backdrop-blur-md border-t border-slate-200 z-30 px-3 py-2 grid grid-cols-5 items-center shadow-lg">
+    <button onclick="switchTab('timetable')" id="bot-tab-timetable" class="bot-nav-btn flex flex-col items-center justify-center gap-0.5 text-blue-600 transition">
       <i class="fa-regular fa-clock text-base"></i>
       <span class="text-[10px] font-bold">Timetable</span>
     </button>
-    <button onclick="switchTab('leave')" id="bot-tab-leave" class="bot-nav-btn flex flex-col items-center gap-0.5 text-slate-400 hover:text-slate-600 min-w-[52px]">
+    <button onclick="switchTab('leave')" id="bot-tab-leave" class="bot-nav-btn flex flex-col items-center justify-center gap-0.5 text-slate-400 hover:text-slate-600 transition">
       <i class="fa-brands fa-whatsapp text-base"></i>
       <span class="text-[10px] font-bold">Leave</span>
     </button>
-    <button onclick="switchTab('notes')" id="bot-tab-notes" class="bot-nav-btn flex flex-col items-center gap-0.5 text-slate-400 hover:text-slate-600 min-w-[52px]">
+    <button onclick="switchTab('notes')" id="bot-tab-notes" class="bot-nav-btn flex flex-col items-center justify-center gap-0.5 text-slate-400 hover:text-slate-600 transition">
       <i class="fa-brands fa-google-drive text-base"></i>
       <span class="text-[10px] font-bold">Notes</span>
     </button>
-    <button onclick="switchTab('coe')" id="bot-tab-coe" class="bot-nav-btn flex flex-col items-center gap-0.5 text-slate-400 hover:text-slate-600 min-w-[52px]">
-      <i class="fa-regular fa-calendar text-base"></i>
-      <span class="text-[10px] font-bold">Calendar</span>
-    </button>
-    <button onclick="switchTab('matrix')" id="bot-tab-matrix" class="bot-nav-btn flex flex-col items-center gap-0.5 text-slate-400 hover:text-slate-600 min-w-[52px]">
-      <i class="fa-solid fa-book-bookmark text-base"></i>
-      <span class="text-[10px] font-bold">Courses</span>
-    </button>
-    <button onclick="switchTab('students')" id="bot-tab-students" class="bot-nav-btn flex flex-col items-center gap-0.5 text-slate-400 hover:text-slate-600 min-w-[52px]">
+    <button onclick="switchTab('students')" id="bot-tab-students" class="bot-nav-btn flex flex-col items-center justify-center gap-0.5 text-slate-400 hover:text-slate-600 transition">
       <i class="fa-solid fa-users text-base"></i>
       <span class="text-[10px] font-bold">Students</span>
     </button>
-    <button onclick="switchTab('erp')" id="bot-tab-erp" class="bot-nav-btn flex flex-col items-center gap-0.5 text-slate-400 hover:text-slate-600 min-w-[52px]">
-      <i class="fa-solid fa-landmark text-base"></i>
-      <span class="text-[10px] font-bold">ERP</span>
+    <button onclick="toggleMoreMenu()" id="bot-tab-more" class="bot-nav-btn flex flex-col items-center justify-center gap-0.5 text-slate-400 hover:text-slate-600 transition relative">
+      <i class="fa-solid fa-ellipsis text-base"></i>
+      <span class="text-[10px] font-bold">More</span>
+      <span id="more-active-dot" class="hidden absolute top-0.5 right-4 w-2 h-2 rounded-full bg-blue-600"></span>
     </button>
-    <button onclick="switchTab('chat')" id="bot-tab-chat" class="bot-nav-btn flex flex-col items-center gap-0.5 text-slate-400 hover:text-slate-600 min-w-[52px]">
-      <i class="fa-solid fa-comments text-base"></i>
-      <span class="text-[10px] font-bold">Chat</span>
-    </button>
+  </div>
+
+  <div id="more-menu-backdrop" onclick="toggleMoreMenu()" class="fixed inset-0 bg-slate-950/60 backdrop-blur-xs z-40 hidden transition-opacity duration-300 md:hidden"></div>
+  <div id="more-menu-sheet" class="fixed bottom-0 left-0 right-0 bg-white rounded-t-3xl z-50 p-5 border-t border-slate-200 transform translate-y-full transition-transform duration-300 md:hidden shadow-2xl">
+    <div class="w-12 h-1.5 bg-slate-300 rounded-full mx-auto mb-4"></div>
+    <div class="flex items-center justify-between mb-4">
+      <h3 class="text-sm font-extrabold text-slate-900">Additional Features & Portals</h3>
+      <button onclick="toggleMoreMenu()" class="w-7 h-7 rounded-full bg-slate-100 flex items-center justify-center text-slate-500">
+        <i class="fa-solid fa-xmark text-xs"></i>
+      </button>
+    </div>
+    
+    <div class="grid grid-cols-2 gap-3 pb-4">
+      <button onclick="switchTabFromMore('coe')" class="flex items-center gap-3 p-3 bg-slate-50 border border-slate-200 rounded-2xl active:scale-95 transition text-left">
+        <div class="w-9 h-9 rounded-xl bg-cyan-50 text-cyan-600 flex items-center justify-center text-base shrink-0 border border-cyan-200">
+          <i class="fa-regular fa-calendar"></i>
+        </div>
+        <div>
+          <h4 class="text-xs font-bold text-slate-900">Academic Calendar</h4>
+          <p class="text-[10px] text-slate-500">Working days & SEE</p>
+        </div>
+      </button>
+
+      <button onclick="switchTabFromMore('matrix')" class="flex items-center gap-3 p-3 bg-slate-50 border border-slate-200 rounded-2xl active:scale-95 transition text-left">
+        <div class="w-9 h-9 rounded-xl bg-rose-50 text-rose-600 flex items-center justify-center text-base shrink-0 border border-rose-200">
+          <i class="fa-solid fa-book-bookmark"></i>
+        </div>
+        <div>
+          <h4 class="text-xs font-bold text-slate-900">Course Matrix</h4>
+          <p class="text-[10px] text-slate-500">Credits & syllabus</p>
+        </div>
+      </button>
+
+      <button onclick="switchTabFromMore('erp')" class="flex items-center gap-3 p-3 bg-slate-50 border border-slate-200 rounded-2xl active:scale-95 transition text-left">
+        <div class="w-9 h-9 rounded-xl bg-orange-50 text-orange-600 flex items-center justify-center text-base shrink-0 border border-orange-200">
+          <i class="fa-solid fa-landmark"></i>
+        </div>
+        <div>
+          <h4 class="text-xs font-bold text-slate-900">ERP Portal</h4>
+          <p class="text-[10px] text-slate-500">Attendance & marks</p>
+        </div>
+      </button>
+
+      <button onclick="switchTabFromMore('chat')" class="flex items-center gap-3 p-3 bg-slate-50 border border-slate-200 rounded-2xl active:scale-95 transition text-left">
+        <div class="w-9 h-9 rounded-xl bg-pink-50 text-pink-600 flex items-center justify-center text-base shrink-0 border border-pink-200">
+          <i class="fa-solid fa-comments"></i>
+        </div>
+        <div>
+          <h4 class="text-xs font-bold text-slate-900">Class Chat</h4>
+          <p class="text-[10px] text-slate-500">Peer messaging</p>
+        </div>
+      </button>
+    </div>
   </div>
 
   <div id="ai-modal" class="fixed inset-0 z-50 bg-slate-950/70 backdrop-blur-xs flex flex-col justify-end md:justify-center md:items-center hidden transition-opacity duration-300">
@@ -820,7 +860,7 @@
       }
     ];
 
-    // 1. Timetable Data
+    // Timetable Data
     const timetableData = {
       Mon: [
         { period: "1 & 2", time: "8:45 - 10:45", title: "Sports and Yoga", faculty: "Dr. Srinivas M", type: "Activity", color: "bg-sky-50 text-sky-900 border-sky-200" },
@@ -872,7 +912,7 @@
       ]
     };
 
-    // 2. Course Matrix Data
+    // Course Matrix Data
     const courseMatrixData = [
       { sem: 3, no: 1, code: "BSC 201", name: "Environment Science", type: "BSC", ltpe: "2-0-0-3", cr: 3, nh: 90, l: 30, t: 0, p: 0 },
       { sem: 3, no: 2, code: "BSC 202", name: "Mathematics-3 (PDE, Prob/Stat)", type: "BSC", ltpe: "2-0-2-2", cr: 4, nh: 120, l: 30, t: 0, p: 30 },
@@ -923,7 +963,7 @@
       { sem: 8, no: 4, code: "PROJ 3", name: "Engineering Project-3", type: "PROJ", ltpe: "0-0-12-0", cr: 6, nh: 180, l: 0, t: 0, p: 180 },
     ];
 
-    // 3. Complete ECE Student List (65 STUDENTS)
+    // Complete Student List (65 Students)
     const studentList = [
       { sr: 1, usn: "25BTREC001", name: "A PREETHAM", type: "regular", remark: "" },
       { sr: 2, usn: "25BTREC002", name: "AARTHI D", type: "regular", remark: "" },
@@ -998,16 +1038,13 @@
     let studentSearchQuery = '';
     let loggedInStudent = null;
 
-    // -------- BIOMETRIC AUTHENTICATION ENGINE (WebAuthn) --------
-    
-    // Check if device supports Biometrics / WebAuthn
+    // Biometric Engine
     function isWebAuthnAvailable() {
       return !!(window.PublicKeyCredential && navigator.credentials && navigator.credentials.create);
     }
 
     async function promptBiometricRegistration(student) {
       if (!isWebAuthnAvailable()) return;
-
       const hasRegistered = localStorage.getItem('portal_bio_registered_' + student.usn);
       if (hasRegistered) return;
 
@@ -1017,33 +1054,19 @@
       try {
         const challenge = new Uint8Array(32);
         window.crypto.getRandomValues(challenge);
-        
         const userId = new Uint8Array(student.usn.split('').map(c => c.charCodeAt(0)));
 
         const publicKeyCredentialCreationOptions = {
           challenge: challenge,
-          rp: {
-            name: "FET Digital Portal",
-            id: window.location.hostname || "localhost"
-          },
-          user: {
-            id: userId,
-            name: student.usn,
-            displayName: student.name
-          },
+          rp: { name: "FET Digital Portal", id: window.location.hostname || "localhost" },
+          user: { id: userId, name: student.usn, displayName: student.name },
           pubKeyCredParams: [{ alg: -7, type: "public-key" }, { alg: -257, type: "public-key" }],
-          authenticatorSelection: {
-            authenticatorAttachment: "platform",
-            userVerification: "required"
-          },
+          authenticatorSelection: { authenticatorAttachment: "platform", userVerification: "required" },
           timeout: 60000,
           attestation: "none"
         };
 
-        const credential = await navigator.credentials.create({
-          publicKey: publicKeyCredentialCreationOptions
-        });
-
+        const credential = await navigator.credentials.create({ publicKey: publicKeyCredentialCreationOptions });
         if (credential) {
           localStorage.setItem('portal_bio_registered_' + student.usn, 'true');
           localStorage.setItem('portal_saved_usn', student.usn);
@@ -1095,8 +1118,6 @@
           return;
         }
       }
-
-      // Fallback for browsers that support local fast login
       grantAccess(matchedStudent);
     }
 
@@ -1115,7 +1136,7 @@
       }
     }
 
-    // -------- MANUAL LOGIN SYSTEM --------
+    // Manual Login
     function handleLogin() {
       const nameInput = document.getElementById('login-name').value.trim().toLowerCase();
       const usnInput = document.getElementById('login-usn').value.trim().toLowerCase();
@@ -1134,7 +1155,6 @@
 
       if (matchedStudent) {
         grantAccess(matchedStudent);
-        // Prompt for fingerprint/Face ID registration for future one-touch logins
         promptBiometricRegistration(matchedStudent);
       } else {
         errorMsg.textContent = "Invalid Name or USN. Please check your spelling.";
@@ -1168,13 +1188,32 @@
       }
     }
 
-    // Switch Main Tabs
+    // Tab Navigation & Mobile Drawer
+    function toggleMoreMenu() {
+      const backdrop = document.getElementById('more-menu-backdrop');
+      const sheet = document.getElementById('more-menu-sheet');
+      const isHidden = backdrop.classList.contains('hidden');
+
+      if (isHidden) {
+        backdrop.classList.remove('hidden');
+        setTimeout(() => sheet.classList.remove('translate-y-full'), 10);
+      } else {
+        sheet.classList.add('translate-y-full');
+        setTimeout(() => backdrop.classList.add('hidden'), 250);
+      }
+    }
+
+    function switchTabFromMore(tabId) {
+      toggleMoreMenu();
+      switchTab(tabId);
+    }
+
     function switchTab(tabId) {
       document.querySelectorAll('.tab-view').forEach(el => el.classList.add('hidden'));
       const activeView = document.getElementById('view-' + tabId);
       if (activeView) activeView.classList.remove('hidden');
 
-      // Desktop Pill Updates
+      // Desktop Pills
       document.querySelectorAll('.desk-nav-btn').forEach(b => {
         b.classList.remove('active-pill');
         b.classList.add('inactive-pill');
@@ -1185,25 +1224,35 @@
         deskTab.classList.add('active-pill');
       }
 
-      // Bottom Bar Navigation Updates
+      // Mobile Bottom Bar
       document.querySelectorAll('.bot-nav-btn').forEach(b => {
         b.classList.remove('text-blue-600', 'text-amber-500', 'text-indigo-600', 'text-emerald-600');
         b.classList.add('text-slate-400');
       });
-      
-      const botTab = document.getElementById('bot-tab-' + tabId);
-      if (botTab) {
-        botTab.classList.remove('text-slate-400');
-        if (tabId === 'notes') {
-          botTab.classList.add('text-amber-500');
-        } else if (tabId === 'students') {
-          botTab.classList.add('text-indigo-600');
-        } else if (tabId === 'leave') {
-          botTab.classList.add('text-emerald-600');
-        } else {
-          botTab.classList.add('text-blue-600');
+
+      const moreActiveDot = document.getElementById('more-active-dot');
+      const primaryMobileTabs = ['timetable', 'leave', 'notes', 'students'];
+
+      if (primaryMobileTabs.includes(tabId)) {
+        moreActiveDot.classList.add('hidden');
+        const botTab = document.getElementById('bot-tab-' + tabId);
+        if (botTab) {
+          botTab.classList.remove('text-slate-400');
+          if (tabId === 'notes') botTab.classList.add('text-amber-500');
+          else if (tabId === 'students') botTab.classList.add('text-indigo-600');
+          else if (tabId === 'leave') botTab.classList.add('text-emerald-600');
+          else botTab.classList.add('text-blue-600');
         }
+      } else {
+        // Active item resides inside the "More" menu
+        const moreTab = document.getElementById('bot-tab-more');
+        if (moreTab) {
+          moreTab.classList.remove('text-slate-400');
+          moreTab.classList.add('text-blue-600');
+        }
+        moreActiveDot.classList.remove('hidden');
       }
+
       window.scrollTo({ top: 0, behavior: 'smooth' });
     }
 
@@ -1241,7 +1290,6 @@
       }).join('');
     }
 
-    // Render Faculty Leave Directory Cards
     function renderFacultyCards() {
       const container = document.getElementById('faculty-cards-container');
       container.innerHTML = facultyList.map((fac) => `
@@ -1360,7 +1408,6 @@
       renderStudentList();
     }
 
-    // Render Student Directory
     function renderStudentList() {
       const container = document.getElementById('student-list-container');
       const filtered = studentList.filter(s => {
@@ -1532,7 +1579,7 @@
       return `💡 I couldn't find an exact match for your query. Try asking:<br>• <em>"Where are the notes?"</em><br>• <em>"What is the USN of Akshatha?"</em><br>• <em>"What classes do I have on Friday?"</em><br>• <em>"Who teaches Digital Logic Design?"</em>`;
     }
 
-    // Auto-login or show Biometric prompt if previously registered
+    // Initialization
     window.addEventListener('DOMContentLoaded', () => {
       selectDay('Mon');
       filterMobileSem('3');
