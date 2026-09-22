@@ -1,11 +1,17 @@
 // ==================== "BOX" CAMPUS CHAT & HOME MARQUEE ENGINE ====================
-// Serverless Peer-to-Peer Chat Engine with GunDB & BroadcastChannel Mesh
+// Real-Time Cross-Device Mesh with High-Speed PubSub, GunDB & BroadcastChannel
 
+const CHAT_SYNC_TOPIC = 'fet_jain_ece_box_chat_2026';
+const NOTICE_SYNC_TOPIC = 'fet_jain_ece_marquee_notice_2026';
+const PRESENCE_SYNC_TOPIC = 'fet_jain_ece_presence_2026';
 const AUTHORIZED_ADMIN_USNS = ['25BTREC020', '25BTREC09', '25BTREC009'];
 
 let gun = null;
 let boxChatChannel = null;
 let boxNoticeChannel = null;
+let chatEventSource = null;
+let noticeEventSource = null;
+let presenceEventSource = null;
 let boxMessages = [];
 let activePinnedNotice = {
   tag: '📢',
@@ -18,7 +24,7 @@ let activePinnedNotice = {
 let currentBoxTheme = localStorage.getItem('box_chat_theme') || 'glass';
 let activePresenceMap = {};
 
-// Auto-purge legacy browser cache on load (wipes old bot/mock messages)
+// Auto-purge legacy browser cache on load
 function purgeLegacyChatCache() {
   const legacyKeys = [
     'portal_campus_chat_messages',
@@ -29,10 +35,157 @@ function purgeLegacyChatCache() {
   legacyKeys.forEach(k => localStorage.removeItem(k));
 }
 
-// Initialize GunDB Mesh & Cross-Tab BroadcastChannel
+// Update connection status indicator in UI
+function updateConnectionStatus(isOnline) {
+  const statusEl = document.getElementById('box-connection-status');
+  if (!statusEl) return;
+  const parent = statusEl.parentElement;
+  if (isOnline) {
+    statusEl.textContent = "Live Connected";
+    if (parent) {
+      parent.className = "inline-flex items-center gap-1 px-2.5 py-0.5 rounded-full bg-emerald-500/15 text-emerald-600 dark:text-emerald-400 text-[10px] font-extrabold border border-emerald-500/30";
+    }
+  } else {
+    statusEl.textContent = "Connecting...";
+    if (parent) {
+      parent.className = "inline-flex items-center gap-1 px-2.5 py-0.5 rounded-full bg-amber-500/15 text-amber-600 dark:text-amber-400 text-[10px] font-extrabold border border-amber-500/30";
+    }
+  }
+}
+
+// Connect Real-Time Server-Sent Events (SSE) Streams
+function connectRealtimeStreams() {
+  // 1. Live Chat Message Stream
+  if (chatEventSource) {
+    try { chatEventSource.close(); } catch(e) {}
+  }
+  try {
+    chatEventSource = new EventSource(`https://ntfy.sh/${CHAT_SYNC_TOPIC}/sse`);
+    chatEventSource.onopen = () => {
+      updateConnectionStatus(true);
+    };
+    chatEventSource.onmessage = (event) => {
+      try {
+        const payload = JSON.parse(event.data);
+        if (payload.event === 'message' && payload.message) {
+          const data = JSON.parse(payload.message);
+          if (data && data.type === 'DELETE_MESSAGE' && data.id) {
+            handleRemoteDeleteMessage(data.id);
+          } else if (data && data.text) {
+            receiveBoxMessage(data, false);
+          }
+        }
+      } catch (err) {
+        console.warn("Error processing chat SSE event:", err);
+      }
+    };
+    chatEventSource.onerror = () => {
+      updateConnectionStatus(false);
+    };
+  } catch (err) {
+    console.warn("Chat SSE setup error:", err);
+  }
+
+  // 2. Live Pinned Marquee Notice Stream
+  if (noticeEventSource) {
+    try { noticeEventSource.close(); } catch(e) {}
+  }
+  try {
+    noticeEventSource = new EventSource(`https://ntfy.sh/${NOTICE_SYNC_TOPIC}/sse`);
+    noticeEventSource.onmessage = (event) => {
+      try {
+        const payload = JSON.parse(event.data);
+        if (payload.event === 'message' && payload.message) {
+          const notice = JSON.parse(payload.message);
+          if (notice && notice.text) {
+            applyPinnedNotice(notice, false);
+          }
+        }
+      } catch (err) {}
+    };
+  } catch (err) {}
+
+  // 3. Live Presence Stream
+  if (presenceEventSource) {
+    try { presenceEventSource.close(); } catch(e) {}
+  }
+  try {
+    presenceEventSource = new EventSource(`https://ntfy.sh/${PRESENCE_SYNC_TOPIC}/sse`);
+    presenceEventSource.onmessage = (event) => {
+      try {
+        const payload = JSON.parse(event.data);
+        if (payload.event === 'message' && payload.message) {
+          const pres = JSON.parse(payload.message);
+          recordStudentPresence(pres);
+        }
+      } catch (err) {}
+    };
+  } catch (err) {}
+}
+
+// Fetch Remote Chat History (Sync past messages when opening portal)
+async function syncRemoteChatHistory() {
+  try {
+    const res = await fetch(`https://ntfy.sh/${CHAT_SYNC_TOPIC}/json?poll=1&since=all`, { cache: 'no-store' });
+    if (res.ok) {
+      const text = await res.text();
+      const lines = text.trim().split('\n');
+      let newCount = 0;
+      lines.forEach(line => {
+        if (!line) return;
+        try {
+          const item = JSON.parse(line);
+          if (item.event === 'message' && item.message) {
+            const msg = JSON.parse(item.message);
+            if (msg && msg.text && msg.id) {
+              const exists = boxMessages.some(m => m.id === msg.id || (m.timestamp === msg.timestamp && m.senderUsn === msg.senderUsn && m.text === msg.text));
+              if (!exists) {
+                boxMessages.push(msg);
+                newCount++;
+              }
+            }
+          }
+        } catch(e) {}
+      });
+      if (newCount > 0) {
+        saveBoxMessages();
+        renderBoxMessages();
+      }
+    }
+  } catch (err) {
+    console.warn("History poll error:", err);
+  }
+}
+
+// Fetch Remote Pinned Notice
+async function syncRemotePinnedNotice() {
+  try {
+    const res = await fetch(`https://ntfy.sh/${NOTICE_SYNC_TOPIC}/json?poll=1&since=all`, { cache: 'no-store' });
+    if (res.ok) {
+      const text = await res.text();
+      const lines = text.trim().split('\n');
+      for (let i = lines.length - 1; i >= 0; i--) {
+        if (!lines[i]) continue;
+        try {
+          const item = JSON.parse(lines[i]);
+          if (item.event === 'message' && item.message) {
+            const notice = JSON.parse(item.message);
+            if (notice && notice.text) {
+              applyPinnedNotice(notice, false);
+              break;
+            }
+          }
+        } catch(e) {}
+      }
+    }
+  } catch (err) {}
+}
+
+// Initialize BOX Chat Engine
 function initBoxChatEngine() {
   purgeLegacyChatCache();
 
+  // 1. Cross-Tab Local BroadcastChannel
   try {
     if (window.BroadcastChannel) {
       boxChatChannel = new BroadcastChannel('fet_box_campus_chat_channel');
@@ -45,6 +198,8 @@ function initBoxChatEngine() {
           boxMessages = [];
           saveBoxMessages();
           renderBoxMessages();
+        } else if (event.data && event.data.type === 'DELETE_MESSAGE') {
+          handleRemoteDeleteMessage(event.data.id);
         } else if (event.data && event.data.type === 'PRESENCE') {
           recordStudentPresence(event.data.presence);
         }
@@ -58,23 +213,23 @@ function initBoxChatEngine() {
       };
     }
   } catch (e) {
-    console.warn("BroadcastChannel not available:", e);
+    console.warn("BroadcastChannel note:", e);
   }
 
-  // Initialize GunDB with public WebSocket relays
+  // 2. Connect Real-time SSE Streams
+  connectRealtimeStreams();
+
+  // 3. Optional GunDB Secondary Mesh
   try {
     if (window.Gun) {
       gun = Gun({
         peers: [
-          'https://gun-manhattan.herokuapp.com/gun',
-          'https://peer.waller.asia/gun',
           'https://relay.peer.ooo/gun'
         ],
         localStorage: false
       });
 
-      // Listen for peer chat messages
-      gun.get('fet_box_campus_chat_room_v3').map().on((data, id) => {
+      gun.get('fet_box_campus_chat_room_v4').map().on((data, id) => {
         if (data && data.senderUsn && data.text) {
           const incoming = {
             id: id,
@@ -88,40 +243,21 @@ function initBoxChatEngine() {
           receiveBoxMessage(incoming, false);
         }
       });
-
-      // Listen for pinned notices
-      gun.get('fet_box_home_pinned_notice_v3').on((data) => {
-        if (data && data.text) {
-          applyPinnedNotice({
-            tag: data.tag || '📢',
-            label: data.label || 'Notice',
-            text: data.text,
-            pinnedBy: data.pinnedBy || 'Admin',
-            timestamp: data.timestamp || new Date().toISOString()
-          }, false);
-        }
-      });
-
-      // Listen for peer presence
-      gun.get('fet_box_presence_v3').map().on((data) => {
-        if (data && data.usn && data.name) {
-          recordStudentPresence(data);
-        }
-      });
-
-      const statusEl = document.getElementById('box-connection-status');
-      if (statusEl) statusEl.textContent = "Online Mesh";
     }
   } catch (err) {
-    console.warn("GunDB initialization fallback:", err);
+    console.warn("GunDB auxiliary layer note:", err);
   }
 
-  // Load clean cached messages (Pure active users only)
+  // 4. Load local messages and pinned notice
   loadBoxMessages();
   loadPinnedNotice();
   applyBoxTheme();
 
-  // Listen for student session updates
+  // 5. Fetch recent global messages from remote relay
+  syncRemoteChatHistory();
+  syncRemotePinnedNotice();
+
+  // Listen for student login session
   window.addEventListener('student-session-active', (e) => {
     checkAdminPermissions(e.detail);
     broadcastMyPresence();
@@ -132,8 +268,8 @@ function initBoxChatEngine() {
     broadcastMyPresence();
   }
 
-  // Heartbeat presence broadcast every 30 seconds
-  setInterval(broadcastMyPresence, 30000);
+  // Broadcast presence heartbeat every 25 seconds
+  setInterval(broadcastMyPresence, 25000);
 }
 
 // Presence Tracking
@@ -149,9 +285,16 @@ function broadcastMyPresence() {
   if (boxChatChannel) {
     boxChatChannel.postMessage({ type: 'PRESENCE', presence: pData });
   }
+
+  fetch(`https://ntfy.sh/${PRESENCE_SYNC_TOPIC}`, {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify(pData)
+  }).catch(e => {});
+
   if (gun) {
     try {
-      gun.get('fet_box_presence_v3').get(loggedInStudent.usn).put(pData);
+      gun.get('fet_box_presence_v4').get(loggedInStudent.usn).put(pData);
     } catch (e) {}
   }
 }
@@ -160,16 +303,16 @@ function recordStudentPresence(p) {
   if (!p || !p.usn) return;
   activePresenceMap[p.usn] = { name: p.name, time: p.time || Date.now() };
 
-  // Count active in last 5 minutes
+  // Count active students in last 3 minutes
   const now = Date.now();
-  const activeCount = Object.values(activePresenceMap).filter(item => now - item.time < 300000).length;
+  const activeCount = Object.values(activePresenceMap).filter(item => now - item.time < 180000).length;
   const countEl = document.getElementById('box-active-count-text');
   if (countEl) {
     countEl.textContent = activeCount > 1 ? `${activeCount} Students Online` : '1 Student Online';
   }
 }
 
-// --- Theme Management ---
+// Theme Management
 function setBoxTheme(themeKey) {
   currentBoxTheme = themeKey;
   localStorage.setItem('box_chat_theme', themeKey);
@@ -194,7 +337,7 @@ function applyBoxTheme() {
   stream.classList.add(`box-theme-${currentBoxTheme}`);
 }
 
-// --- Media Drawer: Stickers, GIFs & Emojis ---
+// Media Drawer (🤪 Stickers, GIFs & Emojis)
 function toggleMediaDrawer() {
   const drawer = document.getElementById('media-drawer-popover');
   if (drawer) drawer.classList.toggle('hidden');
@@ -260,6 +403,28 @@ function quickShoutPrompt() {
   }
 }
 
+// Outbound Message Broadcaster (Dispatches to local tabs, ntfy.sh relay, and GunDB)
+function broadcastOutboundMessage(message) {
+  // 1. Cross-tab BroadcastChannel
+  if (boxChatChannel) {
+    boxChatChannel.postMessage({ type: 'NEW_MESSAGE', message: message });
+  }
+
+  // 2. High-speed HTTP Serverless Push (ntfy.sh)
+  fetch(`https://ntfy.sh/${CHAT_SYNC_TOPIC}`, {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify(message)
+  }).catch(err => console.warn("Sync push error:", err));
+
+  // 3. GunDB secondary mesh
+  if (gun) {
+    try {
+      gun.get('fet_box_campus_chat_room_v4').set(message);
+    } catch (e) {}
+  }
+}
+
 function sendSpecialBoxMessage(customPayload) {
   const now = new Date();
   const timeStr = now.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' });
@@ -279,14 +444,7 @@ function sendSpecialBoxMessage(customPayload) {
   };
 
   receiveBoxMessage(message, true);
-
-  if (gun) {
-    try {
-      gun.get('fet_box_campus_chat_room_v3').set(message);
-    } catch (e) {
-      console.warn("Gun broadcast error:", e);
-    }
-  }
+  broadcastOutboundMessage(message);
 }
 
 // Check if current user is an authorized admin (25BTREC020 or 25BTREC09)
@@ -315,7 +473,7 @@ function checkAdminPermissions(student) {
 
 function loadBoxMessages() {
   try {
-    const raw = localStorage.getItem('fet_box_messages_v3');
+    const raw = localStorage.getItem('fet_box_messages_v4') || localStorage.getItem('fet_box_messages_v3');
     boxMessages = raw ? JSON.parse(raw) : [];
   } catch (e) {
     boxMessages = [];
@@ -325,11 +483,11 @@ function loadBoxMessages() {
 
 function saveBoxMessages() {
   try {
-    localStorage.setItem('fet_box_messages_v3', JSON.stringify(boxMessages.slice(-100)));
+    localStorage.setItem('fet_box_messages_v4', JSON.stringify(boxMessages.slice(-120)));
   } catch (e) {}
 }
 
-function receiveBoxMessage(msg, broadcast = true) {
+function receiveBoxMessage(msg, isOutbound = false) {
   if (!msg || !msg.text) return;
   const exists = boxMessages.some(m => m.id === msg.id || (m.timestamp === msg.timestamp && m.senderUsn === msg.senderUsn && m.text === msg.text));
   if (exists) return;
@@ -337,10 +495,6 @@ function receiveBoxMessage(msg, broadcast = true) {
   boxMessages.push(msg);
   saveBoxMessages();
   renderBoxMessages();
-
-  if (broadcast && boxChatChannel) {
-    boxChatChannel.postMessage({ type: 'NEW_MESSAGE', message: msg });
-  }
 }
 
 function handleSendBoxMessage() {
@@ -377,28 +531,14 @@ function handleSendBoxMessage() {
   if (pinCheckbox) pinCheckbox.checked = false;
 
   receiveBoxMessage(message, true);
-
-  if (gun) {
-    try {
-      gun.get('fet_box_campus_chat_room_v3').set({
-        senderName: message.senderName,
-        senderUsn: message.senderUsn,
-        text: message.text,
-        timestamp: message.timestamp,
-        photo: message.photo,
-        isAdmin: message.isAdmin
-      });
-    } catch (e) {
-      console.warn("Gun broadcast error:", e);
-    }
-  }
+  broadcastOutboundMessage(message);
 
   if (shouldPinToHome) {
     pinMessageToHomeMarquee(message.text, '📢', 'Notice');
   }
 }
 
-// Render message body with support for Stickers, GIFs, Shouts, and Text
+// Format message body with vibrant badges for Stickers, GIFs, Shouts, and Text
 function formatMessageContent(rawText) {
   if (!rawText) return '';
 
@@ -407,12 +547,25 @@ function formatMessageContent(rawText) {
     const icon = parts[1] || '🎓';
     const title = parts[2] || 'Campus Sticker';
     const color = parts[3] || 'pink';
+
+    const colorMap = {
+      emerald: { border: 'border-emerald-500/50', text: 'text-emerald-600 dark:text-emerald-400' },
+      amber: { border: 'border-amber-500/50', text: 'text-amber-600 dark:text-amber-400' },
+      orange: { border: 'border-orange-500/50', text: 'text-orange-600 dark:text-orange-400' },
+      purple: { border: 'border-purple-500/50', text: 'text-purple-600 dark:text-purple-400' },
+      rose: { border: 'border-rose-500/50', text: 'text-rose-600 dark:text-rose-400' },
+      sky: { border: 'border-sky-500/50', text: 'text-sky-600 dark:text-sky-400' },
+      red: { border: 'border-red-600/50', text: 'text-red-600 dark:text-red-400' },
+      teal: { border: 'border-teal-500/50', text: 'text-teal-600 dark:text-teal-400' }
+    };
+    const c = colorMap[color] || { border: 'border-pink-500/50', text: 'text-pink-600 dark:text-pink-400' };
+
     return `
-      <div class="inline-flex items-center gap-2.5 p-2.5 rounded-2xl bg-white/95 dark:bg-slate-900/90 border border-pink-500/40 shadow-md">
+      <div class="inline-flex items-center gap-2.5 p-2.5 rounded-2xl bg-white/95 dark:bg-slate-900/90 border ${c.border} shadow-md my-1">
         <span class="text-3xl">${icon}</span>
         <div>
-          <span class="text-[9px] uppercase font-black tracking-wider text-pink-600 dark:text-pink-400 block leading-none mb-0.5">College Sticker</span>
-          <span class="text-xs font-black text-slate-900 dark:text-white leading-tight">${title}</span>
+          <span class="text-[9px] uppercase font-black tracking-wider ${c.text} block leading-none mb-0.5">College Sticker</span>
+          <span class="text-xs font-black text-slate-900 dark:text-white leading-tight">${escapeHtml(title)}</span>
         </div>
       </div>
     `;
@@ -430,7 +583,7 @@ function formatMessageContent(rawText) {
   if (rawText.startsWith('SHOUT:')) {
     const shoutBody = rawText.substring(6).trim();
     return `
-      <div class="p-3 rounded-2xl bg-gradient-to-r from-amber-500/20 via-orange-500/20 to-red-500/20 border-2 border-amber-500/60 shadow-md">
+      <div class="p-3 rounded-2xl bg-gradient-to-r from-amber-500/20 via-orange-500/20 to-red-500/20 border-2 border-amber-500/60 shadow-md my-1">
         <div class="flex items-center gap-1.5 mb-1 text-amber-600 dark:text-amber-400">
           <i class="fa-solid fa-bullhorn text-xs"></i>
           <span class="text-[10px] font-black uppercase tracking-wider">Campus Shoutout</span>
@@ -455,7 +608,7 @@ function renderBoxMessages() {
         </div>
         <h4 class="text-sm font-black text-slate-700 dark:text-slate-200">Welcome to BOX!</h4>
         <p class="text-xs max-w-sm leading-relaxed text-slate-500 dark:text-slate-400">
-          No bot messages or broadcast notices. Only active students using the website can chat here. Tap <strong>🤪</strong> to send college stickers, GIFs & emojis!
+          Real-time cross-device campus chat active. Send messages or tap <strong>🤪</strong> to send college stickers, GIFs & emojis!
         </p>
       </div>
     `;
@@ -519,8 +672,31 @@ function escapeHtml(text) {
 }
 
 function deleteBoxMessage(index) {
+  const msg = boxMessages[index];
+  if (!msg) return;
+
   if (confirm("Delete this message?")) {
     boxMessages.splice(index, 1);
+    saveBoxMessages();
+    renderBoxMessages();
+
+    if (boxChatChannel) {
+      boxChatChannel.postMessage({ type: 'DELETE_MESSAGE', id: msg.id });
+    }
+
+    fetch(`https://ntfy.sh/${CHAT_SYNC_TOPIC}`, {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ type: 'DELETE_MESSAGE', id: msg.id })
+    }).catch(e => {});
+  }
+}
+
+function handleRemoteDeleteMessage(msgId) {
+  if (!msgId) return;
+  const idx = boxMessages.findIndex(m => m.id === msgId);
+  if (idx !== -1) {
+    boxMessages.splice(idx, 1);
     saveBoxMessages();
     renderBoxMessages();
   }
@@ -537,10 +713,10 @@ function clearBoxChatHistory() {
   }
 }
 
-// --- Home Page Running Marquee Ticker & Notice Controls ---
+// Home Page Running Marquee Ticker & Notice Controls
 function loadPinnedNotice() {
   try {
-    const raw = localStorage.getItem('fet_box_pinned_notice_v3');
+    const raw = localStorage.getItem('fet_box_pinned_notice_v4') || localStorage.getItem('fet_box_pinned_notice_v3');
     if (raw) {
       activePinnedNotice = JSON.parse(raw);
     }
@@ -550,8 +726,26 @@ function loadPinnedNotice() {
 
 function savePinnedNotice() {
   try {
-    localStorage.setItem('fet_box_pinned_notice_v3', JSON.stringify(activePinnedNotice));
+    localStorage.setItem('fet_box_pinned_notice_v4', JSON.stringify(activePinnedNotice));
   } catch (e) {}
+}
+
+function broadcastOutboundNotice(notice) {
+  if (boxNoticeChannel) {
+    boxNoticeChannel.postMessage({ notice: notice });
+  }
+
+  fetch(`https://ntfy.sh/${NOTICE_SYNC_TOPIC}`, {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify(notice)
+  }).catch(e => {});
+
+  if (gun) {
+    try {
+      gun.get('fet_box_home_pinned_notice_v4').put(notice);
+    } catch (e) {}
+  }
 }
 
 function applyPinnedNotice(notice, broadcast = true) {
@@ -561,14 +755,7 @@ function applyPinnedNotice(notice, broadcast = true) {
   updateMarqueeDisplay();
 
   if (broadcast) {
-    if (boxNoticeChannel) {
-      boxNoticeChannel.postMessage({ notice: activePinnedNotice });
-    }
-    if (gun) {
-      try {
-        gun.get('fet_box_home_pinned_notice_v3').put(activePinnedNotice);
-      } catch (e) {}
-    }
+    broadcastOutboundNotice(activePinnedNotice);
   }
 }
 
@@ -609,7 +796,7 @@ function pinMessageToHomeMarquee(text, tag = '📢', label = 'Notice') {
   alert(`Notice successfully pinned to Home Page Running Marquee:\n"${text}"`);
 }
 
-// Manage Notice Modal
+// Manage Notice Modal for Admins
 let selectedNoticeTag = { icon: '📢', label: 'Notice' };
 
 function openManageNoticeModal() {
