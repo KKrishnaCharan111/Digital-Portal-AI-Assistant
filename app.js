@@ -1355,11 +1355,11 @@ function renderMobileCourseCards() {
         <span class="text-xs font-extrabold text-purple-600 dark:text-purple-400">${item.cr} Credits</span>
       </div>
       <h3 class="text-sm font-bold text-slate-900 dark:text-white leading-snug">${item.name}</h3>
-      <div class="grid grid-cols-4 gap-1.5 bg-slate-50/60 dark:bg-slate-900/60 p-2 rounded-xl text-[10px] text-center border border-slate-100 dark:border-slate-800">
-        <div><span class="text-slate-400 block font-medium">L-T-P-E</span><span class="font-mono font-bold">${item.ltpe}</span></div>
-        <div><span class="text-slate-400 block font-medium">Notional</span><span class="font-bold">${item.nh} hrs</span></div>
-        <div><span class="text-slate-400 block font-medium">L / T / P</span><span class="font-bold">${item.l}/${item.t}/${item.p}</span></div>
-        <div><span class="text-slate-400 block font-medium">Credits</span><span class="font-bold text-purple-600">${item.cr}</span></div>
+      <div class="grid grid-cols-4 gap-1.5 bg-slate-50/80 dark:bg-slate-900/80 p-2 rounded-xl text-[10px] text-center border border-slate-200/60 dark:border-slate-800">
+        <div><span class="text-slate-400 block font-medium">L-T-P-E</span><span class="font-mono font-bold text-slate-800 dark:text-slate-200">${item.ltpe}</span></div>
+        <div><span class="text-slate-400 block font-medium">Notional</span><span class="font-bold text-slate-800 dark:text-slate-200">${item.nh} hrs</span></div>
+        <div><span class="text-slate-400 block font-medium">L / T / P</span><span class="font-bold text-slate-800 dark:text-slate-200">${item.l}/${item.t}/${item.p}</span></div>
+        <div><span class="text-slate-400 block font-medium">Credits</span><span class="font-bold text-purple-600 dark:text-purple-400">${item.cr}</span></div>
       </div>
     </div>
   `).join('');
@@ -1707,6 +1707,7 @@ function handleSaveProfile(e) {
   };
 
   localStorage.setItem('portal_student_custom_profiles', JSON.stringify(customStudentProfiles));
+  broadcastProfileUpdate(loggedInStudent.usn, customStudentProfiles[loggedInStudent.usn]);
   closeEditProfileModal();
   renderHomeCustomSocials();
   renderStudentList();
@@ -1788,23 +1789,23 @@ function renderStudentList() {
     if (s.type === 'tc') badge = '<span class="text-[9px] font-extrabold uppercase px-2 py-0.5 rounded-md bg-rose-50 text-rose-800 dark:bg-rose-950 dark:text-rose-300">TC</span>';
 
     return `
-      <div class="glass-card p-4 rounded-3xl border ${isMe ? 'border-indigo-500 ring-2 ring-indigo-500/20' : 'border-slate-200/60 dark:border-slate-800'} flex flex-col justify-between group">
+      <div class="glass-card p-4 rounded-3xl border ${isMe ? 'border-indigo-500 ring-2 ring-indigo-500/20' : 'border-slate-200/60 dark:border-slate-800'} flex flex-col justify-between group hover:border-indigo-400/80 transition shadow-xs">
         <div>
           <div class="flex items-start justify-between gap-2">
-            <div class="flex items-center gap-2.5">
+            <div class="flex items-center gap-2.5 cursor-pointer group/prof" onclick="viewStudentProfileModal('${s.usn}')" title="Click to view full profile">
               ${prof.photo ? `
                 <div class="relative shrink-0">
-                  <img src="${prof.photo}" alt="${s.name}" class="w-10 h-10 rounded-2xl object-cover border-2 border-indigo-500/50 shadow-md" />
+                  <img src="${prof.photo}" alt="${s.name}" class="w-10 h-10 rounded-2xl object-cover border-2 border-indigo-500/50 shadow-md group-hover/prof:scale-105 transition" />
                   ${isMe ? `<span class="absolute -bottom-1 -right-1 w-4 h-4 rounded-full bg-indigo-600 text-white flex items-center justify-center text-[8px] font-black border border-white dark:border-slate-900" title="Your Photo">★</span>` : ''}
                 </div>
               ` : `
-                <div class="w-10 h-10 rounded-2xl bg-gradient-to-tr from-indigo-500/20 to-purple-500/20 text-indigo-700 dark:text-indigo-300 flex items-center justify-center font-black text-xs shrink-0 border border-indigo-500/30">
+                <div class="w-10 h-10 rounded-2xl bg-gradient-to-tr from-indigo-500/20 to-purple-500/20 text-indigo-700 dark:text-indigo-300 flex items-center justify-center font-black text-xs shrink-0 border border-indigo-500/30 group-hover/prof:scale-105 transition">
                   ${s.name.split(' ').map(n=>n[0]).slice(0,2).join('')}
                 </div>
               `}
               <div>
                 <div class="flex items-center gap-1.5">
-                  <h4 class="text-xs font-black text-slate-900 dark:text-white truncate leading-tight">${s.name}</h4>
+                  <h4 class="text-xs font-black text-slate-900 dark:text-white truncate leading-tight group-hover/prof:text-indigo-600 dark:group-hover/prof:text-indigo-400 transition">${s.name}</h4>
                   ${isMe ? '<span class="text-[9px] font-black bg-indigo-600 text-white px-1.5 py-0.2 rounded-full">YOU</span>' : ''}
                 </div>
                 <p class="text-[10px] font-mono text-slate-400 mt-0.5">${s.usn}</p>
@@ -1813,7 +1814,7 @@ function renderStudentList() {
             ${badge}
           </div>
 
-          <p class="text-[11px] text-slate-500 dark:text-slate-400 mt-2 line-clamp-2 font-medium">
+          <p class="text-[11px] text-slate-500 dark:text-slate-400 mt-2 line-clamp-2 font-medium cursor-pointer" onclick="viewStudentProfileModal('${s.usn}')">
             ${prof.headline || (s.mentor ? `Mentor: ${s.mentor}` : 'Electronics & Communication Engineering')}
           </p>
 
@@ -1843,19 +1844,213 @@ function renderStudentList() {
             ` : ''}
           </div>
 
-          ${isMe ? `
-            <button onclick="openEditProfileModal()" class="text-[10px] font-bold text-indigo-600 dark:text-indigo-400 hover:underline flex items-center gap-1">
-              <i class="fa-solid fa-pen"></i> Edit Profile
+          <div class="flex items-center gap-1.5">
+            <button onclick="viewStudentProfileModal('${s.usn}')" class="px-2.5 py-1 rounded-xl bg-indigo-50 dark:bg-indigo-950/50 text-indigo-600 dark:text-indigo-300 hover:bg-indigo-600 hover:text-white font-bold text-[10px] transition flex items-center gap-1 active:scale-95 shadow-2xs" title="View Full Profile">
+              <i class="fa-regular fa-id-badge text-[9px]"></i> Profile
             </button>
-          ` : `
-            <button onclick="chatWithClassmate('${s.name}')" class="px-2.5 py-1 rounded-xl bg-pink-50 dark:bg-pink-950/40 text-pink-600 dark:text-pink-400 font-bold text-[10px] hover:bg-pink-600 hover:text-white transition flex items-center gap-1 active:scale-95 shadow-2xs" title="Chat with ${s.name} in BOX">
-              <i class="fa-solid fa-comments text-[9px]"></i> Chat
-            </button>
-          `}
+
+            ${isMe ? `
+              <button onclick="openEditProfileModal()" class="px-2.5 py-1 rounded-xl bg-slate-100 dark:bg-slate-800 text-slate-700 dark:text-slate-200 font-bold text-[10px] hover:bg-slate-200 transition flex items-center gap-1">
+                <i class="fa-solid fa-pen text-[9px]"></i> Edit
+              </button>
+            ` : `
+              <button onclick="chatWithClassmate('${s.name}')" class="px-2.5 py-1 rounded-xl bg-pink-50 dark:bg-pink-950/40 text-pink-600 dark:text-pink-400 font-bold text-[10px] hover:bg-pink-600 hover:text-white transition flex items-center gap-1 active:scale-95 shadow-2xs" title="Chat with ${s.name} in BOX">
+                <i class="fa-solid fa-comments text-[9px]"></i> Chat
+              </button>
+            `}
+          </div>
         </div>
       </div>
     `;
   }).join('');
+}
+
+// Student Profile View Modal Handler
+function viewStudentProfileModal(usn) {
+  const student = studentList.find(s => s.usn.toLowerCase() === (usn || '').toLowerCase());
+  if (!student) return;
+
+  loadCustomProfiles();
+  const prof = customStudentProfiles[student.usn] || {};
+  const isMe = loggedInStudent && loggedInStudent.usn.toLowerCase() === student.usn.toLowerCase();
+
+  const nameEl = document.getElementById('view-profile-name');
+  const usnEl = document.getElementById('view-profile-usn');
+  const headlineEl = document.getElementById('view-profile-headline');
+  const mentorEl = document.getElementById('view-profile-mentor');
+  const badgeEl = document.getElementById('view-profile-badge');
+  const avatarContainer = document.getElementById('view-profile-avatar-container');
+  const skillsContainer = document.getElementById('view-profile-skills');
+  const actionsContainer = document.getElementById('view-profile-actions');
+  const footerEl = document.getElementById('view-profile-footer');
+
+  if (nameEl) nameEl.textContent = student.name;
+  if (usnEl) usnEl.textContent = `${student.usn} • Roll #${student.sr}`;
+  if (headlineEl) headlineEl.textContent = prof.headline || "Electronics & Communication Engineering • Jain University (FET)";
+  if (mentorEl) mentorEl.textContent = student.mentor || 'ECE Department Faculty';
+
+  if (badgeEl) {
+    if (student.type === 'lateral') {
+      badgeEl.className = 'text-[9px] font-extrabold uppercase px-2 py-0.5 rounded-md bg-amber-100 text-amber-800 dark:bg-amber-950 dark:text-amber-300';
+      badgeEl.textContent = 'Lateral Entry';
+    } else if (student.type === 'tc') {
+      badgeEl.className = 'text-[9px] font-extrabold uppercase px-2 py-0.5 rounded-md bg-rose-100 text-rose-800 dark:bg-rose-950 dark:text-rose-300';
+      badgeEl.textContent = 'TC Student';
+    } else {
+      badgeEl.className = 'text-[9px] font-extrabold uppercase px-2 py-0.5 rounded-md bg-blue-100 text-blue-700 dark:bg-blue-900/40 dark:text-blue-300';
+      badgeEl.textContent = 'Regular B.Tech';
+    }
+  }
+
+  if (avatarContainer) {
+    if (prof.photo) {
+      avatarContainer.innerHTML = `
+        <img src="${prof.photo}" alt="${student.name}" class="w-20 h-20 sm:w-24 sm:h-24 rounded-3xl object-cover border-2 border-indigo-500/50 shadow-xl" />
+      `;
+    } else {
+      const initials = student.name.split(' ').map(n => n[0]).slice(0, 2).join('');
+      avatarContainer.innerHTML = `
+        <div class="w-20 h-20 sm:w-24 sm:h-24 rounded-3xl bg-gradient-to-tr from-indigo-500 to-purple-600 text-white flex items-center justify-center font-black text-2xl sm:text-3xl shadow-xl">
+          ${initials}
+        </div>
+      `;
+    }
+  }
+
+  if (skillsContainer) {
+    const rawSkills = prof.skills || 'VLSI Design, Embedded Systems, Python, Digital Electronics';
+    const skillsList = rawSkills.split(',').map(s => s.trim()).filter(Boolean);
+    skillsContainer.innerHTML = skillsList.map(sk => `
+      <span class="px-2.5 py-1 rounded-xl bg-indigo-50 dark:bg-indigo-950/60 text-indigo-700 dark:text-indigo-300 border border-indigo-200 dark:border-indigo-800 font-bold text-[11px]">${sk}</span>
+    `).join('');
+  }
+
+  if (actionsContainer) {
+    const linkedinUrl = prof.linkedin || `https://www.linkedin.com/search/results/all/?keywords=${encodeURIComponent(student.name + ' Jain University')}`;
+    const whatsappUrl = prof.whatsapp ? `https://wa.me/${prof.whatsapp}` : null;
+
+    actionsContainer.innerHTML = `
+      <a href="${linkedinUrl}" target="_blank" class="py-2.5 px-2 rounded-xl bg-blue-600 hover:bg-blue-700 text-white font-bold text-[11px] flex items-center justify-center gap-1 shadow-sm transition active:scale-95" title="LinkedIn Profile">
+        <i class="fa-brands fa-linkedin text-sm"></i> <span>LinkedIn</span>
+      </a>
+
+      ${whatsappUrl ? `
+        <a href="${whatsappUrl}" target="_blank" class="py-2.5 px-2 rounded-xl bg-emerald-600 hover:bg-emerald-700 text-white font-bold text-[11px] flex items-center justify-center gap-1 shadow-sm transition active:scale-95" title="WhatsApp Chat">
+          <i class="fa-brands fa-whatsapp text-sm"></i> <span>WhatsApp</span>
+        </a>
+      ` : `
+        <button type="button" disabled class="py-2.5 px-2 rounded-xl glass-card opacity-50 text-slate-400 font-bold text-[11px] flex items-center justify-center gap-1 cursor-not-allowed">
+          <i class="fa-brands fa-whatsapp text-sm"></i> <span>No WhatsApp</span>
+        </button>
+      `}
+
+      <button type="button" onclick="closeStudentProfileModal(); chatWithClassmate('${student.name}')" class="py-2.5 px-2 rounded-xl bg-pink-600 hover:bg-pink-700 text-white font-bold text-[11px] flex items-center justify-center gap-1 shadow-sm transition active:scale-95" title="Chat in BOX">
+        <i class="fa-solid fa-comments text-sm"></i> <span>BOX Chat</span>
+      </button>
+    `;
+  }
+
+  if (footerEl) {
+    if (isMe) {
+      footerEl.innerHTML = `
+        <button type="button" onclick="closeStudentProfileModal(); openEditProfileModal();" class="px-4 py-2 rounded-xl bg-indigo-600 hover:bg-indigo-700 text-white text-xs font-bold transition flex items-center gap-1.5 shadow-sm">
+          <i class="fa-solid fa-pen"></i> Edit My Profile
+        </button>
+      `;
+    } else {
+      footerEl.innerHTML = '';
+    }
+  }
+
+  document.getElementById('view-student-profile-modal').classList.remove('hidden');
+}
+
+function closeStudentProfileModal() {
+  const modal = document.getElementById('view-student-profile-modal');
+  if (modal) modal.classList.add('hidden');
+}
+
+// Cross-Device Student Profile Real-Time Syncing
+const PROFILE_SYNC_TOPIC = 'fet_jain_ece_student_profiles_2026';
+let profileSyncChannel = null;
+
+function initProfileSync() {
+  try {
+    if (window.BroadcastChannel) {
+      profileSyncChannel = new BroadcastChannel('fet_profiles_sync_channel');
+      profileSyncChannel.onmessage = (event) => {
+        if (event.data && event.data.type === 'PROFILE_UPDATE') {
+          const { usn, profile } = event.data;
+          if (usn && profile) {
+            customStudentProfiles[usn] = profile;
+            localStorage.setItem('portal_student_custom_profiles', JSON.stringify(customStudentProfiles));
+            renderStudentList();
+            if (loggedInStudent && loggedInStudent.usn.toLowerCase() === usn.toLowerCase()) {
+              renderHomeCustomSocials();
+            }
+          }
+        }
+      };
+    }
+  } catch (e) {}
+
+  syncRemoteProfiles();
+
+  try {
+    const sse = new EventSource(`https://ntfy.sh/${PROFILE_SYNC_TOPIC}/sse`);
+    sse.onmessage = (event) => {
+      try {
+        const payload = JSON.parse(event.data);
+        if (payload.event === 'message' && payload.message) {
+          const data = JSON.parse(payload.message);
+          if (data && data.type === 'PROFILE_UPDATE' && data.usn && data.profile) {
+            customStudentProfiles[data.usn] = data.profile;
+            localStorage.setItem('portal_student_custom_profiles', JSON.stringify(customStudentProfiles));
+            renderStudentList();
+          }
+        }
+      } catch (e) {}
+    };
+  } catch (e) {}
+}
+
+async function syncRemoteProfiles() {
+  try {
+    const res = await fetch(`https://ntfy.sh/${PROFILE_SYNC_TOPIC}/json?poll=1&since=all`, { cache: 'no-store' });
+    if (res.ok) {
+      const text = await res.text();
+      const lines = text.trim().split('\n');
+      let changed = false;
+      lines.forEach(line => {
+        if (!line) return;
+        try {
+          const item = JSON.parse(line);
+          if (item.event === 'message' && item.message) {
+            const data = JSON.parse(item.message);
+            if (data && data.type === 'PROFILE_UPDATE' && data.usn && data.profile) {
+              customStudentProfiles[data.usn] = data.profile;
+              changed = true;
+            }
+          }
+        } catch (e) {}
+      });
+      if (changed) {
+        localStorage.setItem('portal_student_custom_profiles', JSON.stringify(customStudentProfiles));
+        renderStudentList();
+      }
+    }
+  } catch (e) {}
+}
+
+function broadcastProfileUpdate(usn, profile) {
+  if (profileSyncChannel) {
+    profileSyncChannel.postMessage({ type: 'PROFILE_UPDATE', usn, profile });
+  }
+  fetch(`https://ntfy.sh/${PROFILE_SYNC_TOPIC}`, {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify({ type: 'PROFILE_UPDATE', usn, profile })
+  }).catch(e => {});
 }
 
 function chatWithClassmate(name) {
@@ -2127,4 +2322,5 @@ window.addEventListener('DOMContentLoaded', () => {
 
   checkSavedBiometricProfile();
   updateEnrollmentStatusUI();
+  initProfileSync();
 });
