@@ -42,20 +42,25 @@
     @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap');
 
     :root {
-      --glass-bg: rgba(255, 255, 255, 0.82);
-      --glass-border: rgba(255, 255, 255, 0.85);
+      --glass-bg: rgba(255, 255, 255, 0.85);
+      --glass-border: rgba(255, 255, 255, 0.9);
       --glass-shadow: 0 10px 30px 0 rgba(0, 0, 0, 0.05), 0 1px 3px 0 rgba(0, 0, 0, 0.02);
       --glass-inner-glow: inset 0 1px 1px 0 rgba(255, 255, 255, 0.95);
       --spring-easing: cubic-bezier(0.16, 1, 0.3, 1);
     }
 
     html.dark {
-      --glass-bg: rgba(18, 27, 44, 0.85);
-      --glass-border: rgba(255, 255, 255, 0.12);
-      --glass-shadow: 0 12px 35px 0 rgba(0, 0, 0, 0.5);
-      --glass-inner-glow: inset 0 1px 1px 0 rgba(255, 255, 255, 0.16);
-      background-color: #080D1A;
-      color: #F8FAFC;
+      --glass-bg: rgba(15, 23, 42, 0.82);
+      --glass-border: rgba(255, 255, 255, 0.1);
+      --glass-shadow: 0 14px 40px 0 rgba(0, 0, 0, 0.6);
+      --glass-inner-glow: inset 0 1px 1px 0 rgba(255, 255, 255, 0.14);
+      background-color: #070b14 !important;
+      color: #f8fafc !important;
+    }
+
+    html.dark body {
+      background-color: #070b14 !important;
+      color: #f8fafc !important;
     }
 
     body {
@@ -72,11 +77,11 @@
       pointer-events: none;
       z-index: -1;
       overflow: hidden;
-      opacity: 0.7;
+      opacity: 0.65;
       transition: opacity 0.5s ease;
     }
     html.dark .ios-mesh-bg {
-      opacity: 0.42;
+      opacity: 0.32;
     }
     .orb {
       position: absolute;
@@ -89,23 +94,32 @@
       height: 460px;
       top: -80px;
       left: -60px;
-      background: linear-gradient(135deg, rgba(0, 122, 255, 0.4), rgba(88, 86, 214, 0.32));
+      background: linear-gradient(135deg, rgba(0, 122, 255, 0.35), rgba(88, 86, 214, 0.28));
+    }
+    html.dark .orb-1 {
+      background: linear-gradient(135deg, rgba(37, 99, 235, 0.42), rgba(99, 102, 241, 0.32));
     }
     .orb-2 {
       width: 520px;
       height: 520px;
       bottom: 5%;
       right: -100px;
-      background: linear-gradient(135deg, rgba(175, 82, 222, 0.35), rgba(255, 45, 85, 0.25));
+      background: linear-gradient(135deg, rgba(175, 82, 222, 0.3), rgba(255, 45, 85, 0.2));
       animation-delay: -6s;
+    }
+    html.dark .orb-2 {
+      background: linear-gradient(135deg, rgba(147, 51, 234, 0.38), rgba(219, 39, 119, 0.25));
     }
     .orb-3 {
       width: 420px;
       height: 420px;
       top: 45%;
       left: 28%;
-      background: linear-gradient(135deg, rgba(48, 176, 199, 0.3), rgba(52, 199, 89, 0.25));
+      background: linear-gradient(135deg, rgba(48, 176, 199, 0.25), rgba(52, 199, 89, 0.2));
       animation-delay: -12s;
+    }
+    html.dark .orb-3 {
+      background: linear-gradient(135deg, rgba(14, 165, 233, 0.32), rgba(16, 185, 129, 0.22));
     }
 
     @keyframes floatOrb {
@@ -281,7 +295,8 @@
     }
     .marquee-content {
       display: inline-block;
-      animation: marqueeScroll 24s linear infinite;
+      animation: marqueeScroll 12s linear infinite;
+      will-change: transform;
     }
     .marquee-container:hover .marquee-content {
       animation-play-state: paused;
@@ -289,6 +304,11 @@
     @keyframes marqueeScroll {
       0% { transform: translateX(100%); }
       100% { transform: translateX(-100%); }
+    }
+    @media (max-width: 640px) {
+      .marquee-content {
+        animation-duration: 9s;
+      }
     }
 
     /* Face ID Biometric Radar Animation */
@@ -392,7 +412,7 @@
     }
   </style>
 </head>
-<body class="bg-slate-100 text-slate-800 min-h-screen pb-32 md:pb-12 antialiased selection:bg-blue-500 selection:text-white" id="main-body">
+<body class="bg-slate-50 dark:bg-[#070b14] text-slate-800 dark:text-slate-100 min-h-screen pb-32 md:pb-12 antialiased selection:bg-blue-500 selection:text-white transition-colors duration-300" id="main-body">
 
   <div class="ios-mesh-bg" aria-hidden="true">
     <div class="orb orb-1"></div>
@@ -685,7 +705,7 @@
     <section id="view-home" class="tab-view space-y-5">
       
       <!-- Home Running Marquee Announcement Ticker (Active Across Campus) -->
-      <div id="home-running-marquee-card" onclick="switchTab('chat')" class="cursor-pointer glass-panel rounded-2xl p-2.5 sm:px-4 sm:py-3 border border-amber-500/40 bg-gradient-to-r from-amber-500/15 via-orange-500/10 to-amber-500/15 shadow-sm hover:border-amber-500 transition group flex items-center gap-3">
+      <div id="home-running-marquee-card" onclick="handleMarqueeClick(event)" class="cursor-pointer glass-panel rounded-2xl p-2.5 sm:px-4 sm:py-3 border border-amber-500/40 bg-gradient-to-r from-amber-500/15 via-orange-500/10 to-amber-500/15 shadow-sm hover:border-amber-500 transition group flex items-center gap-3">
         <div class="flex items-center gap-1.5 shrink-0 bg-amber-500 text-slate-950 px-2.5 py-1 rounded-xl text-[10px] font-black uppercase tracking-wider shadow-sm">
           <span id="marquee-urgency-icon">📢</span>
           <span id="marquee-urgency-label">Notice</span>
@@ -696,6 +716,10 @@
             Welcome to Digital Portal! Stay updated on class routines, attendance, and campus announcements through BOX chat.
           </div>
         </div>
+
+        <span id="marquee-attachment-indicator" class="hidden px-2 py-0.5 rounded-lg bg-amber-400 text-slate-950 text-[10px] font-black shrink-0 flex items-center gap-1">
+          <i class="fa-solid fa-paperclip text-[9px]"></i> <span>Media</span>
+        </span>
 
         <span class="text-[10px] font-bold text-amber-600 dark:text-amber-400 shrink-0 hidden sm:inline-flex items-center gap-1 group-hover:translate-x-1 transition">
           <span>Open BOX</span> <i class="fa-solid fa-arrow-right text-[9px]"></i>
@@ -740,7 +764,7 @@
       <!-- Quick Launch Grid: High-Contrast Colorful Apple Glass Cards -->
       <div class="grid grid-cols-2 sm:grid-cols-4 gap-3.5">
         <!-- Attendance -->
-        <div onclick="switchTab('attendance')" class="glass-card p-4 rounded-3xl cursor-pointer group border-2 border-emerald-400/80 dark:border-emerald-500/40 hover:border-emerald-500 bg-gradient-to-br from-emerald-100/90 via-teal-50/60 to-white dark:from-emerald-950/60 dark:via-teal-950/30 dark:to-slate-900 shadow-md shadow-emerald-500/10 hover:shadow-emerald-500/25 hover:-translate-y-1 transition">
+        <div onclick="switchTab('attendance')" class="glass-card p-4 rounded-3xl cursor-pointer group border-2 border-emerald-400/80 dark:border-emerald-500/35 hover:border-emerald-500 bg-gradient-to-br from-emerald-50/90 via-teal-50/40 to-white dark:from-emerald-950/40 dark:via-slate-900/60 dark:to-slate-900/80 shadow-md shadow-emerald-500/10 hover:shadow-emerald-500/25 hover:-translate-y-1 transition">
           <div class="flex items-center justify-between">
             <span class="text-[10px] font-black text-emerald-700 dark:text-emerald-300 uppercase tracking-wider bg-emerald-200/60 dark:bg-emerald-900/60 px-2 py-0.5 rounded-full">Attendance</span>
             <div class="w-9 h-9 rounded-2xl bg-emerald-600 text-white flex items-center justify-center text-sm group-hover:scale-110 transition shadow-sm shadow-emerald-600/30">
@@ -754,7 +778,7 @@
         </div>
 
         <!-- Schedule / Routine -->
-        <div onclick="switchTab('timetable')" class="glass-card p-4 rounded-3xl cursor-pointer group border-2 border-sky-400/80 dark:border-sky-500/40 hover:border-sky-500 bg-gradient-to-br from-sky-100/90 via-blue-50/60 to-white dark:from-sky-950/60 dark:via-blue-950/30 dark:to-slate-900 shadow-md shadow-sky-500/10 hover:shadow-sky-500/25 hover:-translate-y-1 transition">
+        <div onclick="switchTab('timetable')" class="glass-card p-4 rounded-3xl cursor-pointer group border-2 border-sky-400/80 dark:border-sky-500/35 hover:border-sky-500 bg-gradient-to-br from-sky-50/90 via-blue-50/40 to-white dark:from-sky-950/40 dark:via-slate-900/60 dark:to-slate-900/80 shadow-md shadow-sky-500/10 hover:shadow-sky-500/25 hover:-translate-y-1 transition">
           <div class="flex items-center justify-between">
             <span class="text-[10px] font-black text-sky-700 dark:text-sky-300 uppercase tracking-wider bg-sky-200/60 dark:bg-sky-900/60 px-2 py-0.5 rounded-full">Routine</span>
             <div class="w-9 h-9 rounded-2xl bg-sky-600 text-white flex items-center justify-center text-sm group-hover:scale-110 transition shadow-sm shadow-sky-600/30">
@@ -768,7 +792,7 @@
         </div>
 
         <!-- Notes -->
-        <div onclick="switchTab('notes')" class="glass-card p-4 rounded-3xl cursor-pointer group border-2 border-amber-400/80 dark:border-amber-500/40 hover:border-amber-500 bg-gradient-to-br from-amber-100/90 via-yellow-50/60 to-white dark:from-amber-950/60 dark:via-yellow-950/30 dark:to-slate-900 shadow-md shadow-amber-500/10 hover:shadow-amber-500/25 hover:-translate-y-1 transition">
+        <div onclick="switchTab('notes')" class="glass-card p-4 rounded-3xl cursor-pointer group border-2 border-amber-400/80 dark:border-amber-500/35 hover:border-amber-500 bg-gradient-to-br from-amber-50/90 via-yellow-50/40 to-white dark:from-amber-950/40 dark:via-slate-900/60 dark:to-slate-900/80 shadow-md shadow-amber-500/10 hover:shadow-amber-500/25 hover:-translate-y-1 transition">
           <div class="flex items-center justify-between">
             <span class="text-[10px] font-black text-amber-700 dark:text-amber-300 uppercase tracking-wider bg-amber-200/60 dark:bg-amber-900/60 px-2 py-0.5 rounded-full">Course Notes</span>
             <div class="w-9 h-9 rounded-2xl bg-amber-500 text-white flex items-center justify-center text-sm group-hover:scale-110 transition shadow-sm shadow-amber-500/30">
@@ -782,7 +806,7 @@
         </div>
 
         <!-- Tuck Shop Xerox -->
-        <div onclick="switchTab('tuckshop')" class="glass-card p-4 rounded-3xl cursor-pointer group border-2 border-orange-400/80 dark:border-orange-500/40 hover:border-orange-500 bg-gradient-to-br from-orange-100/90 via-amber-50/60 to-white dark:from-orange-950/60 dark:via-amber-950/30 dark:to-slate-900 shadow-md shadow-orange-500/10 hover:shadow-orange-500/25 hover:-translate-y-1 transition">
+        <div onclick="switchTab('tuckshop')" class="glass-card p-4 rounded-3xl cursor-pointer group border-2 border-orange-400/80 dark:border-orange-500/35 hover:border-orange-500 bg-gradient-to-br from-orange-50/90 via-amber-50/40 to-white dark:from-orange-950/40 dark:via-slate-900/60 dark:to-slate-900/80 shadow-md shadow-orange-500/10 hover:shadow-orange-500/25 hover:-translate-y-1 transition">
           <div class="flex items-center justify-between">
             <span class="text-[10px] font-black text-orange-700 dark:text-orange-300 uppercase tracking-wider bg-orange-200/60 dark:bg-orange-900/60 px-2 py-0.5 rounded-full">Tuck Shop Xerox</span>
             <div class="w-9 h-9 rounded-2xl bg-orange-500 text-white flex items-center justify-center text-sm group-hover:scale-110 transition shadow-sm shadow-orange-500/30">
@@ -799,7 +823,7 @@
       <!-- Second Tier Student Tools -->
       <div class="grid grid-cols-2 sm:grid-cols-4 gap-3.5">
         <!-- Leave Permission -->
-        <div onclick="switchTab('leave')" class="glass-card p-3.5 rounded-2xl cursor-pointer group border-2 border-emerald-300/70 hover:border-emerald-500 bg-gradient-to-br from-emerald-50 via-teal-50/50 to-white dark:from-emerald-950/40 dark:to-slate-900 hover:-translate-y-0.5 transition shadow-xs">
+        <div onclick="switchTab('leave')" class="glass-card p-3.5 rounded-2xl cursor-pointer group border-2 border-emerald-300/70 dark:border-emerald-500/30 hover:border-emerald-500 bg-gradient-to-br from-emerald-50/80 via-teal-50/30 to-white dark:from-emerald-950/40 dark:to-slate-900/70 hover:-translate-y-0.5 transition shadow-xs">
           <div class="flex items-center gap-2.5">
             <div class="w-8 h-8 rounded-xl bg-emerald-500 text-white flex items-center justify-center text-sm shadow-xs">
               <i class="fa-brands fa-whatsapp"></i>
@@ -812,7 +836,7 @@
         </div>
 
         <!-- Student Directory -->
-        <div onclick="switchTab('students')" class="glass-card p-3.5 rounded-2xl cursor-pointer group border-2 border-indigo-300/70 hover:border-indigo-500 bg-gradient-to-br from-indigo-50 via-purple-50/50 to-white dark:from-indigo-950/40 dark:to-slate-900 hover:-translate-y-0.5 transition shadow-xs">
+        <div onclick="switchTab('students')" class="glass-card p-3.5 rounded-2xl cursor-pointer group border-2 border-indigo-300/70 dark:border-indigo-500/30 hover:border-indigo-500 bg-gradient-to-br from-indigo-50/80 via-purple-50/30 to-white dark:from-indigo-950/40 dark:to-slate-900/70 hover:-translate-y-0.5 transition shadow-xs">
           <div class="flex items-center gap-2.5">
             <div class="w-8 h-8 rounded-xl bg-indigo-600 text-white flex items-center justify-center text-sm shadow-xs">
               <i class="fa-brands fa-linkedin"></i>
@@ -825,7 +849,7 @@
         </div>
 
         <!-- Complaint Booth -->
-        <div onclick="switchTab('complaints')" class="glass-card p-3.5 rounded-2xl cursor-pointer group border-2 border-rose-300/70 hover:border-rose-500 bg-gradient-to-br from-rose-50 via-pink-50/50 to-white dark:from-rose-950/40 dark:to-slate-900 hover:-translate-y-0.5 transition shadow-xs">
+        <div onclick="switchTab('complaints')" class="glass-card p-3.5 rounded-2xl cursor-pointer group border-2 border-rose-300/70 dark:border-rose-500/30 hover:border-rose-500 bg-gradient-to-br from-rose-50/80 via-pink-50/30 to-white dark:from-rose-950/40 dark:to-slate-900/70 hover:-translate-y-0.5 transition shadow-xs">
           <div class="flex items-center gap-2.5">
             <div class="w-8 h-8 rounded-xl bg-rose-500 text-white flex items-center justify-center text-sm shadow-xs">
               <i class="fa-solid fa-bullhorn"></i>
@@ -838,7 +862,7 @@
         </div>
 
         <!-- Academic Calendar -->
-        <div onclick="switchTab('coe')" class="glass-card p-3.5 rounded-2xl cursor-pointer group border-2 border-cyan-300/70 hover:border-cyan-500 bg-gradient-to-br from-cyan-50 via-teal-50/50 to-white dark:from-cyan-950/40 dark:to-slate-900 hover:-translate-y-0.5 transition shadow-xs">
+        <div onclick="switchTab('coe')" class="glass-card p-3.5 rounded-2xl cursor-pointer group border-2 border-cyan-300/70 dark:border-cyan-500/30 hover:border-cyan-500 bg-gradient-to-br from-cyan-50/80 via-teal-50/30 to-white dark:from-cyan-950/40 dark:to-slate-900/70 hover:-translate-y-0.5 transition shadow-xs">
           <div class="flex items-center gap-2.5">
             <div class="w-8 h-8 rounded-xl bg-cyan-600 text-white flex items-center justify-center text-sm shadow-xs">
               <i class="fa-regular fa-calendar-days"></i>
@@ -1699,9 +1723,9 @@
             <span id="m-total-nh" class="font-black text-slate-800 dark:text-white ml-1.5 text-sm">600 hrs</span>
           </div>
         </div>
-        <div class="flex items-center gap-3 text-[11px] text-slate-500 font-medium">
-          <span class="bg-purple-50 dark:bg-purple-950 px-2 py-0.5 rounded-lg border border-purple-200/60">Degree Total: <strong>123 Credits</strong></span>
-          <span class="bg-amber-50 dark:bg-amber-950 px-2 py-0.5 rounded-lg border border-amber-200/60">Total Hours: <strong>3,015 hrs</strong></span>
+        <div class="flex items-center gap-3 text-[11px] font-medium">
+          <span class="bg-purple-50 dark:bg-purple-950/60 text-purple-700 dark:text-purple-300 px-2.5 py-1 rounded-xl border border-purple-200/60 dark:border-purple-800/60">Degree Total: <strong>123 Credits</strong></span>
+          <span class="bg-amber-50 dark:bg-amber-950/60 text-amber-700 dark:text-amber-300 px-2.5 py-1 rounded-xl border border-amber-200/60 dark:border-amber-800/60">Total Hours: <strong>3,015 hrs</strong></span>
         </div>
       </div>
 
@@ -1731,21 +1755,11 @@
                 <span id="box-active-count-text">Students Connected</span>
               </span>
             </div>
-            <p class="text-xs text-slate-500 dark:text-slate-400 mt-0.5">Real-time peer student discussion • Zero bot messages • Active students only</p>
+            <p class="text-xs text-slate-500 dark:text-slate-400 mt-0.5">Real-time peer student discussion</p>
           </div>
         </div>
 
         <div class="flex items-center gap-2 flex-wrap justify-between md:justify-end">
-          <!-- Chat Theme Selector Pills -->
-          <div class="flex items-center gap-1 bg-white/70 dark:bg-slate-900/70 p-1 rounded-2xl border border-slate-200/80 dark:border-slate-800 shadow-2xs">
-            <span class="text-[10px] font-extrabold px-1.5 text-slate-400 uppercase tracking-wider">Themes:</span>
-            <button onclick="setBoxTheme('glass')" id="theme-btn-glass" class="px-2 py-1 rounded-xl text-[10px] font-black transition bg-pink-600 text-white shadow-xs" title="Frosted Apple Glass">Glass</button>
-            <button onclick="setBoxTheme('cyber')" id="theme-btn-cyber" class="px-2 py-1 rounded-xl text-[10px] font-bold text-slate-600 dark:text-slate-300 hover:bg-black/10 transition" title="Cyber Neon Matrix">Cyber</button>
-            <button onclick="setBoxTheme('sunset')" id="theme-btn-sunset" class="px-2 py-1 rounded-xl text-[10px] font-bold text-slate-600 dark:text-slate-300 hover:bg-black/10 transition" title="Sunset Gold">Sunset</button>
-            <button onclick="setBoxTheme('ocean')" id="theme-btn-ocean" class="px-2 py-1 rounded-xl text-[10px] font-bold text-slate-600 dark:text-slate-300 hover:bg-black/10 transition" title="Deep Ocean">Ocean</button>
-            <button onclick="setBoxTheme('mint')" id="theme-btn-mint" class="px-2 py-1 rounded-xl text-[10px] font-bold text-slate-600 dark:text-slate-300 hover:bg-black/10 transition" title="Mint Campus">Mint</button>
-          </div>
-
           <!-- Quick Shout to Class Button -->
           <button onclick="quickShoutPrompt()" class="px-3 py-1.5 rounded-xl bg-gradient-to-r from-amber-500 to-orange-500 hover:from-amber-600 hover:to-orange-600 text-white text-xs font-bold transition active:scale-95 flex items-center gap-1 shadow-sm" title="Send a high-priority shoutout to everyone">
             <i class="fa-solid fa-bullhorn text-[10px]"></i>
@@ -1761,17 +1775,17 @@
       </div>
 
       <!-- Authorized Admin Announcement Bar (Strictly 25BTREC020 & 25BTREC09) -->
-      <div id="box-admin-broadcast-bar" class="hidden p-3 rounded-2xl bg-amber-50 dark:bg-amber-950/40 border border-amber-300 dark:border-amber-800/60 flex flex-col sm:flex-row sm:items-center justify-between gap-2.5 shadow-sm">
+      <div id="box-admin-broadcast-bar" class="hidden p-3 rounded-2xl bg-amber-50/90 dark:bg-amber-950/50 border border-amber-300/80 dark:border-amber-700/60 flex flex-col sm:flex-row sm:items-center justify-between gap-2.5 shadow-sm">
         <div class="flex items-center gap-2">
-          <span class="w-7 h-7 rounded-xl bg-amber-500 text-slate-950 flex items-center justify-center text-xs font-black shrink-0">
+          <span class="w-7 h-7 rounded-xl bg-amber-500 text-slate-950 flex items-center justify-center text-xs font-black shrink-0 shadow-xs">
             <i class="fa-solid fa-bullhorn"></i>
           </span>
           <div>
             <div class="flex items-center gap-1.5">
-              <span class="text-xs font-black text-amber-800 dark:text-amber-200">Admin Broadcast Controls</span>
-              <span class="text-[9px] font-bold px-1.5 py-0.2 rounded bg-amber-200 dark:bg-amber-900 text-amber-900 dark:text-amber-100 uppercase" id="box-admin-usn-badge">25BTREC020</span>
+              <span class="text-xs font-black text-amber-900 dark:text-amber-200">Admin Broadcast Controls</span>
+              <span class="text-[9px] font-bold px-1.5 py-0.2 rounded bg-amber-200 dark:bg-amber-900 text-amber-950 dark:text-amber-100 uppercase" id="box-admin-usn-badge">25BTREC020</span>
             </div>
-            <p class="text-[10px] text-amber-700 dark:text-amber-300">You are authorized to broadcast announcements to the Home page running marquee ticker.</p>
+            <p class="text-[10px] text-amber-800 dark:text-amber-300 font-medium">You are authorized to broadcast announcements to the Home page running marquee ticker.</p>
           </div>
         </div>
 
@@ -1960,14 +1974,25 @@
           <span class="text-[10px] text-amber-700 dark:text-amber-400 font-medium">Auto-scrolls marquee</span>
         </div>
 
-        <!-- Chat Input Bar with Media Drawer Trigger Button 🤪 -->
+        <!-- Attachment Preview Bar (Image / Document / File) -->
+        <div id="box-attachment-preview-bar" class="hidden px-3 pt-2 pb-1 bg-slate-50/70 dark:bg-slate-900/70 border-t border-slate-200/40 dark:border-slate-800"></div>
+
+        <!-- Chat Input Bar with Media Drawer Trigger Button 🤪 and File Attachment 📎 -->
         <div class="p-2.5 sm:p-3 glass-panel border-t border-slate-200/60 dark:border-slate-800 flex items-center gap-2 relative">
+          <!-- Hidden File Upload Input for Images, Docs & Files -->
+          <input type="file" id="box-file-upload-input" class="hidden" accept="image/*,.pdf,.doc,.docx,.ppt,.pptx,.xls,.xlsx,.txt,.csv,.zip,.rar" onchange="handleChatFileSelect(event)" />
+
+          <!-- Attachment Button 📎 -->
+          <button type="button" onclick="triggerChatFileUpload()" id="btn-chat-attach" class="w-10 h-10 rounded-2xl glass-card text-slate-600 dark:text-slate-300 hover:text-pink-600 dark:hover:text-pink-400 text-sm flex items-center justify-center hover:scale-110 active:scale-95 transition shrink-0" title="Attach Image, Document, or File">
+            <i class="fa-solid fa-paperclip"></i>
+          </button>
+
           <!-- Tapping 🤪 opens media drawer with College Stickers, GIFs & Emojis -->
           <button type="button" onclick="toggleMediaDrawer()" id="btn-media-drawer" class="w-10 h-10 rounded-2xl glass-card text-xl flex items-center justify-center hover:scale-110 active:scale-95 transition shrink-0" title="Open Media Drawer (Stickers, GIFs & Emojis)">
             🤪
           </button>
 
-          <input type="text" id="box-chat-input" onkeydown="if(event.key === 'Enter') handleSendBoxMessage()" placeholder="Type a message to your classmates..." class="flex-1 text-xs glass-card rounded-2xl px-3.5 py-2.5 focus:outline-none focus:ring-2 focus:ring-pink-500 font-medium text-slate-800 dark:text-white" />
+          <input type="text" id="box-chat-input" onkeydown="if(event.key === 'Enter') handleSendBoxMessage()" placeholder="Type a message or caption..." class="flex-1 text-xs glass-card rounded-2xl px-3.5 py-2.5 focus:outline-none focus:ring-2 focus:ring-pink-500 font-medium text-slate-800 dark:text-white" />
           
           <button onclick="handleSendBoxMessage()" class="w-10 h-10 bg-gradient-to-r from-pink-500 to-rose-600 hover:from-pink-600 hover:to-rose-700 text-white rounded-2xl flex items-center justify-center transition shrink-0 active:scale-95 shadow-md shadow-pink-500/25" title="Send Message">
             <i class="fa-solid fa-paper-plane text-xs"></i>
@@ -2016,7 +2041,18 @@
 
         <div>
           <label class="block font-bold text-slate-700 dark:text-slate-200 mb-1">Notice Text</label>
-          <textarea id="manage-notice-input" rows="3" required placeholder="Type custom announcement text to scroll continuously across the top of Home..." class="w-full px-3.5 py-2.5 rounded-xl bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-700 font-medium text-slate-800 dark:text-white focus:ring-2 focus:ring-amber-500 text-xs"></textarea>
+          <textarea id="manage-notice-input" rows="3" placeholder="Type custom announcement text to scroll continuously across the top of Home..." class="w-full px-3.5 py-2.5 rounded-xl bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-700 font-medium text-slate-800 dark:text-white focus:ring-2 focus:ring-amber-500 text-xs"></textarea>
+        </div>
+
+        <div>
+          <div class="flex items-center justify-between mb-1">
+            <label class="block font-bold text-slate-700 dark:text-slate-200">Attached Media (Image / Document)</label>
+            <button type="button" onclick="document.getElementById('notice-file-input').click()" class="text-[11px] font-bold text-amber-600 hover:text-amber-700 dark:text-amber-400 flex items-center gap-1">
+              <i class="fa-solid fa-paperclip"></i> Attach File
+            </button>
+          </div>
+          <input type="file" id="notice-file-input" class="hidden" accept="image/*,.pdf,.doc,.docx,.ppt,.pptx,.xls,.xlsx,.txt" onchange="handleNoticeAttachmentSelect(event)" />
+          <div id="manage-notice-attachment-preview" class="hidden"></div>
         </div>
 
         <div>
@@ -2160,6 +2196,59 @@
           <i class="fa-solid fa-floppy-disk text-xs"></i> Save Profile Details
         </button>
       </form>
+    </div>
+  </div>
+
+  <!-- Student Profile View Modal (For viewing any classmate's full profile) -->
+  <div id="view-student-profile-modal" class="fixed inset-0 z-50 bg-slate-900/60 backdrop-blur-xl flex flex-col items-center justify-center p-4 hidden transition-all duration-300">
+    <div class="glass-panel rounded-3xl p-6 sm:p-7 w-full max-w-md border border-white/60 dark:border-white/10 shadow-2xl relative">
+      <button onclick="closeStudentProfileModal()" class="w-8 h-8 rounded-full glass-card flex items-center justify-center text-slate-400 hover:text-slate-600 transition absolute top-4 right-4" title="Close">
+        <i class="fa-solid fa-xmark text-xs"></i>
+      </button>
+
+      <!-- Profile Header with Large Avatar and Details -->
+      <div class="flex flex-col sm:flex-row items-center sm:items-start gap-4 pb-4 border-b border-slate-200/60 dark:border-slate-800 text-center sm:text-left">
+        <div id="view-profile-avatar-container" class="relative shrink-0"></div>
+
+        <div class="space-y-1 flex-1 min-w-0">
+          <div class="flex flex-wrap items-center justify-center sm:justify-start gap-2">
+            <h3 id="view-profile-name" class="text-base sm:text-lg font-black text-slate-900 dark:text-white leading-tight"></h3>
+            <span id="view-profile-badge" class="text-[9px] font-extrabold uppercase px-2 py-0.5 rounded-md"></span>
+          </div>
+          <p id="view-profile-usn" class="text-xs font-mono text-indigo-600 dark:text-indigo-400 font-bold"></p>
+          <p id="view-profile-headline" class="text-xs text-slate-600 dark:text-slate-300 font-medium"></p>
+        </div>
+      </div>
+
+      <!-- Profile Details Body -->
+      <div class="py-4 space-y-3.5 text-xs">
+        <!-- Academic Info Grid -->
+        <div class="grid grid-cols-2 gap-2.5">
+          <div class="p-2.5 rounded-2xl bg-indigo-50/60 dark:bg-indigo-950/40 border border-indigo-500/20">
+            <span class="text-[10px] font-bold text-indigo-600 dark:text-indigo-400 uppercase tracking-wider block">Branch & Sem</span>
+            <span class="font-black text-slate-900 dark:text-white text-xs">ECE • 3rd Semester</span>
+          </div>
+          <div class="p-2.5 rounded-2xl bg-purple-50/60 dark:bg-purple-950/40 border border-purple-500/20">
+            <span class="text-[10px] font-bold text-purple-600 dark:text-purple-400 uppercase tracking-wider block">Faculty Mentor</span>
+            <span id="view-profile-mentor" class="font-black text-slate-900 dark:text-white text-xs truncate block"></span>
+          </div>
+        </div>
+
+        <!-- Skills Section -->
+        <div id="view-profile-skills-box">
+          <span class="text-[10px] font-bold text-slate-400 uppercase tracking-wider block mb-1.5">Skills & Specializations</span>
+          <div id="view-profile-skills" class="flex flex-wrap gap-1.5"></div>
+        </div>
+
+        <!-- Connect & Social Actions -->
+        <div class="pt-2 border-t border-slate-200/60 dark:border-slate-800 space-y-2">
+          <span class="text-[10px] font-bold text-slate-400 uppercase tracking-wider block">Connect with Classmate</span>
+          <div class="grid grid-cols-3 gap-2" id="view-profile-actions"></div>
+        </div>
+      </div>
+
+      <!-- Footer action if looking at own profile -->
+      <div id="view-profile-footer" class="pt-2 border-t border-slate-200/60 dark:border-slate-800 flex justify-end"></div>
     </div>
   </div>
 
@@ -3651,11 +3740,11 @@ function renderMobileCourseCards() {
         <span class="text-xs font-extrabold text-purple-600 dark:text-purple-400">${item.cr} Credits</span>
       </div>
       <h3 class="text-sm font-bold text-slate-900 dark:text-white leading-snug">${item.name}</h3>
-      <div class="grid grid-cols-4 gap-1.5 bg-slate-50/60 dark:bg-slate-900/60 p-2 rounded-xl text-[10px] text-center border border-slate-100 dark:border-slate-800">
-        <div><span class="text-slate-400 block font-medium">L-T-P-E</span><span class="font-mono font-bold">${item.ltpe}</span></div>
-        <div><span class="text-slate-400 block font-medium">Notional</span><span class="font-bold">${item.nh} hrs</span></div>
-        <div><span class="text-slate-400 block font-medium">L / T / P</span><span class="font-bold">${item.l}/${item.t}/${item.p}</span></div>
-        <div><span class="text-slate-400 block font-medium">Credits</span><span class="font-bold text-purple-600">${item.cr}</span></div>
+      <div class="grid grid-cols-4 gap-1.5 bg-slate-50/80 dark:bg-slate-900/80 p-2 rounded-xl text-[10px] text-center border border-slate-200/60 dark:border-slate-800">
+        <div><span class="text-slate-400 block font-medium">L-T-P-E</span><span class="font-mono font-bold text-slate-800 dark:text-slate-200">${item.ltpe}</span></div>
+        <div><span class="text-slate-400 block font-medium">Notional</span><span class="font-bold text-slate-800 dark:text-slate-200">${item.nh} hrs</span></div>
+        <div><span class="text-slate-400 block font-medium">L / T / P</span><span class="font-bold text-slate-800 dark:text-slate-200">${item.l}/${item.t}/${item.p}</span></div>
+        <div><span class="text-slate-400 block font-medium">Credits</span><span class="font-bold text-purple-600 dark:text-purple-400">${item.cr}</span></div>
       </div>
     </div>
   `).join('');
@@ -4003,6 +4092,7 @@ function handleSaveProfile(e) {
   };
 
   localStorage.setItem('portal_student_custom_profiles', JSON.stringify(customStudentProfiles));
+  broadcastProfileUpdate(loggedInStudent.usn, customStudentProfiles[loggedInStudent.usn]);
   closeEditProfileModal();
   renderHomeCustomSocials();
   renderStudentList();
@@ -4084,23 +4174,23 @@ function renderStudentList() {
     if (s.type === 'tc') badge = '<span class="text-[9px] font-extrabold uppercase px-2 py-0.5 rounded-md bg-rose-50 text-rose-800 dark:bg-rose-950 dark:text-rose-300">TC</span>';
 
     return `
-      <div class="glass-card p-4 rounded-3xl border ${isMe ? 'border-indigo-500 ring-2 ring-indigo-500/20' : 'border-slate-200/60 dark:border-slate-800'} flex flex-col justify-between group">
+      <div class="glass-card p-4 rounded-3xl border ${isMe ? 'border-indigo-500 ring-2 ring-indigo-500/20' : 'border-slate-200/60 dark:border-slate-800'} flex flex-col justify-between group hover:border-indigo-400/80 transition shadow-xs">
         <div>
           <div class="flex items-start justify-between gap-2">
-            <div class="flex items-center gap-2.5">
+            <div class="flex items-center gap-2.5 cursor-pointer group/prof" onclick="viewStudentProfileModal('${s.usn}')" title="Click to view full profile">
               ${prof.photo ? `
                 <div class="relative shrink-0">
-                  <img src="${prof.photo}" alt="${s.name}" class="w-10 h-10 rounded-2xl object-cover border-2 border-indigo-500/50 shadow-md" />
+                  <img src="${prof.photo}" alt="${s.name}" class="w-10 h-10 rounded-2xl object-cover border-2 border-indigo-500/50 shadow-md group-hover/prof:scale-105 transition" />
                   ${isMe ? `<span class="absolute -bottom-1 -right-1 w-4 h-4 rounded-full bg-indigo-600 text-white flex items-center justify-center text-[8px] font-black border border-white dark:border-slate-900" title="Your Photo">★</span>` : ''}
                 </div>
               ` : `
-                <div class="w-10 h-10 rounded-2xl bg-gradient-to-tr from-indigo-500/20 to-purple-500/20 text-indigo-700 dark:text-indigo-300 flex items-center justify-center font-black text-xs shrink-0 border border-indigo-500/30">
+                <div class="w-10 h-10 rounded-2xl bg-gradient-to-tr from-indigo-500/20 to-purple-500/20 text-indigo-700 dark:text-indigo-300 flex items-center justify-center font-black text-xs shrink-0 border border-indigo-500/30 group-hover/prof:scale-105 transition">
                   ${s.name.split(' ').map(n=>n[0]).slice(0,2).join('')}
                 </div>
               `}
               <div>
                 <div class="flex items-center gap-1.5">
-                  <h4 class="text-xs font-black text-slate-900 dark:text-white truncate leading-tight">${s.name}</h4>
+                  <h4 class="text-xs font-black text-slate-900 dark:text-white truncate leading-tight group-hover/prof:text-indigo-600 dark:group-hover/prof:text-indigo-400 transition">${s.name}</h4>
                   ${isMe ? '<span class="text-[9px] font-black bg-indigo-600 text-white px-1.5 py-0.2 rounded-full">YOU</span>' : ''}
                 </div>
                 <p class="text-[10px] font-mono text-slate-400 mt-0.5">${s.usn}</p>
@@ -4109,7 +4199,7 @@ function renderStudentList() {
             ${badge}
           </div>
 
-          <p class="text-[11px] text-slate-500 dark:text-slate-400 mt-2 line-clamp-2 font-medium">
+          <p class="text-[11px] text-slate-500 dark:text-slate-400 mt-2 line-clamp-2 font-medium cursor-pointer" onclick="viewStudentProfileModal('${s.usn}')">
             ${prof.headline || (s.mentor ? `Mentor: ${s.mentor}` : 'Electronics & Communication Engineering')}
           </p>
 
@@ -4139,19 +4229,213 @@ function renderStudentList() {
             ` : ''}
           </div>
 
-          ${isMe ? `
-            <button onclick="openEditProfileModal()" class="text-[10px] font-bold text-indigo-600 dark:text-indigo-400 hover:underline flex items-center gap-1">
-              <i class="fa-solid fa-pen"></i> Edit Profile
+          <div class="flex items-center gap-1.5">
+            <button onclick="viewStudentProfileModal('${s.usn}')" class="px-2.5 py-1 rounded-xl bg-indigo-50 dark:bg-indigo-950/50 text-indigo-600 dark:text-indigo-300 hover:bg-indigo-600 hover:text-white font-bold text-[10px] transition flex items-center gap-1 active:scale-95 shadow-2xs" title="View Full Profile">
+              <i class="fa-regular fa-id-badge text-[9px]"></i> Profile
             </button>
-          ` : `
-            <button onclick="chatWithClassmate('${s.name}')" class="px-2.5 py-1 rounded-xl bg-pink-50 dark:bg-pink-950/40 text-pink-600 dark:text-pink-400 font-bold text-[10px] hover:bg-pink-600 hover:text-white transition flex items-center gap-1 active:scale-95 shadow-2xs" title="Chat with ${s.name} in BOX">
-              <i class="fa-solid fa-comments text-[9px]"></i> Chat
-            </button>
-          `}
+
+            ${isMe ? `
+              <button onclick="openEditProfileModal()" class="px-2.5 py-1 rounded-xl bg-slate-100 dark:bg-slate-800 text-slate-700 dark:text-slate-200 font-bold text-[10px] hover:bg-slate-200 transition flex items-center gap-1">
+                <i class="fa-solid fa-pen text-[9px]"></i> Edit
+              </button>
+            ` : `
+              <button onclick="chatWithClassmate('${s.name}')" class="px-2.5 py-1 rounded-xl bg-pink-50 dark:bg-pink-950/40 text-pink-600 dark:text-pink-400 font-bold text-[10px] hover:bg-pink-600 hover:text-white transition flex items-center gap-1 active:scale-95 shadow-2xs" title="Chat with ${s.name} in BOX">
+                <i class="fa-solid fa-comments text-[9px]"></i> Chat
+              </button>
+            `}
+          </div>
         </div>
       </div>
     `;
   }).join('');
+}
+
+// Student Profile View Modal Handler
+function viewStudentProfileModal(usn) {
+  const student = studentList.find(s => s.usn.toLowerCase() === (usn || '').toLowerCase());
+  if (!student) return;
+
+  loadCustomProfiles();
+  const prof = customStudentProfiles[student.usn] || {};
+  const isMe = loggedInStudent && loggedInStudent.usn.toLowerCase() === student.usn.toLowerCase();
+
+  const nameEl = document.getElementById('view-profile-name');
+  const usnEl = document.getElementById('view-profile-usn');
+  const headlineEl = document.getElementById('view-profile-headline');
+  const mentorEl = document.getElementById('view-profile-mentor');
+  const badgeEl = document.getElementById('view-profile-badge');
+  const avatarContainer = document.getElementById('view-profile-avatar-container');
+  const skillsContainer = document.getElementById('view-profile-skills');
+  const actionsContainer = document.getElementById('view-profile-actions');
+  const footerEl = document.getElementById('view-profile-footer');
+
+  if (nameEl) nameEl.textContent = student.name;
+  if (usnEl) usnEl.textContent = `${student.usn} • Roll #${student.sr}`;
+  if (headlineEl) headlineEl.textContent = prof.headline || "Electronics & Communication Engineering • Jain University (FET)";
+  if (mentorEl) mentorEl.textContent = student.mentor || 'ECE Department Faculty';
+
+  if (badgeEl) {
+    if (student.type === 'lateral') {
+      badgeEl.className = 'text-[9px] font-extrabold uppercase px-2 py-0.5 rounded-md bg-amber-100 text-amber-800 dark:bg-amber-950 dark:text-amber-300';
+      badgeEl.textContent = 'Lateral Entry';
+    } else if (student.type === 'tc') {
+      badgeEl.className = 'text-[9px] font-extrabold uppercase px-2 py-0.5 rounded-md bg-rose-100 text-rose-800 dark:bg-rose-950 dark:text-rose-300';
+      badgeEl.textContent = 'TC Student';
+    } else {
+      badgeEl.className = 'text-[9px] font-extrabold uppercase px-2 py-0.5 rounded-md bg-blue-100 text-blue-700 dark:bg-blue-900/40 dark:text-blue-300';
+      badgeEl.textContent = 'Regular B.Tech';
+    }
+  }
+
+  if (avatarContainer) {
+    if (prof.photo) {
+      avatarContainer.innerHTML = `
+        <img src="${prof.photo}" alt="${student.name}" class="w-20 h-20 sm:w-24 sm:h-24 rounded-3xl object-cover border-2 border-indigo-500/50 shadow-xl" />
+      `;
+    } else {
+      const initials = student.name.split(' ').map(n => n[0]).slice(0, 2).join('');
+      avatarContainer.innerHTML = `
+        <div class="w-20 h-20 sm:w-24 sm:h-24 rounded-3xl bg-gradient-to-tr from-indigo-500 to-purple-600 text-white flex items-center justify-center font-black text-2xl sm:text-3xl shadow-xl">
+          ${initials}
+        </div>
+      `;
+    }
+  }
+
+  if (skillsContainer) {
+    const rawSkills = prof.skills || 'VLSI Design, Embedded Systems, Python, Digital Electronics';
+    const skillsList = rawSkills.split(',').map(s => s.trim()).filter(Boolean);
+    skillsContainer.innerHTML = skillsList.map(sk => `
+      <span class="px-2.5 py-1 rounded-xl bg-indigo-50 dark:bg-indigo-950/60 text-indigo-700 dark:text-indigo-300 border border-indigo-200 dark:border-indigo-800 font-bold text-[11px]">${sk}</span>
+    `).join('');
+  }
+
+  if (actionsContainer) {
+    const linkedinUrl = prof.linkedin || `https://www.linkedin.com/search/results/all/?keywords=${encodeURIComponent(student.name + ' Jain University')}`;
+    const whatsappUrl = prof.whatsapp ? `https://wa.me/${prof.whatsapp}` : null;
+
+    actionsContainer.innerHTML = `
+      <a href="${linkedinUrl}" target="_blank" class="py-2.5 px-2 rounded-xl bg-blue-600 hover:bg-blue-700 text-white font-bold text-[11px] flex items-center justify-center gap-1 shadow-sm transition active:scale-95" title="LinkedIn Profile">
+        <i class="fa-brands fa-linkedin text-sm"></i> <span>LinkedIn</span>
+      </a>
+
+      ${whatsappUrl ? `
+        <a href="${whatsappUrl}" target="_blank" class="py-2.5 px-2 rounded-xl bg-emerald-600 hover:bg-emerald-700 text-white font-bold text-[11px] flex items-center justify-center gap-1 shadow-sm transition active:scale-95" title="WhatsApp Chat">
+          <i class="fa-brands fa-whatsapp text-sm"></i> <span>WhatsApp</span>
+        </a>
+      ` : `
+        <button type="button" disabled class="py-2.5 px-2 rounded-xl glass-card opacity-50 text-slate-400 font-bold text-[11px] flex items-center justify-center gap-1 cursor-not-allowed">
+          <i class="fa-brands fa-whatsapp text-sm"></i> <span>No WhatsApp</span>
+        </button>
+      `}
+
+      <button type="button" onclick="closeStudentProfileModal(); chatWithClassmate('${student.name}')" class="py-2.5 px-2 rounded-xl bg-pink-600 hover:bg-pink-700 text-white font-bold text-[11px] flex items-center justify-center gap-1 shadow-sm transition active:scale-95" title="Chat in BOX">
+        <i class="fa-solid fa-comments text-sm"></i> <span>BOX Chat</span>
+      </button>
+    `;
+  }
+
+  if (footerEl) {
+    if (isMe) {
+      footerEl.innerHTML = `
+        <button type="button" onclick="closeStudentProfileModal(); openEditProfileModal();" class="px-4 py-2 rounded-xl bg-indigo-600 hover:bg-indigo-700 text-white text-xs font-bold transition flex items-center gap-1.5 shadow-sm">
+          <i class="fa-solid fa-pen"></i> Edit My Profile
+        </button>
+      `;
+    } else {
+      footerEl.innerHTML = '';
+    }
+  }
+
+  document.getElementById('view-student-profile-modal').classList.remove('hidden');
+}
+
+function closeStudentProfileModal() {
+  const modal = document.getElementById('view-student-profile-modal');
+  if (modal) modal.classList.add('hidden');
+}
+
+// Cross-Device Student Profile Real-Time Syncing
+const PROFILE_SYNC_TOPIC = 'fet_jain_ece_student_profiles_2026';
+let profileSyncChannel = null;
+
+function initProfileSync() {
+  try {
+    if (window.BroadcastChannel) {
+      profileSyncChannel = new BroadcastChannel('fet_profiles_sync_channel');
+      profileSyncChannel.onmessage = (event) => {
+        if (event.data && event.data.type === 'PROFILE_UPDATE') {
+          const { usn, profile } = event.data;
+          if (usn && profile) {
+            customStudentProfiles[usn] = profile;
+            localStorage.setItem('portal_student_custom_profiles', JSON.stringify(customStudentProfiles));
+            renderStudentList();
+            if (loggedInStudent && loggedInStudent.usn.toLowerCase() === usn.toLowerCase()) {
+              renderHomeCustomSocials();
+            }
+          }
+        }
+      };
+    }
+  } catch (e) {}
+
+  syncRemoteProfiles();
+
+  try {
+    const sse = new EventSource(`https://ntfy.sh/${PROFILE_SYNC_TOPIC}/sse`);
+    sse.onmessage = (event) => {
+      try {
+        const payload = JSON.parse(event.data);
+        if (payload.event === 'message' && payload.message) {
+          const data = JSON.parse(payload.message);
+          if (data && data.type === 'PROFILE_UPDATE' && data.usn && data.profile) {
+            customStudentProfiles[data.usn] = data.profile;
+            localStorage.setItem('portal_student_custom_profiles', JSON.stringify(customStudentProfiles));
+            renderStudentList();
+          }
+        }
+      } catch (e) {}
+    };
+  } catch (e) {}
+}
+
+async function syncRemoteProfiles() {
+  try {
+    const res = await fetch(`https://ntfy.sh/${PROFILE_SYNC_TOPIC}/json?poll=1&since=all`, { cache: 'no-store' });
+    if (res.ok) {
+      const text = await res.text();
+      const lines = text.trim().split('\n');
+      let changed = false;
+      lines.forEach(line => {
+        if (!line) return;
+        try {
+          const item = JSON.parse(line);
+          if (item.event === 'message' && item.message) {
+            const data = JSON.parse(item.message);
+            if (data && data.type === 'PROFILE_UPDATE' && data.usn && data.profile) {
+              customStudentProfiles[data.usn] = data.profile;
+              changed = true;
+            }
+          }
+        } catch (e) {}
+      });
+      if (changed) {
+        localStorage.setItem('portal_student_custom_profiles', JSON.stringify(customStudentProfiles));
+        renderStudentList();
+      }
+    }
+  } catch (e) {}
+}
+
+function broadcastProfileUpdate(usn, profile) {
+  if (profileSyncChannel) {
+    profileSyncChannel.postMessage({ type: 'PROFILE_UPDATE', usn, profile });
+  }
+  fetch(`https://ntfy.sh/${PROFILE_SYNC_TOPIC}`, {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify({ type: 'PROFILE_UPDATE', usn, profile })
+  }).catch(e => {});
 }
 
 function chatWithClassmate(name) {
@@ -4423,7 +4707,9 @@ window.addEventListener('DOMContentLoaded', () => {
 
   checkSavedBiometricProfile();
   updateEnrollmentStatusUI();
+  initProfileSync();
 });
+
 
 
 // ==================== "BOX" CAMPUS CHAT & HOME MARQUEE ENGINE ====================
@@ -4433,6 +4719,13 @@ const CHAT_SYNC_TOPIC = 'fet_jain_ece_box_chat_2026';
 const NOTICE_SYNC_TOPIC = 'fet_jain_ece_marquee_notice_2026';
 const PRESENCE_SYNC_TOPIC = 'fet_jain_ece_presence_2026';
 const AUTHORIZED_ADMIN_USNS = ['25BTREC020', '25BTREC09', '25BTREC009'];
+
+// Mock and legacy message IDs to strictly suppress and permanently delete
+const KNOWN_MOCK_MSG_IDS = [
+  'BOX-INIT-001',
+  'BOX-INIT-002',
+  'BOX-VERIFY-001'
+];
 
 let gun = null;
 let boxChatChannel = null;
@@ -4445,14 +4738,44 @@ let activePinnedNotice = {
   tag: '📢',
   label: 'Notice',
   text: 'Welcome to Digital Portal! Stay updated on class routines, attendance, and campus announcements through BOX chat.',
+  attachment: null,
   pinnedBy: 'System',
   timestamp: new Date().toISOString()
 };
 
-let currentBoxTheme = localStorage.getItem('box_chat_theme') || 'glass';
+let currentDraftAttachment = null;
+let currentNoticeDraftAttachment = null;
+let currentBoxTheme = 'glass';
 let activePresenceMap = {};
 
-// Auto-purge legacy browser cache on load
+// ==================== PERMANENT DELETION & BLACKLIST SYSTEM ====================
+
+function getDeletedMessageIds() {
+  try {
+    const raw = localStorage.getItem('fet_box_deleted_ids_v5');
+    const arr = raw ? JSON.parse(raw) : [];
+    return new Set([...KNOWN_MOCK_MSG_IDS, ...arr]);
+  } catch (e) {
+    return new Set(KNOWN_MOCK_MSG_IDS);
+  }
+}
+
+function recordDeletedMessageId(id) {
+  if (!id) return;
+  try {
+    const set = getDeletedMessageIds();
+    set.add(id);
+    localStorage.setItem('fet_box_deleted_ids_v5', JSON.stringify(Array.from(set)));
+  } catch (e) {}
+}
+
+function isMessageDeleted(id) {
+  if (!id) return false;
+  if (id.startsWith('BOX-INIT-') || id.startsWith('BOX-VERIFY-')) return true;
+  return getDeletedMessageIds().has(id);
+}
+
+// Auto-purge legacy browser cache & residual mock messages
 function purgeLegacyChatCache() {
   const legacyKeys = [
     'portal_campus_chat_messages',
@@ -4461,6 +4784,16 @@ function purgeLegacyChatCache() {
     'fet_box_chat_legacy'
   ];
   legacyKeys.forEach(k => localStorage.removeItem(k));
+
+  // Purge any mock/deleted messages from localStorage
+  try {
+    const raw = localStorage.getItem('fet_box_messages_v4') || localStorage.getItem('fet_box_messages_v3');
+    if (raw) {
+      const msgs = JSON.parse(raw);
+      const cleaned = msgs.filter(m => m && m.id && !isMessageDeleted(m.id) && m.senderUsn !== 'PORTAL');
+      localStorage.setItem('fet_box_messages_v4', JSON.stringify(cleaned));
+    }
+  } catch (e) {}
 }
 
 // Update connection status indicator in UI
@@ -4485,7 +4818,7 @@ function updateConnectionStatus(isOnline) {
 function connectRealtimeStreams() {
   // 1. Live Chat Message Stream
   if (chatEventSource) {
-    try { chatEventSource.close(); } catch(e) {}
+    try { chatEventSource.close(); } catch (e) {}
   }
   try {
     chatEventSource = new EventSource(`https://ntfy.sh/${CHAT_SYNC_TOPIC}/sse`);
@@ -4499,8 +4832,10 @@ function connectRealtimeStreams() {
           const data = JSON.parse(payload.message);
           if (data && data.type === 'DELETE_MESSAGE' && data.id) {
             handleRemoteDeleteMessage(data.id);
-          } else if (data && data.text) {
-            receiveBoxMessage(data, false);
+          } else if (data && (data.text || data.attachment) && data.id) {
+            if (!isMessageDeleted(data.id)) {
+              receiveBoxMessage(data, false);
+            }
           }
         }
       } catch (err) {
@@ -4516,7 +4851,7 @@ function connectRealtimeStreams() {
 
   // 2. Live Pinned Marquee Notice Stream
   if (noticeEventSource) {
-    try { noticeEventSource.close(); } catch(e) {}
+    try { noticeEventSource.close(); } catch (e) {}
   }
   try {
     noticeEventSource = new EventSource(`https://ntfy.sh/${NOTICE_SYNC_TOPIC}/sse`);
@@ -4525,7 +4860,7 @@ function connectRealtimeStreams() {
         const payload = JSON.parse(event.data);
         if (payload.event === 'message' && payload.message) {
           const notice = JSON.parse(payload.message);
-          if (notice && notice.text) {
+          if (notice && (notice.text || notice.attachment)) {
             applyPinnedNotice(notice, false);
           }
         }
@@ -4535,7 +4870,7 @@ function connectRealtimeStreams() {
 
   // 3. Live Presence Stream
   if (presenceEventSource) {
-    try { presenceEventSource.close(); } catch(e) {}
+    try { presenceEventSource.close(); } catch (e) {}
   }
   try {
     presenceEventSource = new EventSource(`https://ntfy.sh/${PRESENCE_SYNC_TOPIC}/sse`);
@@ -4558,24 +4893,50 @@ async function syncRemoteChatHistory() {
     if (res.ok) {
       const text = await res.text();
       const lines = text.trim().split('\n');
-      let newCount = 0;
+      let changed = false;
+
+      // Pass 1: Collect any remote DELETE_MESSAGE events first
       lines.forEach(line => {
         if (!line) return;
         try {
           const item = JSON.parse(line);
           if (item.event === 'message' && item.message) {
-            const msg = JSON.parse(item.message);
-            if (msg && msg.text && msg.id) {
-              const exists = boxMessages.some(m => m.id === msg.id || (m.timestamp === msg.timestamp && m.senderUsn === msg.senderUsn && m.text === msg.text));
-              if (!exists) {
-                boxMessages.push(msg);
-                newCount++;
+            const data = JSON.parse(item.message);
+            if (data && data.type === 'DELETE_MESSAGE' && data.id) {
+              recordDeletedMessageId(data.id);
+            }
+          }
+        } catch (e) {}
+      });
+
+      // Pass 2: Process messages that are NOT deleted or blacklisted
+      lines.forEach(line => {
+        if (!line) return;
+        try {
+          const item = JSON.parse(line);
+          if (item.event === 'message' && item.message) {
+            const data = JSON.parse(item.message);
+            if (data && data.id && (data.text || data.attachment)) {
+              if (!isMessageDeleted(data.id) && data.senderUsn !== 'PORTAL') {
+                const exists = boxMessages.some(m => m.id === data.id || (m.timestamp === data.timestamp && m.senderUsn === data.senderUsn && m.text === data.text));
+                if (!exists) {
+                  boxMessages.push(data);
+                  changed = true;
+                }
               }
             }
           }
-        } catch(e) {}
+        } catch (e) {}
       });
-      if (newCount > 0) {
+
+      // Pass 3: Purge any messages from boxMessages that are in deleted list
+      const originalLength = boxMessages.length;
+      boxMessages = boxMessages.filter(m => m && m.id && !isMessageDeleted(m.id) && m.senderUsn !== 'PORTAL');
+      if (boxMessages.length !== originalLength) {
+        changed = true;
+      }
+
+      if (changed) {
         saveBoxMessages();
         renderBoxMessages();
       }
@@ -4598,12 +4959,12 @@ async function syncRemotePinnedNotice() {
           const item = JSON.parse(lines[i]);
           if (item.event === 'message' && item.message) {
             const notice = JSON.parse(item.message);
-            if (notice && notice.text) {
+            if (notice && (notice.text || notice.attachment)) {
               applyPinnedNotice(notice, false);
               break;
             }
           }
-        } catch(e) {}
+        } catch (e) {}
       }
     }
   } catch (err) {}
@@ -4619,7 +4980,9 @@ function initBoxChatEngine() {
       boxChatChannel = new BroadcastChannel('fet_box_campus_chat_channel');
       boxChatChannel.onmessage = (event) => {
         if (event.data && event.data.type === 'NEW_MESSAGE') {
-          receiveBoxMessage(event.data.message, false);
+          if (!isMessageDeleted(event.data.message?.id)) {
+            receiveBoxMessage(event.data.message, false);
+          }
         } else if (event.data && event.data.type === 'NOTICE_UPDATE') {
           applyPinnedNotice(event.data.notice, false);
         } else if (event.data && event.data.type === 'CLEAR_CHAT') {
@@ -4651,24 +5014,25 @@ function initBoxChatEngine() {
   try {
     if (window.Gun) {
       gun = Gun({
-        peers: [
-          'https://relay.peer.ooo/gun'
-        ],
+        peers: ['https://relay.peer.ooo/gun'],
         localStorage: false
       });
 
       gun.get('fet_box_campus_chat_room_v4').map().on((data, id) => {
-        if (data && data.senderUsn && data.text) {
-          const incoming = {
-            id: id,
-            senderName: data.senderName,
-            senderUsn: data.senderUsn,
-            text: data.text,
-            timestamp: data.timestamp,
-            photo: data.photo || '',
-            isAdmin: data.isAdmin || false
-          };
-          receiveBoxMessage(incoming, false);
+        if (data && data.senderUsn && (data.text || data.attachment)) {
+          if (!isMessageDeleted(id) && !isMessageDeleted(data.id) && data.senderUsn !== 'PORTAL') {
+            const incoming = {
+              id: id || data.id,
+              senderName: data.senderName,
+              senderUsn: data.senderUsn,
+              text: data.text || '',
+              attachment: data.attachment || null,
+              timestamp: data.timestamp,
+              photo: data.photo || '',
+              isAdmin: data.isAdmin || false
+            };
+            receiveBoxMessage(incoming, false);
+          }
         }
       });
     }
@@ -4685,6 +5049,9 @@ function initBoxChatEngine() {
   syncRemoteChatHistory();
   syncRemotePinnedNotice();
 
+  // 6. Setup Drag and drop + clipboard paste listeners
+  setupMediaPasteAndDrop();
+
   // Listen for student login session
   window.addEventListener('student-session-active', (e) => {
     checkAdminPermissions(e.detail);
@@ -4695,6 +5062,9 @@ function initBoxChatEngine() {
     checkAdminPermissions(loggedInStudent);
     broadcastMyPresence();
   }
+
+  // 7. Dynamic Marquee speed on screen resize / orientation change
+  window.addEventListener('resize', updateMarqueeSpeed);
 
   // Broadcast presence heartbeat every 25 seconds
   setInterval(broadcastMyPresence, 25000);
@@ -4740,29 +5110,17 @@ function recordStudentPresence(p) {
   }
 }
 
-// Theme Management
-function setBoxTheme(themeKey) {
-  currentBoxTheme = themeKey;
-  localStorage.setItem('box_chat_theme', themeKey);
-  applyBoxTheme();
-}
-
+// Theme Management - Glass only permanently
 function applyBoxTheme() {
   const stream = document.getElementById('box-message-stream');
   if (!stream) return;
-  const themes = ['glass', 'cyber', 'sunset', 'ocean', 'mint'];
-  themes.forEach(t => {
-    stream.classList.remove(`box-theme-${t}`);
-    const btn = document.getElementById(`theme-btn-${t}`);
-    if (btn) {
-      if (t === currentBoxTheme) {
-        btn.className = "px-2 py-1 rounded-xl text-[10px] font-black transition bg-pink-600 text-white shadow-xs";
-      } else {
-        btn.className = "px-2 py-1 rounded-xl text-[10px] font-bold text-slate-600 dark:text-slate-300 hover:bg-black/10 transition";
-      }
-    }
-  });
-  stream.classList.add(`box-theme-${currentBoxTheme}`);
+  stream.className = 'flex-1 overflow-y-auto p-4 space-y-3 text-xs box-theme-glass transition-all duration-300';
+}
+
+function setBoxTheme(themeKey) {
+  // Retained for backward-compatibility; keeps glass theme
+  currentBoxTheme = 'glass';
+  applyBoxTheme();
 }
 
 // Media Drawer (🤪 Stickers, GIFs & Emojis)
@@ -4831,14 +5189,14 @@ function quickShoutPrompt() {
   }
 }
 
-// Outbound Message Broadcaster (Dispatches to local tabs, ntfy.sh relay, and GunDB)
+// Outbound Message Broadcaster
 function broadcastOutboundMessage(message) {
   // 1. Cross-tab BroadcastChannel
   if (boxChatChannel) {
     boxChatChannel.postMessage({ type: 'NEW_MESSAGE', message: message });
   }
 
-  // 2. High-speed HTTP Serverless Push (ntfy.sh)
+  // 2. High-speed Serverless Push
   fetch(`https://ntfy.sh/${CHAT_SYNC_TOPIC}`, {
     method: 'POST',
     headers: { 'Content-Type': 'application/json' },
@@ -4866,6 +5224,7 @@ function sendSpecialBoxMessage(customPayload) {
     senderName: loggedInStudent.name,
     senderUsn: loggedInStudent.usn,
     text: customPayload,
+    attachment: null,
     timestamp: timeStr,
     photo: studentPhoto,
     isAdmin: isAuthorizedAdmin(loggedInStudent)
@@ -4873,6 +5232,293 @@ function sendSpecialBoxMessage(customPayload) {
 
   receiveBoxMessage(message, true);
   broadcastOutboundMessage(message);
+}
+
+// ==================== FILE & MEDIA UPLOAD ENGINE ====================
+
+function triggerChatFileUpload() {
+  if (!loggedInStudent) {
+    alert("Please sign in to upload images or documents.");
+    return;
+  }
+  const fileInput = document.getElementById('box-file-upload-input');
+  if (fileInput) {
+    fileInput.click();
+  }
+}
+
+function formatFileSize(bytes) {
+  if (!bytes || bytes === 0) return '0 B';
+  const k = 1024;
+  const sizes = ['B', 'KB', 'MB', 'GB'];
+  const i = Math.floor(Math.log(bytes) / Math.log(k));
+  return parseFloat((bytes / Math.pow(k, i)).toFixed(1)) + ' ' + sizes[i];
+}
+
+// Client-side image compression to keep sync ultrafast
+function compressImageFile(file, maxWidth = 1000, quality = 0.8) {
+  return new Promise((resolve) => {
+    const reader = new FileReader();
+    reader.onload = (e) => {
+      const img = new Image();
+      img.onload = () => {
+        let width = img.width;
+        let height = img.height;
+
+        if (width > maxWidth) {
+          height = Math.round((height * maxWidth) / width);
+          width = maxWidth;
+        }
+
+        const canvas = document.createElement('canvas');
+        canvas.width = width;
+        canvas.height = height;
+        const ctx = canvas.getContext('2d');
+        ctx.drawImage(img, 0, 0, width, height);
+
+        const compressedDataUrl = canvas.toDataURL('image/jpeg', quality);
+        resolve(compressedDataUrl);
+      };
+      img.onerror = () => resolve(e.target.result);
+      img.src = e.target.result;
+    };
+    reader.onerror = () => resolve(null);
+    reader.readAsDataURL(file);
+  });
+}
+
+async function handleChatFileSelect(event) {
+  const file = event.target.files && event.target.files[0];
+  if (!file) return;
+
+  // Maximum 5MB limit
+  if (file.size > 5 * 1024 * 1024) {
+    alert("File is too large. Please select files or documents under 5 MB for peer sync.");
+    event.target.value = '';
+    return;
+  }
+
+  const isImage = file.type.startsWith('image/');
+  let dataUrl = '';
+
+  if (isImage) {
+    dataUrl = await compressImageFile(file, 1000, 0.8);
+  } else {
+    dataUrl = await new Promise((resolve) => {
+      const reader = new FileReader();
+      reader.onload = () => resolve(reader.result);
+      reader.onerror = () => resolve(null);
+      reader.readAsDataURL(file);
+    });
+  }
+
+  if (!dataUrl) {
+    alert("Could not read the selected file.");
+    event.target.value = '';
+    return;
+  }
+
+  currentDraftAttachment = {
+    type: isImage ? 'image' : 'file',
+    name: file.name,
+    size: formatFileSize(file.size),
+    mimeType: file.type || 'application/octet-stream',
+    data: dataUrl
+  };
+
+  renderDraftAttachmentPreview();
+  event.target.value = '';
+}
+
+function clearDraftAttachment() {
+  currentDraftAttachment = null;
+  renderDraftAttachmentPreview();
+}
+
+function renderDraftAttachmentPreview() {
+  const bar = document.getElementById('box-attachment-preview-bar');
+  if (!bar) return;
+
+  if (!currentDraftAttachment) {
+    bar.classList.add('hidden');
+    bar.innerHTML = '';
+    return;
+  }
+
+  bar.classList.remove('hidden');
+
+  const isImg = currentDraftAttachment.type === 'image';
+  const docMeta = getDocumentMeta(currentDraftAttachment.name, currentDraftAttachment.mimeType);
+
+  bar.innerHTML = `
+    <div class="flex items-center justify-between gap-3 p-2 px-3 rounded-2xl bg-pink-500/10 dark:bg-pink-950/40 border border-pink-500/30 text-xs">
+      <div class="flex items-center gap-2.5 min-w-0">
+        ${isImg ? `
+          <img src="${currentDraftAttachment.data}" alt="Preview" class="w-9 h-9 rounded-xl object-cover border border-pink-400/40 shrink-0" />
+        ` : `
+          <div class="w-9 h-9 rounded-xl ${docMeta.bg} ${docMeta.color} flex items-center justify-center text-sm shrink-0">
+            <i class="${docMeta.icon}"></i>
+          </div>
+        `}
+        <div class="min-w-0">
+          <div class="font-bold text-slate-800 dark:text-slate-100 truncate text-[11px] max-w-[200px] sm:max-w-xs">${escapeHtml(currentDraftAttachment.name)}</div>
+          <div class="text-[9px] text-pink-600 dark:text-pink-400 font-semibold">${currentDraftAttachment.size} • Ready to send</div>
+        </div>
+      </div>
+      <button type="button" onclick="clearDraftAttachment()" class="w-6 h-6 rounded-full glass-card hover:bg-rose-500 hover:text-white flex items-center justify-center text-slate-400 text-xs transition" title="Remove attachment">
+        <i class="fa-solid fa-xmark"></i>
+      </button>
+    </div>
+  `;
+}
+
+// Drag & drop and clipboard paste listeners
+function setupMediaPasteAndDrop() {
+  const chatPanel = document.getElementById('box-chat-panel');
+  const chatInput = document.getElementById('box-chat-input');
+
+  if (chatPanel) {
+    chatPanel.addEventListener('dragover', (e) => {
+      e.preventDefault();
+      chatPanel.classList.add('ring-2', 'ring-pink-500', 'ring-offset-2');
+    });
+
+    chatPanel.addEventListener('dragleave', (e) => {
+      e.preventDefault();
+      chatPanel.classList.remove('ring-2', 'ring-pink-500', 'ring-offset-2');
+    });
+
+    chatPanel.addEventListener('drop', async (e) => {
+      e.preventDefault();
+      chatPanel.classList.remove('ring-2', 'ring-pink-500', 'ring-offset-2');
+      if (e.dataTransfer && e.dataTransfer.files && e.dataTransfer.files.length > 0) {
+        const file = e.dataTransfer.files[0];
+        await processDroppedOrPastedFile(file);
+      }
+    });
+  }
+
+  if (chatInput) {
+    chatInput.addEventListener('paste', async (e) => {
+      const items = (e.clipboardData || e.originalEvent.clipboardData)?.items;
+      if (!items) return;
+      for (let i = 0; i < items.length; i++) {
+        if (items[i].kind === 'file') {
+          const file = items[i].getAsFile();
+          if (file) {
+            e.preventDefault();
+            await processDroppedOrPastedFile(file);
+            break;
+          }
+        }
+      }
+    });
+  }
+}
+
+async function processDroppedOrPastedFile(file) {
+  if (!loggedInStudent) {
+    alert("Please sign in to upload files or documents.");
+    return;
+  }
+  if (file.size > 5 * 1024 * 1024) {
+    alert("File is too large. Please select files under 5 MB.");
+    return;
+  }
+  const isImage = file.type.startsWith('image/');
+  let dataUrl = '';
+  if (isImage) {
+    dataUrl = await compressImageFile(file, 1000, 0.8);
+  } else {
+    dataUrl = await new Promise((resolve) => {
+      const reader = new FileReader();
+      reader.onload = () => resolve(reader.result);
+      reader.onerror = () => resolve(null);
+      reader.readAsDataURL(file);
+    });
+  }
+
+  if (dataUrl) {
+    currentDraftAttachment = {
+      type: isImage ? 'image' : 'file',
+      name: file.name || (isImage ? 'pasted-image.png' : 'document-file'),
+      size: formatFileSize(file.size),
+      mimeType: file.type || 'application/octet-stream',
+      data: dataUrl
+    };
+    renderDraftAttachmentPreview();
+  }
+}
+
+function getDocumentMeta(filename = '', mimeType = '') {
+  const ext = (filename.split('.').pop() || '').toLowerCase();
+  if (ext === 'pdf' || mimeType.includes('pdf')) {
+    return { icon: 'fa-solid fa-file-pdf', color: 'text-rose-600 dark:text-rose-400', bg: 'bg-rose-500/15 border border-rose-500/30' };
+  }
+  if (['doc', 'docx'].includes(ext) || mimeType.includes('word')) {
+    return { icon: 'fa-solid fa-file-word', color: 'text-blue-600 dark:text-blue-400', bg: 'bg-blue-500/15 border border-blue-500/30' };
+  }
+  if (['xls', 'xlsx', 'csv'].includes(ext) || mimeType.includes('excel') || mimeType.includes('spreadsheet')) {
+    return { icon: 'fa-solid fa-file-excel', color: 'text-emerald-600 dark:text-emerald-400', bg: 'bg-emerald-500/15 border border-emerald-500/30' };
+  }
+  if (['ppt', 'pptx'].includes(ext) || mimeType.includes('presentation')) {
+    return { icon: 'fa-solid fa-file-powerpoint', color: 'text-amber-600 dark:text-amber-400', bg: 'bg-amber-500/15 border border-amber-500/30' };
+  }
+  if (['zip', 'rar', '7z', 'tar', 'gz'].includes(ext) || mimeType.includes('zip') || mimeType.includes('archive')) {
+    return { icon: 'fa-solid fa-file-zipper', color: 'text-purple-600 dark:text-purple-400', bg: 'bg-purple-500/15 border border-purple-500/30' };
+  }
+  if (['txt', 'md', 'json', 'py', 'c', 'cpp', 'java', 'js', 'html', 'css'].includes(ext)) {
+    return { icon: 'fa-solid fa-file-code', color: 'text-indigo-600 dark:text-indigo-400', bg: 'bg-indigo-500/15 border border-indigo-500/30' };
+  }
+  return { icon: 'fa-solid fa-file', color: 'text-slate-600 dark:text-slate-300', bg: 'bg-slate-500/15 border border-slate-500/30' };
+}
+
+// Lightbox full-size image viewer
+function openLightboxImage(imgSrc, title = 'Image Preview') {
+  let modal = document.getElementById('image-lightbox-modal');
+  if (!modal) {
+    modal = document.createElement('div');
+    modal.id = 'image-lightbox-modal';
+    modal.className = 'fixed inset-0 z-50 bg-slate-950/85 backdrop-blur-xl flex flex-col items-center justify-center p-4 transition-all duration-300';
+    modal.innerHTML = `
+      <div class="relative max-w-4xl max-h-[90vh] flex flex-col items-center">
+        <div class="w-full flex items-center justify-between pb-3 text-white">
+          <span id="lightbox-title" class="text-xs font-bold truncate max-w-xs sm:max-w-md"></span>
+          <div class="flex items-center gap-2">
+            <a id="lightbox-download-btn" href="#" download="campus-image.png" class="px-3 py-1.5 rounded-xl bg-pink-600 hover:bg-pink-700 text-white text-xs font-bold flex items-center gap-1.5 transition">
+              <i class="fa-solid fa-download"></i> <span>Download</span>
+            </a>
+            <button onclick="closeLightboxImage()" class="w-8 h-8 rounded-full bg-white/20 hover:bg-white/30 text-white flex items-center justify-center text-sm transition">
+              <i class="fa-solid fa-xmark"></i>
+            </button>
+          </div>
+        </div>
+        <img id="lightbox-img" src="" alt="Full view" class="max-w-full max-h-[80vh] object-contain rounded-2xl shadow-2xl border border-white/20" />
+      </div>
+    `;
+    modal.addEventListener('click', (e) => {
+      if (e.target === modal) closeLightboxImage();
+    });
+    document.body.appendChild(modal);
+  }
+
+  const imgEl = modal.querySelector('#lightbox-img');
+  const titleEl = modal.querySelector('#lightbox-title');
+  const dwnEl = modal.querySelector('#lightbox-download-btn');
+
+  if (imgEl) imgEl.src = imgSrc;
+  if (titleEl) titleEl.textContent = title;
+  if (dwnEl) {
+    dwnEl.href = imgSrc;
+    dwnEl.download = title || 'campus-media.png';
+  }
+
+  modal.classList.remove('hidden');
+}
+
+function closeLightboxImage() {
+  const modal = document.getElementById('image-lightbox-modal');
+  if (modal) modal.classList.add('hidden');
 }
 
 // Check if current user is an authorized admin (25BTREC020 or 25BTREC09)
@@ -4902,7 +5548,8 @@ function checkAdminPermissions(student) {
 function loadBoxMessages() {
   try {
     const raw = localStorage.getItem('fet_box_messages_v4') || localStorage.getItem('fet_box_messages_v3');
-    boxMessages = raw ? JSON.parse(raw) : [];
+    const parsed = raw ? JSON.parse(raw) : [];
+    boxMessages = parsed.filter(m => m && m.id && !isMessageDeleted(m.id) && m.senderUsn !== 'PORTAL');
   } catch (e) {
     boxMessages = [];
   }
@@ -4911,12 +5558,15 @@ function loadBoxMessages() {
 
 function saveBoxMessages() {
   try {
-    localStorage.setItem('fet_box_messages_v4', JSON.stringify(boxMessages.slice(-120)));
+    const cleanList = boxMessages.filter(m => m && m.id && !isMessageDeleted(m.id) && m.senderUsn !== 'PORTAL');
+    localStorage.setItem('fet_box_messages_v4', JSON.stringify(cleanList.slice(-120)));
   } catch (e) {}
 }
 
 function receiveBoxMessage(msg, isOutbound = false) {
-  if (!msg || !msg.text) return;
+  if (!msg || (!msg.text && !msg.attachment)) return;
+  if (isMessageDeleted(msg.id) || msg.senderUsn === 'PORTAL') return;
+
   const exists = boxMessages.some(m => m.id === msg.id || (m.timestamp === msg.timestamp && m.senderUsn === msg.senderUsn && m.text === msg.text));
   if (exists) return;
 
@@ -4932,8 +5582,11 @@ function handleSendBoxMessage() {
   }
 
   const input = document.getElementById('box-chat-input');
-  const text = input.value.trim();
-  if (!text) return;
+  const text = input ? input.value.trim() : '';
+
+  if (!text && !currentDraftAttachment) {
+    return;
+  }
 
   const pinCheckbox = document.getElementById('box-pin-as-marquee-checkbox');
   const shouldPinToHome = isAuthorizedAdmin(loggedInStudent) && pinCheckbox && pinCheckbox.checked;
@@ -4945,30 +5598,71 @@ function handleSendBoxMessage() {
   const customProfiles = JSON.parse(localStorage.getItem('portal_student_custom_profiles') || '{}');
   const studentPhoto = customProfiles[loggedInStudent.usn]?.photo || localStorage.getItem('portal_avatar_' + loggedInStudent.usn) || '';
 
+  const attachmentToSend = currentDraftAttachment ? { ...currentDraftAttachment } : null;
+
   const message = {
     id: msgId,
     senderName: loggedInStudent.name,
     senderUsn: loggedInStudent.usn,
     text: text,
+    attachment: attachmentToSend,
     timestamp: timeStr,
     photo: studentPhoto,
     isAdmin: isAuthorizedAdmin(loggedInStudent)
   };
 
-  input.value = '';
+  if (input) input.value = '';
+  clearDraftAttachment();
   if (pinCheckbox) pinCheckbox.checked = false;
 
   receiveBoxMessage(message, true);
   broadcastOutboundMessage(message);
 
   if (shouldPinToHome) {
-    pinMessageToHomeMarquee(message.text, '📢', 'Notice');
+    let pinTitle = message.text || (attachmentToSend ? (attachmentToSend.type === 'image' ? 'Pinned Image' : attachmentToSend.name) : 'Campus Notice');
+    pinMessageToHomeMarquee(pinTitle, '📢', 'Notice', attachmentToSend);
   }
 }
 
-// Format message body with vibrant badges for Stickers, GIFs, Shouts, and Text
-function formatMessageContent(rawText) {
-  if (!rawText) return '';
+// Format message body with vibrant badges for Stickers, GIFs, Shouts, Attachments, and Text
+function formatMessageContent(rawText, attachment) {
+  let attachmentHtml = '';
+
+  if (attachment) {
+    if (attachment.type === 'image') {
+      attachmentHtml = `
+        <div class="rounded-2xl overflow-hidden border border-slate-200/80 dark:border-slate-800 max-w-[280px] shadow-sm my-1.5 bg-black/5 dark:bg-black/30">
+          <img src="${escapeHtml(attachment.data)}" alt="${escapeHtml(attachment.name)}" class="w-full max-h-56 object-cover rounded-t-2xl cursor-pointer hover:opacity-95 transition" onclick="openLightboxImage('${escapeHtml(attachment.data)}', '${escapeHtml(attachment.name)}')" loading="lazy" />
+          <div class="p-2 bg-white/95 dark:bg-slate-900/95 flex items-center justify-between text-[10px] gap-2 border-t border-slate-100 dark:border-slate-800">
+            <span class="truncate font-bold text-slate-800 dark:text-slate-200" title="${escapeHtml(attachment.name)}">${escapeHtml(attachment.name)}</span>
+            <a href="${escapeHtml(attachment.data)}" download="${escapeHtml(attachment.name)}" class="p-1 px-2 rounded-lg bg-pink-500/10 hover:bg-pink-500/20 text-pink-600 dark:text-pink-400 font-extrabold flex items-center gap-1 shrink-0" title="Download">
+              <i class="fa-solid fa-download text-[9px]"></i> <span>${attachment.size || ''}</span>
+            </a>
+          </div>
+        </div>
+      `;
+    } else {
+      const meta = getDocumentMeta(attachment.name, attachment.mimeType);
+      attachmentHtml = `
+        <div class="flex items-center gap-2.5 p-2.5 rounded-2xl border border-slate-200/80 dark:border-slate-800 bg-white/95 dark:bg-slate-900/95 shadow-xs my-1.5 max-w-sm">
+          <div class="w-9 h-9 rounded-xl ${meta.bg} ${meta.color} flex items-center justify-center text-sm shrink-0">
+            <i class="${meta.icon}"></i>
+          </div>
+          <div class="flex-1 min-w-0">
+            <div class="text-xs font-black text-slate-900 dark:text-white truncate" title="${escapeHtml(attachment.name)}">${escapeHtml(attachment.name)}</div>
+            <div class="text-[9px] text-slate-500 dark:text-slate-400 font-semibold">${attachment.size || 'Document'}</div>
+          </div>
+          <a href="${escapeHtml(attachment.data)}" download="${escapeHtml(attachment.name)}" class="px-2.5 py-1.5 rounded-xl bg-pink-600 hover:bg-pink-700 text-white text-[11px] font-bold shrink-0 flex items-center gap-1 shadow-xs transition active:scale-95" title="Download ${escapeHtml(attachment.name)}">
+            <i class="fa-solid fa-download text-[10px]"></i>
+          </a>
+        </div>
+      `;
+    }
+  }
+
+  if (!rawText) {
+    return attachmentHtml;
+  }
 
   if (rawText.startsWith('STICKER:')) {
     const parts = rawText.split(':');
@@ -4996,6 +5690,7 @@ function formatMessageContent(rawText) {
           <span class="text-xs font-black text-slate-900 dark:text-white leading-tight">${escapeHtml(title)}</span>
         </div>
       </div>
+      ${attachmentHtml}
     `;
   }
 
@@ -5005,6 +5700,7 @@ function formatMessageContent(rawText) {
       <div class="rounded-2xl overflow-hidden border border-slate-200 dark:border-slate-800 max-w-[280px] shadow-sm my-1">
         <img src="${escapeHtml(gifUrl)}" alt="Reaction GIF" class="w-full max-h-56 object-cover rounded-2xl" loading="lazy" onerror="this.src='https://media.giphy.com/media/LmN8OYiY4m0X85K0Zz/giphy.gif'" />
       </div>
+      ${attachmentHtml}
     `;
   }
 
@@ -5018,25 +5714,32 @@ function formatMessageContent(rawText) {
         </div>
         <p class="text-xs font-extrabold text-slate-900 dark:text-white leading-snug">${escapeHtml(shoutBody)}</p>
       </div>
+      ${attachmentHtml}
     `;
   }
 
-  return `<p class="text-xs break-words leading-relaxed">${escapeHtml(rawText)}</p>`;
+  return `
+    <p class="text-xs break-words leading-relaxed">${escapeHtml(rawText)}</p>
+    ${attachmentHtml}
+  `;
 }
 
 function renderBoxMessages() {
   const container = document.getElementById('box-message-stream');
   if (!container) return;
 
-  if (boxMessages.length === 0) {
+  // Filter out any mock or deleted messages
+  const displayableMessages = boxMessages.filter(m => m && m.id && !isMessageDeleted(m.id) && m.senderUsn !== 'PORTAL');
+
+  if (displayableMessages.length === 0) {
     container.innerHTML = `
       <div id="box-empty-state" class="h-full flex flex-col items-center justify-center text-center p-6 space-y-2 text-slate-400">
         <div class="w-16 h-16 rounded-3xl bg-pink-500/10 text-pink-500 flex items-center justify-center text-2xl mb-1">
           <i class="fa-solid fa-comments"></i>
         </div>
-        <h4 class="text-sm font-black text-slate-700 dark:text-slate-200">Welcome to BOX!</h4>
+        <h4 class="text-sm font-black text-slate-700 dark:text-slate-200">Welcome to BOX Campus Chat!</h4>
         <p class="text-xs max-w-sm leading-relaxed text-slate-500 dark:text-slate-400">
-          Real-time cross-device campus chat active. Send messages or tap <strong>🤪</strong> to send college stickers, GIFs & emojis!
+          Real-time peer student discussion. Send messages, attach documents or images, and share college stickers & GIFs!
         </p>
       </div>
     `;
@@ -5046,7 +5749,7 @@ function renderBoxMessages() {
   const currentUsn = loggedInStudent ? loggedInStudent.usn.toUpperCase() : '';
   const currentIsAdmin = loggedInStudent ? isAuthorizedAdmin(loggedInStudent) : false;
 
-  container.innerHTML = boxMessages.map((m, idx) => {
+  container.innerHTML = displayableMessages.map((m, idx) => {
     const isMe = m.senderUsn && m.senderUsn.toUpperCase() === currentUsn;
     const msgIsAdmin = m.isAdmin || AUTHORIZED_ADMIN_USNS.includes((m.senderUsn || '').toUpperCase());
     const initials = m.senderName ? m.senderName.split(' ').map(n => n[0]).slice(0, 2).join('') : 'ST';
@@ -5066,14 +5769,14 @@ function renderBoxMessages() {
             ${msgIsAdmin ? '<span class="text-[8px] font-black px-1.5 py-0.2 rounded bg-amber-400 text-slate-950 uppercase shadow-2xs">ADMIN</span>' : ''}
           </div>
 
-          ${formatMessageContent(m.text)}
+          ${formatMessageContent(m.text, m.attachment)}
 
           <div class="flex items-center justify-between gap-2 mt-1.5 pt-1 border-t ${isMe ? 'border-white/20' : 'border-slate-100 dark:border-slate-800'} text-[9px] opacity-75">
             <span>${m.timestamp}</span>
 
             <div class="flex items-center gap-2">
               ${currentIsAdmin ? `
-                <button type="button" onclick="pinMessageByIndex(${idx})" class="hover:underline font-bold flex items-center gap-0.5 ${isMe ? 'text-white' : 'text-amber-600 dark:text-amber-400'}" title="Pin this message to Home Marquee">
+                <button type="button" onclick="pinMessageByIndex(${idx})" class="hover:underline font-bold flex items-center gap-0.5 ${isMe ? 'text-white' : 'text-amber-600 dark:text-amber-400'}" title="Pin this message and any attachment to Home Marquee">
                   <span>📌 Pin to Home</span>
                 </button>
               ` : ''}
@@ -5094,6 +5797,7 @@ function renderBoxMessages() {
 }
 
 function escapeHtml(text) {
+  if (!text) return '';
   const div = document.createElement('div');
   div.textContent = text;
   return div.innerHTML;
@@ -5104,6 +5808,7 @@ function deleteBoxMessage(index) {
   if (!msg) return;
 
   if (confirm("Delete this message?")) {
+    recordDeletedMessageId(msg.id);
     boxMessages.splice(index, 1);
     saveBoxMessages();
     renderBoxMessages();
@@ -5117,11 +5822,18 @@ function deleteBoxMessage(index) {
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify({ type: 'DELETE_MESSAGE', id: msg.id })
     }).catch(e => {});
+
+    if (gun) {
+      try {
+        gun.get('fet_box_campus_chat_room_v4').get(msg.id).put(null);
+      } catch (e) {}
+    }
   }
 }
 
 function handleRemoteDeleteMessage(msgId) {
   if (!msgId) return;
+  recordDeletedMessageId(msgId);
   const idx = boxMessages.findIndex(m => m.id === msgId);
   if (idx !== -1) {
     boxMessages.splice(idx, 1);
@@ -5132,6 +5844,9 @@ function handleRemoteDeleteMessage(msgId) {
 
 function clearBoxChatHistory() {
   if (confirm("Clear local chat messages on this device?")) {
+    boxMessages.forEach(m => {
+      if (m && m.id) recordDeletedMessageId(m.id);
+    });
     boxMessages = [];
     saveBoxMessages();
     renderBoxMessages();
@@ -5141,10 +5856,11 @@ function clearBoxChatHistory() {
   }
 }
 
-// Home Page Running Marquee Ticker & Notice Controls
+// ==================== HOME RUNNING MARQUEE & PINNED NOTICE ENGINE ====================
+
 function loadPinnedNotice() {
   try {
-    const raw = localStorage.getItem('fet_box_pinned_notice_v4') || localStorage.getItem('fet_box_pinned_notice_v3');
+    const raw = localStorage.getItem('fet_box_pinned_notice_v5') || localStorage.getItem('fet_box_pinned_notice_v4');
     if (raw) {
       activePinnedNotice = JSON.parse(raw);
     }
@@ -5154,7 +5870,7 @@ function loadPinnedNotice() {
 
 function savePinnedNotice() {
   try {
-    localStorage.setItem('fet_box_pinned_notice_v4', JSON.stringify(activePinnedNotice));
+    localStorage.setItem('fet_box_pinned_notice_v5', JSON.stringify(activePinnedNotice));
   } catch (e) {}
 }
 
@@ -5177,7 +5893,7 @@ function broadcastOutboundNotice(notice) {
 }
 
 function applyPinnedNotice(notice, broadcast = true) {
-  if (!notice || !notice.text) return;
+  if (!notice || (!notice.text && !notice.attachment)) return;
   activePinnedNotice = notice;
   savePinnedNotice();
   updateMarqueeDisplay();
@@ -5191,22 +5907,79 @@ function updateMarqueeDisplay() {
   const iconEl = document.getElementById('marquee-urgency-icon');
   const labelEl = document.getElementById('marquee-urgency-label');
   const textEl = document.getElementById('marquee-text-content');
+  const attachmentBadgeEl = document.getElementById('marquee-attachment-indicator');
 
   if (iconEl) iconEl.textContent = activePinnedNotice.tag || '📢';
   if (labelEl) labelEl.textContent = activePinnedNotice.label || 'Notice';
-  if (textEl) textEl.textContent = activePinnedNotice.text || 'Welcome to Digital Portal!';
+
+  let marqueeText = activePinnedNotice.text || 'Welcome to Digital Portal!';
+  if (activePinnedNotice.attachment) {
+    const mediaName = activePinnedNotice.attachment.name || 'Media';
+    marqueeText = `${marqueeText} • 📎 [${mediaName}]`;
+    if (attachmentBadgeEl) attachmentBadgeEl.classList.remove('hidden');
+  } else {
+    if (attachmentBadgeEl) attachmentBadgeEl.classList.add('hidden');
+  }
+
+  if (textEl) {
+    textEl.textContent = marqueeText;
+    updateMarqueeSpeed();
+  }
+}
+
+// Dynamically calibrate marquee scrolling speed based on message length and device viewport
+function updateMarqueeSpeed() {
+  const textEl = document.getElementById('marquee-text-content');
+  if (!textEl) return;
+  const len = (textEl.textContent || '').trim().length;
+  const isMobile = window.innerWidth <= 640;
+
+  // On mobile: keep speed brisk and responsive (6s to 15s)
+  // On desktop: comfortable reading speed (8s to 22s)
+  let duration;
+  if (isMobile) {
+    duration = Math.max(6, Math.min(15, Math.round(len * 0.08) + 3));
+  } else {
+    duration = Math.max(8, Math.min(22, Math.round(len * 0.10) + 4));
+  }
+  textEl.style.animationDuration = `${duration}s`;
+}
+
+// Clicking the running marquee ticker opens attached media directly or switches to BOX chat
+function handleMarqueeClick(event) {
+  if (activePinnedNotice && activePinnedNotice.attachment) {
+    const att = activePinnedNotice.attachment;
+    if (att.type === 'image') {
+      openLightboxImage(att.data, att.name);
+      return;
+    } else {
+      const a = document.createElement('a');
+      a.href = att.data;
+      a.download = att.name;
+      document.body.appendChild(a);
+      a.click();
+      document.body.removeChild(a);
+      return;
+    }
+  }
+  switchTab('chat');
 }
 
 function pinMessageByIndex(idx) {
   const msg = boxMessages[idx];
   if (!msg) return;
-  let cleanText = msg.text;
+  let cleanText = msg.text || '';
   if (cleanText.startsWith('SHOUT:')) cleanText = cleanText.substring(6);
   if (cleanText.startsWith('STICKER:')) cleanText = cleanText.split(':')[2] || cleanText;
-  pinMessageToHomeMarquee(cleanText, '📢', 'Notice');
+
+  if (!cleanText && msg.attachment) {
+    cleanText = (msg.attachment.type === 'image' ? 'Pinned Image: ' : 'Pinned Document: ') + msg.attachment.name;
+  }
+
+  pinMessageToHomeMarquee(cleanText, '📢', 'Notice', msg.attachment || null);
 }
 
-function pinMessageToHomeMarquee(text, tag = '📢', label = 'Notice') {
+function pinMessageToHomeMarquee(text, tag = '📢', label = 'Notice', attachment = null) {
   if (!loggedInStudent || !isAuthorizedAdmin(loggedInStudent)) {
     alert("Only authorized admins (25BTREC020 & 25BTREC09) can pin notices.");
     return;
@@ -5215,13 +5988,14 @@ function pinMessageToHomeMarquee(text, tag = '📢', label = 'Notice') {
   const notice = {
     tag,
     label,
-    text,
+    text: text || (attachment ? attachment.name : 'Campus Announcement'),
+    attachment: attachment || null,
     pinnedBy: loggedInStudent.name,
     timestamp: new Date().toISOString()
   };
 
   applyPinnedNotice(notice, true);
-  alert(`Notice successfully pinned to Home Page Running Marquee:\n"${text}"`);
+  alert(`Notice successfully pinned to Home Page:\n"${notice.text}"`);
 }
 
 // Manage Notice Modal for Admins
@@ -5236,6 +6010,9 @@ function openManageNoticeModal() {
   const input = document.getElementById('manage-notice-input');
   if (input) input.value = activePinnedNotice.text || '';
   selectNoticeTag(activePinnedNotice.tag || '📢', activePinnedNotice.label || 'Notice');
+
+  currentNoticeDraftAttachment = activePinnedNotice.attachment ? { ...activePinnedNotice.attachment } : null;
+  renderNoticeModalAttachmentPreview();
   updateNoticePreview();
 
   document.getElementById('manage-notice-modal').classList.remove('hidden');
@@ -5263,7 +6040,114 @@ function updateNoticePreview() {
   const preview = document.getElementById('notice-preview-text');
 
   if (badge) badge.textContent = `${selectedNoticeTag.icon} ${selectedNoticeTag.label}`;
-  if (preview) preview.textContent = (input && input.value.trim()) ? input.value.trim() : 'Preview text will appear here';
+  let txt = (input && input.value.trim()) ? input.value.trim() : 'Preview text will appear here';
+  if (currentNoticeDraftAttachment) {
+    txt += ` • 📎 [${currentNoticeDraftAttachment.name}]`;
+  }
+  if (preview) preview.textContent = txt;
+}
+
+async function handleNoticeAttachmentSelect(event) {
+  const file = event.target.files && event.target.files[0];
+  if (!file) return;
+
+  if (file.size > 5 * 1024 * 1024) {
+    alert("File is too large. Please select files under 5 MB.");
+    event.target.value = '';
+    return;
+  }
+
+  const isImage = file.type.startsWith('image/');
+  let dataUrl = '';
+  if (isImage) {
+    dataUrl = await compressImageFile(file, 1000, 0.8);
+  } else {
+    dataUrl = await new Promise((resolve) => {
+      const reader = new FileReader();
+      reader.onload = () => resolve(reader.result);
+      reader.onerror = () => resolve(null);
+      reader.readAsDataURL(file);
+    });
+  }
+
+  if (dataUrl) {
+    currentNoticeDraftAttachment = {
+      type: isImage ? 'image' : 'file',
+      name: file.name,
+      size: formatFileSize(file.size),
+      mimeType: file.type || 'application/octet-stream',
+      data: dataUrl
+    };
+    renderNoticeModalAttachmentPreview();
+    updateNoticePreview();
+  }
+  event.target.value = '';
+}
+
+function clearNoticeDraftAttachment() {
+  currentNoticeDraftAttachment = null;
+  renderNoticeModalAttachmentPreview();
+  updateNoticePreview();
+}
+
+function renderNoticeModalAttachmentPreview() {
+  const container = document.getElementById('manage-notice-attachment-preview');
+  if (!container) return;
+
+  if (!currentNoticeDraftAttachment) {
+    container.classList.add('hidden');
+    container.innerHTML = '';
+    return;
+  }
+
+  container.classList.remove('hidden');
+  const isImg = currentNoticeDraftAttachment.type === 'image';
+  const meta = getDocumentMeta(currentNoticeDraftAttachment.name, currentNoticeDraftAttachment.mimeType);
+
+  container.innerHTML = `
+    <div class="flex items-center justify-between gap-2 p-2 rounded-xl bg-amber-500/10 border border-amber-500/30">
+      <div class="flex items-center gap-2 min-w-0">
+        ${isImg ? `
+          <img src="${currentNoticeDraftAttachment.data}" class="w-8 h-8 rounded-lg object-cover" />
+        ` : `
+          <div class="w-8 h-8 rounded-lg ${meta.bg} ${meta.color} flex items-center justify-center text-xs">
+            <i class="${meta.icon}"></i>
+          </div>
+        `}
+        <div class="min-w-0">
+          <div class="text-[11px] font-bold text-slate-800 dark:text-slate-100 truncate">${escapeHtml(currentNoticeDraftAttachment.name)}</div>
+          <div class="text-[9px] text-amber-700 dark:text-amber-400 font-semibold">${currentNoticeDraftAttachment.size}</div>
+        </div>
+      </div>
+      <button type="button" onclick="clearNoticeDraftAttachment()" class="w-5 h-5 rounded-full hover:bg-rose-500 hover:text-white flex items-center justify-center text-slate-400 text-xs">
+        <i class="fa-solid fa-xmark"></i>
+      </button>
+    </div>
+  `;
+}
+
+function handleSaveNotice(e) {
+  e.preventDefault();
+  const input = document.getElementById('manage-notice-input');
+  const text = input ? input.value.trim() : '';
+  if (!text && !currentNoticeDraftAttachment) return;
+
+  pinMessageToHomeMarquee(text, selectedNoticeTag.icon, selectedNoticeTag.label, currentNoticeDraftAttachment);
+  closeManageNoticeModal();
+}
+
+function resetNoticeToDefault() {
+  const defaultNotice = {
+    tag: '📢',
+    label: 'Notice',
+    text: 'Welcome to Digital Portal! Stay updated on class routines, attendance, and campus announcements through BOX chat.',
+    attachment: null,
+    pinnedBy: 'System',
+    timestamp: new Date().toISOString()
+  };
+  applyPinnedNotice(defaultNotice, true);
+  closeManageNoticeModal();
+  alert("Marquee and home notice reset to default announcement.");
 }
 
 document.addEventListener('DOMContentLoaded', () => {
@@ -5273,29 +6157,6 @@ document.addEventListener('DOMContentLoaded', () => {
   }
   initBoxChatEngine();
 });
-
-function handleSaveNotice(e) {
-  e.preventDefault();
-  const input = document.getElementById('manage-notice-input');
-  const text = input ? input.value.trim() : '';
-  if (!text) return;
-
-  pinMessageToHomeMarquee(text, selectedNoticeTag.icon, selectedNoticeTag.label);
-  closeManageNoticeModal();
-}
-
-function resetNoticeToDefault() {
-  const defaultNotice = {
-    tag: '📢',
-    label: 'Notice',
-    text: 'Welcome to Digital Portal! Stay updated on class routines, attendance, and campus announcements through BOX chat.',
-    pinnedBy: 'System',
-    timestamp: new Date().toISOString()
-  };
-  applyPinnedNotice(defaultNotice, true);
-  closeManageNoticeModal();
-  alert("Marquee reset to default announcement.");
-}
 
 
 </script>
