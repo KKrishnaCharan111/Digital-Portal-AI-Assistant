@@ -296,14 +296,25 @@ function initBoxChatEngine() {
   // 2. Connect Real-time SSE Streams
   connectRealtimeStreams();
 
-  // 3. Optional GunDB Secondary Mesh
+  // 3. GunDB Real-Time Campus Mesh
   try {
-    if (window.Gun) {
+    if (typeof getGlobalGun === 'function') {
+      gun = getGlobalGun();
+    } else if (window.portalGun) {
+      gun = window.portalGun;
+    } else if (window.Gun) {
       gun = Gun({
-        peers: ['https://relay.peer.ooo/gun'],
+        peers: [
+          'https://relay.peer.ooo/gun',
+          'https://peer.wallie.io/gun',
+          'https://gun-manhattan.herokuapp.com/gun'
+        ],
         localStorage: false
       });
+      window.portalGun = gun;
+    }
 
+    if (gun) {
       gun.get('fet_box_campus_chat_room_v4').map().on((data, id) => {
         if (data && data.senderUsn && (data.text || data.attachment)) {
           if (!isMessageDeleted(id) && !isMessageDeleted(data.id) && data.senderUsn !== 'PORTAL') {
@@ -385,7 +396,9 @@ function broadcastMyPresence() {
 
 function recordStudentPresence(p) {
   if (!p || !p.usn) return;
-  activePresenceMap[p.usn] = { name: p.name, time: p.time || Date.now() };
+  const usnKey = p.usn.toUpperCase();
+  activePresenceMap[usnKey] = { name: p.name, time: p.time || Date.now() };
+  window.activePresenceMap = activePresenceMap;
 
   // Count active students in last 3 minutes
   const now = Date.now();
@@ -394,7 +407,19 @@ function recordStudentPresence(p) {
   if (countEl) {
     countEl.textContent = activeCount > 1 ? `${activeCount} Students Online` : '1 Student Online';
   }
+
+  // Live update presence dot in Student Directory if active
+  if (typeof updateDirectoryPresenceBadges === 'function') {
+    updateDirectoryPresenceBadges();
+  }
 }
+
+window.isStudentOnline = function(usn) {
+  if (!usn) return false;
+  const entry = activePresenceMap[usn.toUpperCase()];
+  if (!entry) return false;
+  return (Date.now() - entry.time) < 180000;
+};
 
 // Theme Management - Glass only permanently
 function applyBoxTheme() {
