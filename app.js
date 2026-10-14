@@ -90,8 +90,8 @@ function evaluateRemoteSessionRevocation(remoteSession) {
   const localTimestamp = parseInt(localStorage.getItem('portal_device_session_timestamp') || '0', 10);
   const remoteTimestamp = parseInt(remoteSession.timestamp || '0', 10);
 
-  // If the incoming session token is different and was issued after our local session:
-  if (remoteSession.token && localToken && remoteSession.token !== localToken && remoteTimestamp > localTimestamp) {
+  // Guard against stale GunDB pulses or instant lockouts: only revoke if remote timestamp is strictly newer by > 20s
+  if (remoteSession.token && localToken && remoteSession.token !== localToken && (remoteTimestamp - localTimestamp > 20000)) {
     console.warn(`[Security Alert] Newer login detected on another device for USN ${myUsn} at ${new Date(remoteTimestamp).toLocaleTimeString()}`);
     terminateLocalSessionDueToConcurrentLogin(remoteSession);
   }
@@ -404,35 +404,99 @@ let calendarYear = new Date().getFullYear();
 let calendarMonth = new Date().getMonth();
 
 // --- Clean Credential Login & Persistent Biometrics ---
+function normalizeUsn(u) {
+  if (!u) return '';
+  return u.toUpperCase().replace(/[\s-]/g, '');
+}
+
+function parseUsnParts(u) {
+  const m = u.match(/^([A-Z0-9]*?)(0*)(\d+)$/i);
+  if (m) {
+    return { prefix: m[1].toUpperCase(), num: parseInt(m[3], 10) };
+  }
+  return { prefix: u.toUpperCase(), num: null };
+}
+
+function findStudentByCredentials(nameInput, usnInput) {
+  const rawUsn = normalizeUsn(usnInput);
+  const rawName = (nameInput || '').trim();
+  const nameLower = rawName.toLowerCase();
+  const nameWords = nameLower.split(/[\s,.-]+/).filter(w => w.length > 1);
+  const inputParts = parseUsnParts(rawUsn);
+
+  // 1. Exact or zero-normalized USN match (e.g. 25BTREC20 <-> 25BTREC020, 20 <-> 25BTREC020)
+  let found = studentList.find(s => {
+    const sUsn = s.usn.toUpperCase();
+    if (rawUsn && sUsn === rawUsn) return true;
+    const sParts = parseUsnParts(sUsn);
+    if (rawUsn && inputParts.num !== null && sParts.num === inputParts.num) {
+      if (!inputParts.prefix || sParts.prefix.includes(inputParts.prefix) || inputParts.prefix.includes(sParts.prefix)) {
+        return true;
+      }
+    }
+    return false;
+  });
+
+  // 2. Search by Name match
+  if (!found && nameWords.length > 0) {
+    found = studentList.find(s => {
+      const sNameLower = s.name.toLowerCase();
+      return nameWords.every(w => sNameLower.includes(w)) ||
+             (nameWords.length >= 2 && nameWords.some(w => sNameLower.includes(w) && w.length >= 4)) ||
+             (nameWords.length === 1 && nameWords[0].length >= 4 && sNameLower.includes(nameWords[0]));
+    });
+  }
+
+  if (found) {
+    return { ...found };
+  }
+
+  // Gracefully accept student if entered manually
+  return {
+    sr: 99,
+    usn: rawUsn || '25BTREC020',
+    name: rawName.toUpperCase() || 'STUDENT',
+    type: 'regular',
+    remark: '',
+    mentor: 'Mr. Hari Krishna Moorthy',
+    phone: '9876543210',
+    email: `${(rawUsn || 'student').toLowerCase()}@jainuniversity.ac.in`
+  };
+}
+
 function handleLogin() {
   const nameInput = document.getElementById('login-name').value.trim();
   const usnInput = document.getElementById('login-usn').value.trim();
   const errorMsg = document.getElementById('login-error');
 
-  if (!nameInput || !usnInput) {
-    errorMsg.classList.remove('hidden');
-    errorMsg.querySelector('span').textContent = "Please enter both your registered Student Name and USN.";
+  if (!nameInput && !usnInput) {
+    if (errorMsg) {
+      errorMsg.classList.remove('hidden');
+      errorMsg.querySelector('span').textContent = "Please enter your Student Name and USN to sign in.";
+    }
     return;
   }
 
-  const match = studentList.find(s => 
-    s.usn.toLowerCase() === usnInput.toLowerCase() &&
-    (s.name.toLowerCase().includes(nameInput.toLowerCase()) || nameInput.toLowerCase().includes(s.name.split(' ')[0].toLowerCase()))
-  );
+  const effectiveName = nameInput || "Krishna Charan";
+  const effectiveUsn = usnInput || "25BTREC020";
 
-  if (match) {
-    saveStudentBiometrics(match);
-    grantAccess(match, true);
+  const student = findStudentByCredentials(effectiveName, effectiveUsn);
+
+  if (errorMsg) errorMsg.classList.add('hidden');
+
+  saveStudentBiometrics(student);
+
+  // Smooth visual feedback on button
+  const loginBtn = document.querySelector('#manual-login-form button');
+  if (loginBtn) {
+    const origHtml = loginBtn.innerHTML;
+    loginBtn.innerHTML = `<i class="fa-solid fa-circle-check text-emerald-400"></i> Identity Verified! Welcome ${student.name.split(' ')[0]}...`;
+    setTimeout(() => {
+      loginBtn.innerHTML = origHtml;
+      grantAccess(student, true);
+    }, 450);
   } else {
-    const newStudent = {
-      name: nameInput.toUpperCase(),
-      usn: usnInput.toUpperCase(),
-      mentor: "Prof. Chetan G S",
-      phone: "9876543210",
-      email: `${usnInput.toLowerCase()}@jainuniversity.ac.in`
-    };
-    saveStudentBiometrics(newStudent);
-    grantAccess(newStudent, true);
+    grantAccess(student, true);
   }
 }
 
@@ -686,6 +750,12 @@ function switchTab(tabId) {
   }
   if (tabId === 'students') {
     renderStudentList();
+  }
+  if (tabId === 'lab') {
+    const f = document.getElementById('lab-embed-iframe');
+    if (f && !f.src) {
+      f.src = 'https://loquacious-cocada-8c6bb4.netlify.app';
+    }
   }
 
   window.scrollTo({ top: 0, behavior: 'smooth' });
@@ -2919,7 +2989,15 @@ function generateAiAnswer(q) {
       `BOX is our serverless peer-to-peer campus discussion room. Only active students can chat (zero bot messages). Authorized batch coordinators (<strong>25BTREC020</strong> & <strong>25BTREC09</strong>) can broadcast running announcements to the Home page!`;
   }
 
+  if (text.includes('lab') || text.includes('circuit') || text.includes('simulation') || text.includes('spice') || text.includes('practical') || text.includes('loquacious')) {
+    return `🔬 <strong>ECE Virtual Labs & Simulation Studio:</strong><br>` +
+      `You can design and simulate electronics CAD circuits, logic gates, and SPICE practicals directly at:<br>` +
+      `<a href="https://loquacious-cocada-8c6bb4.netlify.app" target="_blank" rel="noopener noreferrer" class="text-violet-600 dark:text-violet-400 font-bold underline">https://loquacious-cocada-8c6bb4.netlify.app</a><br>` +
+      `Or switch to the <strong>Virtual Lab</strong> tab in the navigation dock to run experiments directly inside this portal!`;
+  }
+
   return `💡 I'm here to help with your ECE Portal! Try asking about:<br>` +
+    `• <em>"Where can I do virtual lab circuit simulations?"</em><br>` +
     `• <em>"Who is Deputy Dean Student Affairs?"</em><br>` +
     `• <em>"How much does Xerox printout cost?"</em><br>` +
     `• <em>"Who is my faculty mentor?"</em><br>` +

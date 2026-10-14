@@ -34,26 +34,41 @@ This web application is **100% serverless and static**, requiring **zero backend
   - **Campus Emojis**: Quick one-tap insertion grid.
 - **Theme Wallpapers**: Apple Glass, Cyber Neon, Sunset Ember, Deep Ocean, and Fresh Mint.
 
-### 2. 📢 Home Page Running Marquee Announcement Ticker
-- Prominent continuously scrolling marquee ticker at the top of the Home dashboard.
-- Features urgency tags (📢 Notice, ⚡ Urgent, 📄 Update), auto-pauses on hover/touch, and clicks directly to open BOX chat.
-- **Strict Admin Controls**:
-  - Authorized Admin USNs: **`25BTREC020`** (Kummusani Krishna Charan) and **`25BTREC09` / `25BTREC009`** (Chinmayi V).
-  - Admins can pin any chat message or open the **"Manage Notice"** modal to broadcast custom announcements in real-time.
+### 2. 🔬 ECE Virtual Labs & Circuit Simulation Studio
+- **CircuitVerse Studio Integration**: Direct access to the live online laboratory website at **`https://loquacious-cocada-8c6bb4.netlify.app`**.
+- **Interactive Workbench**: Embedded responsive CAD & SPICE workspace right inside the portal with reload and fullscreen popout buttons.
+- **6 Curated ECE Practicals**:
+  1. *Analog OP-AMP 741 Inverting/Non-Inverting & Active Filters*
+  2. *Combinational Logic Gates & Multiplexers (74xx Series)*
+  3. *Sequential JK Flip-Flops & Asynchronous Counters*
+  4. *Microcontroller Sensor Interfacing & PWM Motor Control*
+  5. *SPICE Transient Waveforms & Diode Bridge Rectifiers*
+  6. *VLSI CMOS Inverter Transfer Characteristics & Timing Delays*
+- **Home Page Spotlight**: Featured banner and quick action pill on the Home page dashboard.
 
-### 3. 🔐 Clean Authentication & Persistent Biometrics
-- **Manual Credentials Sign-In**: Clean Name and USN input fields with zero 1-tap test chips.
+### 3. 📢 Slow & Accessible Marquee Announcement Ticker
+- **Comfortable Reading Speed**: Smooth, slow scroll calibrated between 36s to 95s based on message length (no more rushing text!).
+- **Accessible Controls**:
+  - Auto-pauses on hover and touch.
+  - Dedicated **Pause / Play** toggle button right on the ticker card.
+  - Dedicated **"Read Notice"** button to open the full announcement modal.
+- **Full Notice Reader Modal**: View complete lengthy announcements, verified timestamps, broadcast author, and attached files/media with download links.
+
+### 4. 🔐 Smart Name & USN Authentication
+- **Fault-Tolerant Matching**: Accepts any variant of student name (e.g., *K Krishna Charan*, *Krishna Charan*, *Krishna*) and USN (*25BTREC020*, *25BTREC20*, *20*).
+- **Zero-Normalization**: Automatically maps leading zeros and nicknames to the verified university directory record.
+- **Graceful Onboarding**: New students entering their credentials can sign in immediately with zero blocking errors.
 - **Persistent Biometrics Hub**:
   - Automatically saves credentials to `portal_saved_student_bio` on first sign-in.
   - Subsequent visits feature **Face ID** and **Touch ID Fingerprint** quick-access biometric buttons.
   - Includes a "Switch Student / Sign In Manually" toggle.
 
-### 4. 📸 Two-Step Face ID Attendance & Faculty QR
+### 5. 📸 Two-Step Face ID Attendance & Faculty QR
 - **Step 1: Face Scan**: Authenticates the student's face with anti-proxy multi-person detection.
 - **Step 2: Faculty Live QR Reader**: Automatically unlocks the camera to scan the faculty projector QR code.
 - Anti-Proxy Edge Security rejects multiple people in the camera frame and blocks proxy scans.
 
-### 5. 🖨️ Tuck Shop Xerox (Printout Express)
+### 6. 🖨️ Tuck Shop Xerox (Printout Express)
 - **Direct Email Dispatch**: Auto-composes print orders directly to **`printout275@gmail.com`**.
 - **Accurate Pricing**: Strictly calculates `Pages × Rate × Copies` (B&W: **₹3/page**, Color: **₹10/page**) without any extra binding fee overhead.
 - Generates digital pickup tokens with timestamps.

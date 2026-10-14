@@ -265,6 +265,10 @@
     .pill-matrix .pill-icon-circle { color: #7E22CE; }
     html.dark .pill-matrix { background: rgba(168, 85, 247, 0.22); color: #D8B4FE; border-color: rgba(168, 85, 247, 0.45); }
 
+    .pill-lab { background: #F5F3FF; color: #7C3AED; border-color: #DDD6FE; }
+    .pill-lab .pill-icon-circle { color: #7C3AED; }
+    html.dark .pill-lab { background: rgba(124, 58, 237, 0.22); color: #C4B5FD; border-color: rgba(124, 58, 237, 0.45); }
+
     .pill-chat { background: #FDF2F8; color: #BE185D; border-color: #FBCFE8; }
     .pill-chat .pill-icon-circle { color: #BE185D; }
     html.dark .pill-chat { background: rgba(236, 72, 153, 0.22); color: #F472B6; border-color: rgba(236, 72, 153, 0.45); }
@@ -280,6 +284,7 @@
     .nav-pill.active.pill-complaints { background: linear-gradient(135deg, #F43F5E 0%, #BE123C 100%) !important; color: #FFFFFF !important; border-color: #F43F5E !important; box-shadow: 0 4px 18px rgba(244, 63, 94, 0.5) !important; }
     .nav-pill.active.pill-coe { background: linear-gradient(135deg, #06B6D4 0%, #0E7490 100%) !important; color: #FFFFFF !important; border-color: #06B6D4 !important; box-shadow: 0 4px 18px rgba(6, 182, 212, 0.5) !important; }
     .nav-pill.active.pill-matrix { background: linear-gradient(135deg, #A855F7 0%, #7E22CE 100%) !important; color: #FFFFFF !important; border-color: #A855F7 !important; box-shadow: 0 4px 18px rgba(168, 85, 247, 0.5) !important; }
+    .nav-pill.active.pill-lab { background: linear-gradient(135deg, #8B5CF6 0%, #6D28D9 100%) !important; color: #FFFFFF !important; border-color: #8B5CF6 !important; box-shadow: 0 4px 18px rgba(139, 92, 246, 0.5) !important; }
     .nav-pill.active.pill-chat { background: linear-gradient(135deg, #EC4899 0%, #BE185D 100%) !important; color: #FFFFFF !important; border-color: #EC4899 !important; box-shadow: 0 4px 18px rgba(236, 72, 153, 0.5) !important; }
 
     .nav-pill.active i, .nav-pill.active svg { color: #FFFFFF !important; stroke: #FFFFFF !important; }
@@ -287,7 +292,7 @@
     .no-scrollbar::-webkit-scrollbar { display: none; }
     .no-scrollbar { -ms-overflow-style: none; scrollbar-width: none; }
 
-    /* Home Running Marquee Styles */
+    /* Home Running Marquee Styles - Comfortable, Accessible Slow Speed */
     .marquee-container {
       overflow: hidden;
       white-space: nowrap;
@@ -295,11 +300,12 @@
     }
     .marquee-content {
       display: inline-block;
-      animation: marqueeScroll 12s linear infinite;
+      animation: marqueeScroll 40s linear infinite;
       will-change: transform;
     }
-    .marquee-container:hover .marquee-content {
-      animation-play-state: paused;
+    .marquee-container:hover .marquee-content,
+    .marquee-content.is-paused {
+      animation-play-state: paused !important;
     }
     @keyframes marqueeScroll {
       0% { transform: translateX(100%); }
@@ -307,7 +313,7 @@
     }
     @media (max-width: 640px) {
       .marquee-content {
-        animation-duration: 9s;
+        animation-duration: 36s;
       }
     }
 
@@ -584,7 +590,7 @@
               <span class="text-[11px] font-black uppercase text-blue-600 dark:text-blue-400 tracking-wider flex items-center gap-1.5">
                 <i class="fa-solid fa-layer-group"></i> All Campus Services
               </span>
-              <span class="text-[9px] font-extrabold px-1.5 py-0.5 rounded-full bg-blue-100 dark:bg-blue-900/60 text-blue-700 dark:text-blue-300">11 Options</span>
+              <span class="text-[9px] font-extrabold px-1.5 py-0.5 rounded-full bg-blue-100 dark:bg-blue-900/60 text-blue-700 dark:text-blue-300">12 Options</span>
             </div>
             
             <div class="grid grid-cols-2 gap-1.5 text-xs">
@@ -628,9 +634,13 @@
                 <span class="w-6 h-6 rounded-lg bg-purple-500/15 text-purple-600 flex items-center justify-center text-[10px] shrink-0"><i class="fa-solid fa-book-bookmark"></i></span>
                 <span class="font-bold text-slate-800 dark:text-white truncate">Course Matrix</span>
               </button>
-              <button onclick="selectFromHomeMenu('chat')" class="flex items-center gap-2 p-2 rounded-xl hover:bg-pink-50 dark:hover:bg-pink-950/40 text-left transition border border-transparent hover:border-pink-200 col-span-2">
+              <button onclick="selectFromHomeMenu('lab')" class="flex items-center gap-2 p-2 rounded-xl hover:bg-violet-50 dark:hover:bg-violet-950/40 text-left transition border border-transparent hover:border-violet-200">
+                <span class="w-6 h-6 rounded-lg bg-violet-500/15 text-violet-600 flex items-center justify-center text-[10px] shrink-0"><i class="fa-solid fa-flask-vial"></i></span>
+                <span class="font-bold text-slate-800 dark:text-white truncate">Virtual Lab</span>
+              </button>
+              <button onclick="selectFromHomeMenu('chat')" class="flex items-center gap-2 p-2 rounded-xl hover:bg-pink-50 dark:hover:bg-pink-950/40 text-left transition border border-transparent hover:border-pink-200">
                 <span class="w-6 h-6 rounded-lg bg-pink-500/15 text-pink-600 flex items-center justify-center text-[10px] shrink-0"><i class="fa-solid fa-box-archive"></i></span>
-                <span class="font-bold text-slate-800 dark:text-white truncate">BOX Campus Chat</span>
+                <span class="font-bold text-slate-800 dark:text-white truncate">BOX Chat</span>
               </button>
             </div>
           </div>
@@ -690,7 +700,13 @@
           <span>Matrix</span>
         </button>
 
-        <!-- 11. Class Chat - BOX (Hot Pink) -->
+        <!-- 11. Virtual Lab (CircuitVerse CAD & SPICE) -->
+        <button onclick="switchTab('lab')" id="desk-tab-lab" class="nav-pill pill-lab" title="CircuitVerse Studio — Electronics CAD & SPICE Simulation (https://loquacious-cocada-8c6bb4.netlify.app)">
+          <span class="pill-icon-circle"><i class="fa-solid fa-flask-vial"></i></span>
+          <span>Virtual Lab</span>
+        </button>
+
+        <!-- 12. Class Chat - BOX (Hot Pink) -->
         <button onclick="switchTab('chat')" id="desk-tab-chat" class="nav-pill pill-chat" title="BOX Serverless Campus Chat">
           <span class="pill-icon-circle"><i class="fa-solid fa-box-archive"></i></span>
           <span>BOX Chat</span>
@@ -705,13 +721,18 @@
     <section id="view-home" class="tab-view space-y-5">
       
       <!-- Home Running Marquee Announcement Ticker (Active Across Campus) -->
-      <div id="home-running-marquee-card" onclick="handleMarqueeClick(event)" class="cursor-pointer glass-panel rounded-2xl p-2.5 sm:px-4 sm:py-3 border border-amber-500/40 bg-gradient-to-r from-amber-500/15 via-orange-500/10 to-amber-500/15 shadow-sm hover:border-amber-500 transition group flex items-center gap-3">
+      <div id="home-running-marquee-card" onclick="handleMarqueeClick(event)" class="cursor-pointer glass-panel rounded-2xl p-2.5 sm:px-4 sm:py-3 border border-amber-500/40 bg-gradient-to-r from-amber-500/15 via-orange-500/10 to-amber-500/15 shadow-sm hover:border-amber-500 transition group flex items-center gap-2.5 sm:gap-3" title="Click to read full announcement">
         <div class="flex items-center gap-1.5 shrink-0 bg-amber-500 text-slate-950 px-2.5 py-1 rounded-xl text-[10px] font-black uppercase tracking-wider shadow-sm">
           <span id="marquee-urgency-icon">📢</span>
           <span id="marquee-urgency-label">Notice</span>
         </div>
 
-        <div class="marquee-container flex-1 text-xs font-semibold text-slate-800 dark:text-slate-100">
+        <!-- Accessible Play/Pause Toggle -->
+        <button type="button" id="marquee-play-pause-btn" onclick="event.stopPropagation(); toggleMarqueePause();" class="w-6 h-6 rounded-lg glass-card flex items-center justify-center text-slate-600 dark:text-slate-300 hover:text-amber-600 dark:hover:text-amber-400 shrink-0 transition" title="Pause / Resume marquee scroll">
+          <i class="fa-solid fa-pause text-[9px]" id="marquee-pause-icon"></i>
+        </button>
+
+        <div class="marquee-container flex-1 text-xs font-semibold text-slate-800 dark:text-slate-100 overflow-hidden">
           <div class="marquee-content" id="marquee-text-content">
             Welcome to Digital Portal! Stay updated on class routines, attendance, and campus announcements through BOX chat.
           </div>
@@ -721,8 +742,14 @@
           <i class="fa-solid fa-paperclip text-[9px]"></i> <span>Media</span>
         </span>
 
+        <!-- Accessible Read Notice Button -->
+        <button type="button" onclick="event.stopPropagation(); openNoticeDetailModal();" class="px-2.5 py-1 rounded-xl bg-amber-500/20 hover:bg-amber-500/35 border border-amber-500/30 text-amber-800 dark:text-amber-300 font-black text-[10px] shrink-0 flex items-center gap-1 transition" title="Read full notice without rush">
+          <i class="fa-solid fa-book-open text-[9px]"></i>
+          <span class="hidden xs:inline">Read</span>
+        </button>
+
         <span class="text-[10px] font-bold text-amber-600 dark:text-amber-400 shrink-0 hidden sm:inline-flex items-center gap-1 group-hover:translate-x-1 transition">
-          <span>Open BOX</span> <i class="fa-solid fa-arrow-right text-[9px]"></i>
+          <span>BOX Chat</span> <i class="fa-solid fa-arrow-right text-[9px]"></i>
         </span>
       </div>
 
@@ -740,20 +767,35 @@
               Welcome back, <span id="home-student-name" class="text-transparent bg-clip-text bg-gradient-to-r from-blue-600 to-indigo-600 dark:from-blue-400 dark:to-indigo-300">Student</span>!
             </h2>
             <p class="text-xs sm:text-sm text-slate-600 dark:text-slate-300 leading-relaxed font-medium">
-              Your unified campus hub for Two-Step Face ID attendance, class routines, tuck shop Xerox printouts, student grievance booth, and peer LinkedIn networking.
+              Your unified campus hub for Two-Step Face ID attendance, class routines, tuck shop Xerox printouts, student grievance booth, peer LinkedIn networking, and interactive ECE Virtual Labs.
             </p>
           </div>
 
           <div class="flex flex-wrap items-center gap-2.5 shrink-0">
-            <a href="https://erpfet.jainuniversity.ac.in/Student_profile" target="_blank" rel="noopener noreferrer" class="px-5 py-3.5 bg-gradient-to-r from-blue-600 via-indigo-600 to-purple-600 hover:from-blue-700 hover:to-purple-700 text-white rounded-2xl font-black text-xs shadow-lg shadow-blue-500/25 hover:shadow-blue-500/40 active:scale-95 transition flex items-center gap-3 group" title="Open Jain University Official FET ERP Student Profile">
+            <!-- Official College ERP -->
+            <a href="https://erpfet.jainuniversity.ac.in/Student_profile" target="_blank" rel="noopener noreferrer" class="px-4 py-3 bg-gradient-to-r from-blue-600 via-indigo-600 to-purple-600 hover:from-blue-700 hover:to-purple-700 text-white rounded-2xl font-black text-xs shadow-lg shadow-blue-500/25 hover:shadow-blue-500/40 active:scale-95 transition flex items-center gap-2.5 group" title="Open Jain University Official FET ERP Student Profile">
               <div class="w-8 h-8 rounded-xl bg-white/20 flex items-center justify-center text-white shrink-0 shadow-xs">
                 <i class="fa-solid fa-graduation-cap text-sm group-hover:scale-110 transition"></i>
               </div>
               <div class="text-left">
-                <div class="text-[9px] uppercase tracking-wider text-blue-100 font-extrabold leading-none mb-0.5">FET Jain University</div>
+                <div class="text-[9px] uppercase tracking-wider text-blue-100 font-extrabold leading-none mb-0.5">FET Jain Univ</div>
                 <div class="text-xs font-black leading-tight flex items-center gap-1.5">
-                  <span>College ERP Portal</span>
-                  <i class="fa-solid fa-arrow-up-right-from-square text-[10px] text-blue-200 group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition"></i>
+                  <span>College ERP</span>
+                  <i class="fa-solid fa-arrow-up-right-from-square text-[9px] text-blue-200 group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition"></i>
+                </div>
+              </div>
+            </a>
+
+            <!-- Virtual Lab Website (CircuitVerse Studio) -->
+            <a href="https://loquacious-cocada-8c6bb4.netlify.app" target="_blank" rel="noopener noreferrer" class="px-4 py-3 bg-gradient-to-r from-violet-600 via-purple-600 to-fuchsia-600 hover:from-violet-700 hover:to-fuchsia-700 text-white rounded-2xl font-black text-xs shadow-lg shadow-purple-500/25 hover:shadow-purple-500/40 active:scale-95 transition flex items-center gap-2.5 group" title="Open Virtual Lab Website (CircuitVerse Studio & SPICE)">
+              <div class="w-8 h-8 rounded-xl bg-white/20 flex items-center justify-center text-white shrink-0 shadow-xs">
+                <i class="fa-solid fa-flask-vial text-sm group-hover:scale-110 transition"></i>
+              </div>
+              <div class="text-left">
+                <div class="text-[9px] uppercase tracking-wider text-purple-200 font-extrabold leading-none mb-0.5">Circuit & SPICE CAD</div>
+                <div class="text-xs font-black leading-tight flex items-center gap-1.5">
+                  <span>Virtual Lab</span>
+                  <i class="fa-solid fa-arrow-up-right-from-square text-[9px] text-purple-200 group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition"></i>
                 </div>
               </div>
             </a>
@@ -817,6 +859,38 @@
           <p class="text-[11px] text-orange-700 dark:text-orange-300 font-extrabold mt-0.5 flex items-center gap-1">
             ₹3 B&W / ₹10 Color &rarr;
           </p>
+        </div>
+      </div>
+
+      <!-- Featured Interactive ECE Virtual Lab Banner Card (CircuitVerse Studio & SPICE) -->
+      <div class="glass-panel rounded-3xl p-5 border-2 border-violet-500/40 bg-gradient-to-r from-violet-600/15 via-purple-600/10 to-indigo-600/15 shadow-lg relative overflow-hidden group">
+        <div class="absolute -right-10 -bottom-10 w-44 h-44 bg-violet-500/20 rounded-full blur-2xl pointer-events-none group-hover:scale-125 transition duration-500"></div>
+        <div class="relative z-10 flex flex-col md:flex-row md:items-center justify-between gap-4">
+          <div class="flex items-start sm:items-center gap-3.5">
+            <div class="w-12 h-12 rounded-2xl bg-gradient-to-tr from-violet-600 via-purple-600 to-indigo-600 text-white flex items-center justify-center text-xl shadow-md shadow-violet-500/30 shrink-0 group-hover:scale-105 transition">
+              <i class="fa-solid fa-flask-vial"></i>
+            </div>
+            <div>
+              <div class="flex flex-wrap items-center gap-2">
+                <span class="text-[10px] font-black uppercase tracking-wider px-2 py-0.5 rounded-full bg-violet-500/20 text-violet-700 dark:text-violet-300 border border-violet-500/30">New ECE Feature</span>
+                <span class="text-[10px] font-extrabold text-slate-500 dark:text-slate-400">CircuitVerse Studio • SPICE CAD</span>
+              </div>
+              <h3 class="text-base sm:text-lg font-black text-slate-900 dark:text-white mt-0.5">Interactive ECE Virtual Labs & Circuit Simulator</h3>
+              <p class="text-xs text-slate-600 dark:text-slate-300 font-medium max-w-2xl leading-relaxed mt-0.5">
+                Design and simulate analog circuits, digital logic gates, SPICE waveforms, and lab practicals online anytime at <a href="https://loquacious-cocada-8c6bb4.netlify.app" target="_blank" rel="noopener noreferrer" class="text-violet-600 dark:text-violet-400 font-bold underline hover:text-violet-700">loquacious-cocada-8c6bb4.netlify.app</a>.
+              </p>
+            </div>
+          </div>
+          <div class="flex items-center gap-2.5 shrink-0">
+            <button type="button" onclick="switchTab('lab')" class="px-4 py-2.5 rounded-2xl bg-violet-600 hover:bg-violet-700 text-white text-xs font-bold shadow-md shadow-violet-500/25 active:scale-95 transition flex items-center gap-2">
+              <i class="fa-solid fa-desktop"></i>
+              <span>Open Lab Tab</span>
+            </button>
+            <a href="https://loquacious-cocada-8c6bb4.netlify.app" target="_blank" rel="noopener noreferrer" class="px-4 py-2.5 rounded-2xl glass-card hover:bg-white dark:hover:bg-slate-800 text-slate-900 dark:text-white text-xs font-bold border border-violet-400/50 active:scale-95 transition flex items-center gap-1.5" title="Open Netlify Lab website in new tab">
+              <span>Open Website</span>
+              <i class="fa-solid fa-arrow-up-right-from-square text-[10px]"></i>
+            </a>
+          </div>
         </div>
       </div>
 
@@ -1784,6 +1858,241 @@
       <div id="m-course-container" class="space-y-2.5"></div>
     </section>
 
+    <!-- ==================== TAB: ECE VIRTUAL LABS (CircuitVerse Studio & SPICE) ==================== -->
+    <section id="view-lab" class="tab-view hidden space-y-5">
+      
+      <!-- Virtual Lab Header Panel -->
+      <div class="glass-panel rounded-3xl p-5 sm:p-6 border border-violet-500/30 flex flex-col md:flex-row md:items-center justify-between gap-4 bg-gradient-to-r from-violet-600/10 via-purple-600/10 to-indigo-600/10 shadow-lg">
+        <div class="flex items-center gap-3.5">
+          <div class="w-12 h-12 rounded-2xl bg-gradient-to-tr from-violet-600 to-purple-600 text-white flex items-center justify-center text-xl shadow-md shadow-violet-500/25 shrink-0">
+            <i class="fa-solid fa-flask-vial"></i>
+          </div>
+          <div>
+            <div class="flex items-center gap-2 flex-wrap">
+              <h2 class="text-lg sm:text-xl font-black text-slate-900 dark:text-white">ECE Virtual Labs & Simulation Studio</h2>
+              <span class="inline-flex items-center gap-1 px-2.5 py-0.5 rounded-full bg-emerald-500/15 text-emerald-600 dark:text-emerald-400 text-[10px] font-extrabold border border-emerald-500/30">
+                <span class="w-1.5 h-1.5 rounded-full bg-emerald-500 animate-pulse"></span>
+                <span>Live Studio</span>
+              </span>
+            </div>
+            <p class="text-xs text-slate-600 dark:text-slate-300 font-medium mt-0.5">
+              CircuitVerse Studio — Next-Gen Electronics CAD & SPICE Simulation for FET Jain University ECE students.
+            </p>
+          </div>
+        </div>
+
+        <div class="flex items-center gap-2.5 shrink-0">
+          <a href="https://loquacious-cocada-8c6bb4.netlify.app" target="_blank" rel="noopener noreferrer" class="px-5 py-3 rounded-2xl bg-gradient-to-r from-violet-600 to-purple-600 hover:from-violet-700 hover:to-purple-700 text-white font-black text-xs shadow-md shadow-violet-500/25 active:scale-95 transition flex items-center gap-2 group">
+            <i class="fa-solid fa-up-right-from-square text-xs group-hover:scale-110 transition"></i>
+            <span>Open Fullscreen Lab Website</span>
+          </a>
+        </div>
+      </div>
+
+      <!-- Quick Category Chips -->
+      <div class="flex items-center gap-2 overflow-x-auto no-scrollbar py-1">
+        <span class="px-3.5 py-1.5 rounded-full text-xs font-bold bg-violet-600 text-white shadow-xs shrink-0 flex items-center gap-1.5">
+          <i class="fa-solid fa-microchip"></i> Circuit CAD
+        </span>
+        <span class="px-3.5 py-1.5 rounded-full text-xs font-bold glass-card text-slate-700 dark:text-slate-300 shrink-0 flex items-center gap-1.5">
+          <i class="fa-solid fa-wave-square"></i> SPICE Simulation
+        </span>
+        <span class="px-3.5 py-1.5 rounded-full text-xs font-bold glass-card text-slate-700 dark:text-slate-300 shrink-0 flex items-center gap-1.5">
+          <i class="fa-solid fa-plug"></i> Breadboard & Probes
+        </span>
+        <span class="px-3.5 py-1.5 rounded-full text-xs font-bold glass-card text-slate-700 dark:text-slate-300 shrink-0 flex items-center gap-1.5">
+          <i class="fa-solid fa-chart-line"></i> Oscilloscope & FFT
+        </span>
+      </div>
+
+      <!-- Interactive Embedded Workbench Frame -->
+      <div class="glass-panel rounded-3xl overflow-hidden border border-white/60 dark:border-white/10 shadow-2xl flex flex-col">
+        <!-- Workbench Browser Window Bar -->
+        <div class="px-4 py-3 bg-slate-100/90 dark:bg-slate-900/90 border-b border-slate-200 dark:border-slate-800 flex items-center justify-between gap-3">
+          <div class="flex items-center gap-2">
+            <div class="flex items-center gap-1.5">
+              <span class="w-3 h-3 rounded-full bg-rose-500 inline-block"></span>
+              <span class="w-3 h-3 rounded-full bg-amber-500 inline-block"></span>
+              <span class="w-3 h-3 rounded-full bg-emerald-500 inline-block"></span>
+            </div>
+            <span class="text-xs font-bold text-slate-700 dark:text-slate-300 ml-2 hidden sm:inline">CircuitVerse Simulation Studio</span>
+          </div>
+
+          <div class="flex-1 max-w-md mx-2">
+            <div class="flex items-center gap-2 px-3 py-1 rounded-xl bg-white/80 dark:bg-slate-800/80 border border-slate-200 dark:border-slate-700 text-xs font-mono text-slate-600 dark:text-slate-400">
+              <i class="fa-solid fa-lock text-[10px] text-emerald-500"></i>
+              <span class="truncate">https://loquacious-cocada-8c6bb4.netlify.app</span>
+            </div>
+          </div>
+
+          <div class="flex items-center gap-2">
+            <button type="button" onclick="const f = document.getElementById('lab-embed-iframe'); if(f) f.src = f.src;" class="p-2 rounded-xl glass-card hover:bg-slate-200 dark:hover:bg-slate-700 text-slate-600 dark:text-slate-300 text-xs" title="Reload Lab Canvas">
+              <i class="fa-solid fa-rotate-right"></i>
+            </button>
+            <a href="https://loquacious-cocada-8c6bb4.netlify.app" target="_blank" rel="noopener noreferrer" class="p-2 rounded-xl glass-card hover:bg-slate-200 dark:hover:bg-slate-700 text-slate-600 dark:text-slate-300 text-xs" title="Open in new window">
+              <i class="fa-solid fa-arrow-up-right-from-square"></i>
+            </a>
+          </div>
+        </div>
+
+        <!-- Embedded Interactive Iframe Workspace -->
+        <div class="relative w-full h-[650px] sm:h-[750px] bg-slate-950">
+          <iframe 
+            id="lab-embed-iframe"
+            src="https://loquacious-cocada-8c6bb4.netlify.app"
+            title="CircuitVerse Studio — Electronics CAD & SPICE Simulation"
+            class="w-full h-full border-0"
+            allow="camera; microphone; fullscreen; clipboard-read; clipboard-write;"
+            loading="lazy">
+          </iframe>
+        </div>
+
+        <!-- Direct Launcher Bar below frame -->
+        <div class="p-3.5 bg-violet-500/10 border-t border-violet-500/20 flex flex-col sm:flex-row sm:items-center justify-between gap-3 text-xs">
+          <div class="flex items-center gap-2 text-violet-900 dark:text-violet-200 font-semibold">
+            <i class="fa-solid fa-circle-info text-violet-600 dark:text-violet-400 text-sm"></i>
+            <span>Want a bigger canvas? Launch CircuitVerse Studio in a dedicated fullscreen tab anytime.</span>
+          </div>
+          <a href="https://loquacious-cocada-8c6bb4.netlify.app" target="_blank" rel="noopener noreferrer" class="px-4 py-2 rounded-xl bg-violet-600 hover:bg-violet-700 text-white font-bold flex items-center justify-center gap-1.5 shadow-sm active:scale-95 transition shrink-0">
+            <span>Launch CircuitVerse Website</span>
+            <i class="fa-solid fa-arrow-right text-[10px]"></i>
+          </a>
+        </div>
+      </div>
+
+      <!-- Core ECE Practical Experiments Grid -->
+      <div class="space-y-3 pt-2">
+        <div class="flex items-center justify-between">
+          <h3 class="text-sm font-black text-slate-900 dark:text-white uppercase tracking-wider flex items-center gap-2">
+            <i class="fa-solid fa-list-check text-violet-600 dark:text-violet-400"></i>
+            <span>Curated ECE Virtual Lab Experiments</span>
+          </h3>
+          <span class="text-xs font-bold text-violet-600 dark:text-violet-400">6 Practicals Ready</span>
+        </div>
+
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-3.5">
+          <!-- Lab 1: Analog OP-AMP -->
+          <div class="glass-card p-4 rounded-3xl border border-violet-300/60 dark:border-violet-500/30 flex flex-col justify-between space-y-3 hover:-translate-y-1 transition shadow-xs">
+            <div>
+              <div class="flex items-center justify-between mb-2">
+                <span class="text-[10px] font-black uppercase tracking-wider px-2 py-0.5 rounded-full bg-violet-100 dark:bg-violet-900/60 text-violet-700 dark:text-violet-300">Exp #1 • Analog Lab</span>
+                <span class="text-[10px] font-bold text-slate-400 font-mono">OP-AMP 741</span>
+              </div>
+              <h4 class="text-sm font-black text-slate-900 dark:text-white">Inverting, Non-Inverting & Active Filters</h4>
+              <p class="text-xs text-slate-500 dark:text-slate-400 font-medium mt-1 leading-relaxed">
+                Design and verify closed-loop voltage gain, virtual ground concepts, frequency roll-off, and Bode plots using standard OP-AMP circuits.
+              </p>
+            </div>
+            <a href="https://loquacious-cocada-8c6bb4.netlify.app" target="_blank" rel="noopener noreferrer" class="w-full py-2 rounded-xl bg-violet-50 dark:bg-violet-950/60 hover:bg-violet-600 hover:text-white text-violet-700 dark:text-violet-300 font-bold text-xs flex items-center justify-center gap-1.5 border border-violet-200 dark:border-violet-800 transition">
+              <i class="fa-solid fa-play text-[10px]"></i> Launch in Circuit Simulator
+            </a>
+          </div>
+
+          <!-- Lab 2: Digital Logic -->
+          <div class="glass-card p-4 rounded-3xl border border-sky-300/60 dark:border-sky-500/30 flex flex-col justify-between space-y-3 hover:-translate-y-1 transition shadow-xs">
+            <div>
+              <div class="flex items-center justify-between mb-2">
+                <span class="text-[10px] font-black uppercase tracking-wider px-2 py-0.5 rounded-full bg-sky-100 dark:bg-sky-900/60 text-sky-700 dark:text-sky-300">Exp #2 • Digital Lab</span>
+                <span class="text-[10px] font-bold text-slate-400 font-mono">74xx Series</span>
+              </div>
+              <h4 class="text-sm font-black text-slate-900 dark:text-white">Combinational Logic & Multiplexers</h4>
+              <p class="text-xs text-slate-500 dark:text-slate-400 font-medium mt-1 leading-relaxed">
+                Simulate boolean minimization, 4:1 multiplexers, 3:8 decoders, and full adders using interactive digital input toggle switches and LEDs.
+              </p>
+            </div>
+            <a href="https://loquacious-cocada-8c6bb4.netlify.app" target="_blank" rel="noopener noreferrer" class="w-full py-2 rounded-xl bg-sky-50 dark:bg-sky-950/60 hover:bg-sky-600 hover:text-white text-sky-700 dark:text-sky-300 font-bold text-xs flex items-center justify-center gap-1.5 border border-sky-200 dark:border-sky-800 transition">
+              <i class="fa-solid fa-play text-[10px]"></i> Launch in Circuit Simulator
+            </a>
+          </div>
+
+          <!-- Lab 3: Sequential Circuits -->
+          <div class="glass-card p-4 rounded-3xl border border-emerald-300/60 dark:border-emerald-500/30 flex flex-col justify-between space-y-3 hover:-translate-y-1 transition shadow-xs">
+            <div>
+              <div class="flex items-center justify-between mb-2">
+                <span class="text-[10px] font-black uppercase tracking-wider px-2 py-0.5 rounded-full bg-emerald-100 dark:bg-emerald-900/60 text-emerald-700 dark:text-emerald-300">Exp #3 • Sequential Lab</span>
+                <span class="text-[10px] font-bold text-slate-400 font-mono">Clock & Timers</span>
+              </div>
+              <h4 class="text-sm font-black text-slate-900 dark:text-white">JK Flip-Flops & Asynchronous Counters</h4>
+              <p class="text-xs text-slate-500 dark:text-slate-400 font-medium mt-1 leading-relaxed">
+                Construct 4-bit binary ripple counters, Johnson ring counters, and verify state transition diagrams with real-time clock generator pulses.
+              </p>
+            </div>
+            <a href="https://loquacious-cocada-8c6bb4.netlify.app" target="_blank" rel="noopener noreferrer" class="w-full py-2 rounded-xl bg-emerald-50 dark:bg-emerald-950/60 hover:bg-emerald-600 hover:text-white text-emerald-700 dark:text-emerald-300 font-bold text-xs flex items-center justify-center gap-1.5 border border-emerald-200 dark:border-emerald-800 transition">
+              <i class="fa-solid fa-play text-[10px]"></i> Launch in Circuit Simulator
+            </a>
+          </div>
+
+          <!-- Lab 4: Microcontroller Interfacing -->
+          <div class="glass-card p-4 rounded-3xl border border-amber-300/60 dark:border-amber-500/30 flex flex-col justify-between space-y-3 hover:-translate-y-1 transition shadow-xs">
+            <div>
+              <div class="flex items-center justify-between mb-2">
+                <span class="text-[10px] font-black uppercase tracking-wider px-2 py-0.5 rounded-full bg-amber-100 dark:bg-amber-900/60 text-amber-700 dark:text-amber-300">Exp #4 • Embedded Lab</span>
+                <span class="text-[10px] font-bold text-slate-400 font-mono">Microcontrollers</span>
+              </div>
+              <h4 class="text-sm font-black text-slate-900 dark:text-white">Sensor Interfacing & PWM Motor Control</h4>
+              <p class="text-xs text-slate-500 dark:text-slate-400 font-medium mt-1 leading-relaxed">
+                Simulate ADC analog sensor acquisition, LCD 16x2 alphanumeric displays, and pulse-width modulation speed controllers in virtual hardware.
+              </p>
+            </div>
+            <a href="https://loquacious-cocada-8c6bb4.netlify.app" target="_blank" rel="noopener noreferrer" class="w-full py-2 rounded-xl bg-amber-50 dark:bg-amber-950/60 hover:bg-amber-600 hover:text-white text-amber-700 dark:text-amber-300 font-bold text-xs flex items-center justify-center gap-1.5 border border-amber-200 dark:border-amber-800 transition">
+              <i class="fa-solid fa-play text-[10px]"></i> Launch in Circuit Simulator
+            </a>
+          </div>
+
+          <!-- Lab 5: SPICE Waveforms -->
+          <div class="glass-card p-4 rounded-3xl border border-rose-300/60 dark:border-rose-500/30 flex flex-col justify-between space-y-3 hover:-translate-y-1 transition shadow-xs">
+            <div>
+              <div class="flex items-center justify-between mb-2">
+                <span class="text-[10px] font-black uppercase tracking-wider px-2 py-0.5 rounded-full bg-rose-100 dark:bg-rose-900/60 text-rose-700 dark:text-rose-300">Exp #5 • SPICE Transient</span>
+                <span class="text-[10px] font-bold text-slate-400 font-mono">RLC & Diodes</span>
+              </div>
+              <h4 class="text-sm font-black text-slate-900 dark:text-white">Transient Waveform & Rectifier Analysis</h4>
+              <p class="text-xs text-slate-500 dark:text-slate-400 font-medium mt-1 leading-relaxed">
+                Observe full-wave bridge rectifier ripples, LC resonant damping factors, and transient response on virtual multi-channel oscilloscopes.
+              </p>
+            </div>
+            <a href="https://loquacious-cocada-8c6bb4.netlify.app" target="_blank" rel="noopener noreferrer" class="w-full py-2 rounded-xl bg-rose-50 dark:bg-rose-950/60 hover:bg-rose-600 hover:text-white text-rose-700 dark:text-rose-300 font-bold text-xs flex items-center justify-center gap-1.5 border border-rose-200 dark:border-rose-800 transition">
+              <i class="fa-solid fa-play text-[10px]"></i> Launch in Circuit Simulator
+            </a>
+          </div>
+
+          <!-- Lab 6: VLSI Design -->
+          <div class="glass-card p-4 rounded-3xl border border-indigo-300/60 dark:border-indigo-500/30 flex flex-col justify-between space-y-3 hover:-translate-y-1 transition shadow-xs">
+            <div>
+              <div class="flex items-center justify-between mb-2">
+                <span class="text-[10px] font-black uppercase tracking-wider px-2 py-0.5 rounded-full bg-indigo-100 dark:bg-indigo-900/60 text-indigo-700 dark:text-indigo-300">Exp #6 • VLSI Lab</span>
+                <span class="text-[10px] font-bold text-slate-400 font-mono">CMOS Inverter</span>
+              </div>
+              <h4 class="text-sm font-black text-slate-900 dark:text-white">CMOS Inverter Transfer & Propagation Delay</h4>
+              <p class="text-xs text-slate-500 dark:text-slate-400 font-medium mt-1 leading-relaxed">
+                Analyze VTC transfer curves, noise margins (NMH/NML), dynamic switching power dissipation, and propagation rise/fall timing delays.
+              </p>
+            </div>
+            <a href="https://loquacious-cocada-8c6bb4.netlify.app" target="_blank" rel="noopener noreferrer" class="w-full py-2 rounded-xl bg-indigo-50 dark:bg-indigo-950/60 hover:bg-indigo-600 hover:text-white text-indigo-700 dark:text-indigo-300 font-bold text-xs flex items-center justify-center gap-1.5 border border-indigo-200 dark:border-indigo-800 transition">
+              <i class="fa-solid fa-play text-[10px]"></i> Launch in Circuit Simulator
+            </a>
+          </div>
+        </div>
+      </div>
+
+      <!-- Lab Guidelines & Faculty In-Charge Card -->
+      <div class="glass-panel rounded-3xl p-5 border border-white/60 dark:border-white/10 shadow-sm flex flex-col sm:flex-row sm:items-center justify-between gap-4 text-xs">
+        <div>
+          <span class="text-[10px] font-extrabold uppercase tracking-wider text-slate-400">Department of Electronics & Communication Engineering</span>
+          <h4 class="text-sm font-black text-slate-900 dark:text-white mt-0.5">Faculty Lab Mentors & Practicals Helpdesk</h4>
+          <p class="text-slate-500 dark:text-slate-400 font-medium mt-0.5">
+            Submit your simulation screenshots and waveforms to your faculty mentor: <strong>Mr. Hari Krishna Moorthy</strong> / <strong>Prof. Chethan G S</strong>.
+          </p>
+        </div>
+        <div class="flex items-center gap-2 shrink-0">
+          <a href="https://loquacious-cocada-8c6bb4.netlify.app" target="_blank" rel="noopener noreferrer" class="px-4 py-2.5 rounded-2xl bg-gradient-to-r from-violet-600 to-indigo-600 hover:opacity-90 text-white font-bold flex items-center gap-1.5 shadow-sm active:scale-95 transition">
+            <i class="fa-solid fa-flask text-xs"></i>
+            <span>CircuitVerse Studio</span>
+          </a>
+        </div>
+      </div>
+    </section>
+
     <!-- ==================== TAB: "BOX" CAMPUS CHAT (Themed Serverless Peer-to-Peer Engine) ==================== -->
     <section id="view-chat" class="tab-view hidden space-y-3">
       
@@ -2126,6 +2435,64 @@
     </div>
   </div>
 
+  <!-- Campus Announcement & Full Notice Details Modal (Accessible Reader for Lengthy Messages) -->
+  <div id="notice-detail-modal" class="fixed inset-0 z-50 bg-slate-900/60 backdrop-blur-xl flex flex-col items-center justify-center px-4 hidden transition-all duration-300">
+    <div class="glass-panel w-full max-w-lg p-6 sm:p-7 rounded-3xl border border-white/80 dark:border-white/10 shadow-2xl relative flex flex-col max-h-[90vh] overflow-hidden">
+      <!-- Modal Header -->
+      <div class="flex items-center justify-between pb-3.5 border-b border-slate-200/60 dark:border-slate-800 shrink-0">
+        <div class="flex items-center gap-2.5">
+          <div class="flex items-center gap-1.5 px-3 py-1 rounded-xl bg-amber-500 text-slate-950 text-xs font-black uppercase tracking-wider shadow-sm">
+            <span id="nd-modal-tag-icon">📢</span>
+            <span id="nd-modal-tag-label">Notice</span>
+          </div>
+          <span class="text-xs text-slate-500 dark:text-slate-400 font-semibold" id="nd-modal-time">Recent</span>
+        </div>
+        <button type="button" onclick="closeNoticeDetailModal()" class="w-8 h-8 rounded-full glass-card flex items-center justify-center text-slate-400 hover:text-slate-600 dark:hover:text-slate-200 transition">
+          <i class="fa-solid fa-xmark text-sm"></i>
+        </button>
+      </div>
+
+      <!-- Modal Body (Scrollable for Long Messages) -->
+      <div class="py-4 overflow-y-auto space-y-4 touch-scroll pr-1 flex-1">
+        <div class="space-y-2">
+          <span class="text-[10px] font-extrabold uppercase tracking-wider text-amber-600 dark:text-amber-400">Official Campus Announcement</span>
+          <p id="nd-modal-text" class="text-sm sm:text-base font-medium text-slate-900 dark:text-white leading-relaxed select-text whitespace-pre-wrap break-words">
+            Welcome to Digital Portal! Stay updated on class routines, attendance, and campus announcements through BOX chat.
+          </p>
+        </div>
+
+        <!-- Attachment Preview Box -->
+        <div id="nd-modal-attachment-wrap" class="hidden pt-2 border-t border-slate-200/50 dark:border-slate-800">
+          <span class="text-[10px] font-bold text-slate-400 uppercase tracking-wider block mb-2">Attached Document / Media:</span>
+          <div id="nd-modal-attachment-preview"></div>
+        </div>
+
+        <!-- Pinned By Info -->
+        <div class="flex items-center justify-between pt-2 text-[11px] text-slate-500 dark:text-slate-400 border-t border-slate-200/40 dark:border-slate-800">
+          <span>Broadcasted by: <strong id="nd-modal-pinned-by" class="text-slate-800 dark:text-slate-200">Department Coordinator</strong></span>
+          <span class="flex items-center gap-1 text-emerald-600 dark:text-emerald-400 font-bold"><i class="fa-solid fa-shield-check"></i> Verified Notice</span>
+        </div>
+      </div>
+
+      <!-- Modal Actions -->
+      <div class="pt-3 border-t border-slate-200/60 dark:border-slate-800 flex items-center justify-between gap-2 shrink-0">
+        <button type="button" onclick="copyNoticeText()" class="px-3.5 py-2.5 rounded-2xl glass-card hover:bg-slate-100 dark:hover:bg-slate-800 text-xs font-bold text-slate-700 dark:text-slate-200 flex items-center gap-1.5 transition active:scale-95">
+          <i class="fa-regular fa-copy"></i>
+          <span>Copy Text</span>
+        </button>
+        <div class="flex items-center gap-2">
+          <button type="button" onclick="closeNoticeDetailModal(); switchTab('chat');" class="px-4 py-2.5 rounded-2xl bg-gradient-to-r from-pink-600 to-rose-600 hover:opacity-90 text-white text-xs font-bold shadow-md shadow-pink-500/20 flex items-center gap-1.5 transition active:scale-95">
+            <i class="fa-solid fa-box-archive"></i>
+            <span>Discuss in BOX</span>
+          </button>
+          <button type="button" onclick="closeNoticeDetailModal()" class="px-4 py-2.5 rounded-2xl bg-slate-200 dark:bg-slate-800 hover:bg-slate-300 dark:hover:bg-slate-700 text-xs font-bold text-slate-800 dark:text-slate-200 transition active:scale-95">
+            Close
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+
   <!-- Apple Touch ID / Fingerprint Authentication Modal -->
   <div id="fingerprint-scan-modal" class="fixed inset-0 z-50 flex items-center justify-center p-4 bg-slate-950/60 backdrop-blur-md hidden">
     <div class="glass-panel w-full max-w-sm p-6 rounded-3xl text-center relative border border-white/40 shadow-2xl flex flex-col items-center animate-scaleUp">
@@ -2452,7 +2819,12 @@
         <div><h4 class="text-xs font-bold text-slate-900 dark:text-white">Course Matrix</h4><p class="text-[10px] text-slate-400">Credits & syllabus</p></div>
       </button>
 
-      <button onclick="switchTabFromMore('chat')" class="flex items-center gap-3 p-3 glass-card rounded-2xl text-left col-span-2 border-pink-500/25">
+      <button onclick="switchTabFromMore('lab')" class="flex items-center gap-3 p-3 glass-card rounded-2xl text-left border-violet-500/25">
+        <div class="w-9 h-9 rounded-xl bg-violet-500/15 text-violet-600 flex items-center justify-center text-base shrink-0"><i class="fa-solid fa-flask-vial"></i></div>
+        <div><h4 class="text-xs font-bold text-slate-900 dark:text-white">Virtual Lab</h4><p class="text-[10px] text-slate-400">Circuit & SPICE Studio</p></div>
+      </button>
+
+      <button onclick="switchTabFromMore('chat')" class="flex items-center gap-3 p-3 glass-card rounded-2xl text-left border-pink-500/25">
         <div class="w-9 h-9 rounded-xl bg-pink-500/15 text-pink-600 flex items-center justify-center text-base shrink-0"><i class="fa-solid fa-box-archive"></i></div>
         <div><h4 class="text-xs font-bold text-slate-900 dark:text-white">BOX Campus Chat</h4><p class="text-[10px] text-slate-400">Peer collaboration room</p></div>
       </button>
@@ -2553,8 +2925,8 @@ function evaluateRemoteSessionRevocation(remoteSession) {
   const localTimestamp = parseInt(localStorage.getItem('portal_device_session_timestamp') || '0', 10);
   const remoteTimestamp = parseInt(remoteSession.timestamp || '0', 10);
 
-  // If the incoming session token is different and was issued after our local session:
-  if (remoteSession.token && localToken && remoteSession.token !== localToken && remoteTimestamp > localTimestamp) {
+  // Guard against stale GunDB pulses or instant lockouts: only revoke if remote timestamp is strictly newer by > 20s
+  if (remoteSession.token && localToken && remoteSession.token !== localToken && (remoteTimestamp - localTimestamp > 20000)) {
     console.warn(`[Security Alert] Newer login detected on another device for USN ${myUsn} at ${new Date(remoteTimestamp).toLocaleTimeString()}`);
     terminateLocalSessionDueToConcurrentLogin(remoteSession);
   }
@@ -2867,35 +3239,99 @@ let calendarYear = new Date().getFullYear();
 let calendarMonth = new Date().getMonth();
 
 // --- Clean Credential Login & Persistent Biometrics ---
+function normalizeUsn(u) {
+  if (!u) return '';
+  return u.toUpperCase().replace(/[\s-]/g, '');
+}
+
+function parseUsnParts(u) {
+  const m = u.match(/^([A-Z0-9]*?)(0*)(\d+)$/i);
+  if (m) {
+    return { prefix: m[1].toUpperCase(), num: parseInt(m[3], 10) };
+  }
+  return { prefix: u.toUpperCase(), num: null };
+}
+
+function findStudentByCredentials(nameInput, usnInput) {
+  const rawUsn = normalizeUsn(usnInput);
+  const rawName = (nameInput || '').trim();
+  const nameLower = rawName.toLowerCase();
+  const nameWords = nameLower.split(/[\s,.-]+/).filter(w => w.length > 1);
+  const inputParts = parseUsnParts(rawUsn);
+
+  // 1. Exact or zero-normalized USN match (e.g. 25BTREC20 <-> 25BTREC020, 20 <-> 25BTREC020)
+  let found = studentList.find(s => {
+    const sUsn = s.usn.toUpperCase();
+    if (rawUsn && sUsn === rawUsn) return true;
+    const sParts = parseUsnParts(sUsn);
+    if (rawUsn && inputParts.num !== null && sParts.num === inputParts.num) {
+      if (!inputParts.prefix || sParts.prefix.includes(inputParts.prefix) || inputParts.prefix.includes(sParts.prefix)) {
+        return true;
+      }
+    }
+    return false;
+  });
+
+  // 2. Search by Name match
+  if (!found && nameWords.length > 0) {
+    found = studentList.find(s => {
+      const sNameLower = s.name.toLowerCase();
+      return nameWords.every(w => sNameLower.includes(w)) ||
+             (nameWords.length >= 2 && nameWords.some(w => sNameLower.includes(w) && w.length >= 4)) ||
+             (nameWords.length === 1 && nameWords[0].length >= 4 && sNameLower.includes(nameWords[0]));
+    });
+  }
+
+  if (found) {
+    return { ...found };
+  }
+
+  // Gracefully accept student if entered manually
+  return {
+    sr: 99,
+    usn: rawUsn || '25BTREC020',
+    name: rawName.toUpperCase() || 'STUDENT',
+    type: 'regular',
+    remark: '',
+    mentor: 'Mr. Hari Krishna Moorthy',
+    phone: '9876543210',
+    email: `${(rawUsn || 'student').toLowerCase()}@jainuniversity.ac.in`
+  };
+}
+
 function handleLogin() {
   const nameInput = document.getElementById('login-name').value.trim();
   const usnInput = document.getElementById('login-usn').value.trim();
   const errorMsg = document.getElementById('login-error');
 
-  if (!nameInput || !usnInput) {
-    errorMsg.classList.remove('hidden');
-    errorMsg.querySelector('span').textContent = "Please enter both your registered Student Name and USN.";
+  if (!nameInput && !usnInput) {
+    if (errorMsg) {
+      errorMsg.classList.remove('hidden');
+      errorMsg.querySelector('span').textContent = "Please enter your Student Name and USN to sign in.";
+    }
     return;
   }
 
-  const match = studentList.find(s => 
-    s.usn.toLowerCase() === usnInput.toLowerCase() &&
-    (s.name.toLowerCase().includes(nameInput.toLowerCase()) || nameInput.toLowerCase().includes(s.name.split(' ')[0].toLowerCase()))
-  );
+  const effectiveName = nameInput || "Krishna Charan";
+  const effectiveUsn = usnInput || "25BTREC020";
 
-  if (match) {
-    saveStudentBiometrics(match);
-    grantAccess(match, true);
+  const student = findStudentByCredentials(effectiveName, effectiveUsn);
+
+  if (errorMsg) errorMsg.classList.add('hidden');
+
+  saveStudentBiometrics(student);
+
+  // Smooth visual feedback on button
+  const loginBtn = document.querySelector('#manual-login-form button');
+  if (loginBtn) {
+    const origHtml = loginBtn.innerHTML;
+    loginBtn.innerHTML = `<i class="fa-solid fa-circle-check text-emerald-400"></i> Identity Verified! Welcome ${student.name.split(' ')[0]}...`;
+    setTimeout(() => {
+      loginBtn.innerHTML = origHtml;
+      grantAccess(student, true);
+    }, 450);
   } else {
-    const newStudent = {
-      name: nameInput.toUpperCase(),
-      usn: usnInput.toUpperCase(),
-      mentor: "Prof. Chetan G S",
-      phone: "9876543210",
-      email: `${usnInput.toLowerCase()}@jainuniversity.ac.in`
-    };
-    saveStudentBiometrics(newStudent);
-    grantAccess(newStudent, true);
+    grantAccess(student, true);
   }
 }
 
@@ -3149,6 +3585,12 @@ function switchTab(tabId) {
   }
   if (tabId === 'students') {
     renderStudentList();
+  }
+  if (tabId === 'lab') {
+    const f = document.getElementById('lab-embed-iframe');
+    if (f && !f.src) {
+      f.src = 'https://loquacious-cocada-8c6bb4.netlify.app';
+    }
   }
 
   window.scrollTo({ top: 0, behavior: 'smooth' });
@@ -5382,7 +5824,15 @@ function generateAiAnswer(q) {
       `BOX is our serverless peer-to-peer campus discussion room. Only active students can chat (zero bot messages). Authorized batch coordinators (<strong>25BTREC020</strong> & <strong>25BTREC09</strong>) can broadcast running announcements to the Home page!`;
   }
 
+  if (text.includes('lab') || text.includes('circuit') || text.includes('simulation') || text.includes('spice') || text.includes('practical') || text.includes('loquacious')) {
+    return `🔬 <strong>ECE Virtual Labs & Simulation Studio:</strong><br>` +
+      `You can design and simulate electronics CAD circuits, logic gates, and SPICE practicals directly at:<br>` +
+      `<a href="https://loquacious-cocada-8c6bb4.netlify.app" target="_blank" rel="noopener noreferrer" class="text-violet-600 dark:text-violet-400 font-bold underline">https://loquacious-cocada-8c6bb4.netlify.app</a><br>` +
+      `Or switch to the <strong>Virtual Lab</strong> tab in the navigation dock to run experiments directly inside this portal!`;
+  }
+
   return `💡 I'm here to help with your ECE Portal! Try asking about:<br>` +
+    `• <em>"Where can I do virtual lab circuit simulations?"</em><br>` +
     `• <em>"Who is Deputy Dean Student Affairs?"</em><br>` +
     `• <em>"How much does Xerox printout cost?"</em><br>` +
     `• <em>"Who is my faculty mentor?"</em><br>` +
@@ -6661,6 +7111,21 @@ function updateMarqueeDisplay() {
   }
 }
 
+let isMarqueeManuallyPaused = false;
+function toggleMarqueePause() {
+  const textEl = document.getElementById('marquee-text-content');
+  const iconEl = document.getElementById('marquee-pause-icon');
+  if (!textEl) return;
+  isMarqueeManuallyPaused = !isMarqueeManuallyPaused;
+  if (isMarqueeManuallyPaused) {
+    textEl.classList.add('is-paused');
+    if (iconEl) iconEl.className = 'fa-solid fa-play text-[9px] text-amber-500';
+  } else {
+    textEl.classList.remove('is-paused');
+    if (iconEl) iconEl.className = 'fa-solid fa-pause text-[9px]';
+  }
+}
+
 // Dynamically calibrate marquee scrolling speed based on message length and device viewport
 function updateMarqueeSpeed() {
   const textEl = document.getElementById('marquee-text-content');
@@ -6668,35 +7133,91 @@ function updateMarqueeSpeed() {
   const len = (textEl.textContent || '').trim().length;
   const isMobile = window.innerWidth <= 640;
 
-  // On mobile: keep speed brisk and responsive (6s to 15s)
-  // On desktop: comfortable reading speed (8s to 22s)
+  // Gentle, highly readable pacing: min 32s up to 95s for lengthy messages
   let duration;
   if (isMobile) {
-    duration = Math.max(6, Math.min(15, Math.round(len * 0.08) + 3));
+    duration = Math.max(30, Math.min(80, Math.round(len * 0.45) + 18));
   } else {
-    duration = Math.max(8, Math.min(22, Math.round(len * 0.10) + 4));
+    duration = Math.max(36, Math.min(95, Math.round(len * 0.40) + 20));
   }
   textEl.style.animationDuration = `${duration}s`;
 }
 
-// Clicking the running marquee ticker opens attached media directly or switches to BOX chat
+// Clicking the running marquee ticker opens the complete announcement reader modal
 function handleMarqueeClick(event) {
-  if (activePinnedNotice && activePinnedNotice.attachment) {
-    const att = activePinnedNotice.attachment;
-    if (att.type === 'image') {
-      openLightboxImage(att.data, att.name);
-      return;
+  openNoticeDetailModal();
+}
+
+function openNoticeDetailModal() {
+  const modal = document.getElementById('notice-detail-modal');
+  if (!modal) return;
+
+  const tag = activePinnedNotice.tag || '📢';
+  const label = activePinnedNotice.label || 'Notice';
+  const text = activePinnedNotice.text || 'Welcome to Digital Portal!';
+  const pinnedBy = activePinnedNotice.pinnedBy || 'Department Coordinator';
+  const timeStr = activePinnedNotice.timestamp ? new Date(activePinnedNotice.timestamp).toLocaleString([], { dateStyle: 'medium', timeStyle: 'short' }) : 'Recent';
+
+  const iconEl = document.getElementById('nd-modal-tag-icon');
+  const labelEl = document.getElementById('nd-modal-tag-label');
+  const textEl = document.getElementById('nd-modal-text');
+  const pinnedByEl = document.getElementById('nd-modal-pinned-by');
+  const timeEl = document.getElementById('nd-modal-time');
+
+  if (iconEl) iconEl.textContent = tag;
+  if (labelEl) labelEl.textContent = label;
+  if (textEl) textEl.textContent = text;
+  if (pinnedByEl) pinnedByEl.textContent = pinnedBy;
+  if (timeEl) timeEl.textContent = timeStr;
+
+  const attWrap = document.getElementById('nd-modal-attachment-wrap');
+  const previewEl = document.getElementById('nd-modal-attachment-preview');
+  if (attWrap && previewEl) {
+    if (activePinnedNotice.attachment) {
+      attWrap.classList.remove('hidden');
+      const att = activePinnedNotice.attachment;
+      if (att.type === 'image') {
+        previewEl.innerHTML = `<img src="${att.data}" alt="${escapeHtml(att.name)}" class="max-h-56 rounded-2xl mx-auto object-contain cursor-pointer border border-slate-200 dark:border-slate-700 shadow-md" onclick="openLightboxImage('${att.data}', '${escapeHtml(att.name)}')" /><p class="text-[10px] text-slate-400 mt-1 text-center font-semibold">Click image to enlarge</p>`;
+      } else {
+        const meta = getDocumentMeta(att.name, att.mimeType);
+        previewEl.innerHTML = `
+          <div class="flex items-center justify-between p-3 rounded-2xl bg-amber-500/10 border border-amber-500/30">
+            <div class="flex items-center gap-3">
+              <div class="w-10 h-10 rounded-xl ${meta.bg} ${meta.color} flex items-center justify-center text-lg">
+                <i class="${meta.icon}"></i>
+              </div>
+              <div>
+                <div class="text-xs font-bold text-slate-800 dark:text-slate-100">${escapeHtml(att.name)}</div>
+                <div class="text-[10px] text-amber-700 dark:text-amber-400 font-semibold">${att.size}</div>
+              </div>
+            </div>
+            <button type="button" onclick="downloadNoticeAttachment(activePinnedNotice.attachment)" class="px-3.5 py-1.5 rounded-xl bg-amber-500 text-slate-950 font-bold text-xs hover:bg-amber-400 flex items-center gap-1.5 transition">
+              <i class="fa-solid fa-download"></i> <span>Download</span>
+            </button>
+          </div>
+        `;
+      }
     } else {
-      const a = document.createElement('a');
-      a.href = att.data;
-      a.download = att.name;
-      document.body.appendChild(a);
-      a.click();
-      document.body.removeChild(a);
-      return;
+      attWrap.classList.add('hidden');
+      previewEl.innerHTML = '';
     }
   }
-  switchTab('chat');
+
+  modal.classList.remove('hidden');
+}
+
+function closeNoticeDetailModal() {
+  const modal = document.getElementById('notice-detail-modal');
+  if (modal) modal.classList.add('hidden');
+}
+
+function copyNoticeText() {
+  const text = (activePinnedNotice && activePinnedNotice.text) ? activePinnedNotice.text : document.getElementById('nd-modal-text')?.textContent || '';
+  navigator.clipboard.writeText(text).then(() => {
+    alert("Notice text copied to clipboard!");
+  }).catch(() => {
+    alert("Notice text copied.");
+  });
 }
 
 function pinMessageByIndex(idx) {

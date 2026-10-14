@@ -1238,6 +1238,21 @@ function updateMarqueeDisplay() {
   }
 }
 
+let isMarqueeManuallyPaused = false;
+function toggleMarqueePause() {
+  const textEl = document.getElementById('marquee-text-content');
+  const iconEl = document.getElementById('marquee-pause-icon');
+  if (!textEl) return;
+  isMarqueeManuallyPaused = !isMarqueeManuallyPaused;
+  if (isMarqueeManuallyPaused) {
+    textEl.classList.add('is-paused');
+    if (iconEl) iconEl.className = 'fa-solid fa-play text-[9px] text-amber-500';
+  } else {
+    textEl.classList.remove('is-paused');
+    if (iconEl) iconEl.className = 'fa-solid fa-pause text-[9px]';
+  }
+}
+
 // Dynamically calibrate marquee scrolling speed based on message length and device viewport
 function updateMarqueeSpeed() {
   const textEl = document.getElementById('marquee-text-content');
@@ -1245,35 +1260,91 @@ function updateMarqueeSpeed() {
   const len = (textEl.textContent || '').trim().length;
   const isMobile = window.innerWidth <= 640;
 
-  // On mobile: keep speed brisk and responsive (6s to 15s)
-  // On desktop: comfortable reading speed (8s to 22s)
+  // Gentle, highly readable pacing: min 32s up to 95s for lengthy messages
   let duration;
   if (isMobile) {
-    duration = Math.max(6, Math.min(15, Math.round(len * 0.08) + 3));
+    duration = Math.max(30, Math.min(80, Math.round(len * 0.45) + 18));
   } else {
-    duration = Math.max(8, Math.min(22, Math.round(len * 0.10) + 4));
+    duration = Math.max(36, Math.min(95, Math.round(len * 0.40) + 20));
   }
   textEl.style.animationDuration = `${duration}s`;
 }
 
-// Clicking the running marquee ticker opens attached media directly or switches to BOX chat
+// Clicking the running marquee ticker opens the complete announcement reader modal
 function handleMarqueeClick(event) {
-  if (activePinnedNotice && activePinnedNotice.attachment) {
-    const att = activePinnedNotice.attachment;
-    if (att.type === 'image') {
-      openLightboxImage(att.data, att.name);
-      return;
+  openNoticeDetailModal();
+}
+
+function openNoticeDetailModal() {
+  const modal = document.getElementById('notice-detail-modal');
+  if (!modal) return;
+
+  const tag = activePinnedNotice.tag || '📢';
+  const label = activePinnedNotice.label || 'Notice';
+  const text = activePinnedNotice.text || 'Welcome to Digital Portal!';
+  const pinnedBy = activePinnedNotice.pinnedBy || 'Department Coordinator';
+  const timeStr = activePinnedNotice.timestamp ? new Date(activePinnedNotice.timestamp).toLocaleString([], { dateStyle: 'medium', timeStyle: 'short' }) : 'Recent';
+
+  const iconEl = document.getElementById('nd-modal-tag-icon');
+  const labelEl = document.getElementById('nd-modal-tag-label');
+  const textEl = document.getElementById('nd-modal-text');
+  const pinnedByEl = document.getElementById('nd-modal-pinned-by');
+  const timeEl = document.getElementById('nd-modal-time');
+
+  if (iconEl) iconEl.textContent = tag;
+  if (labelEl) labelEl.textContent = label;
+  if (textEl) textEl.textContent = text;
+  if (pinnedByEl) pinnedByEl.textContent = pinnedBy;
+  if (timeEl) timeEl.textContent = timeStr;
+
+  const attWrap = document.getElementById('nd-modal-attachment-wrap');
+  const previewEl = document.getElementById('nd-modal-attachment-preview');
+  if (attWrap && previewEl) {
+    if (activePinnedNotice.attachment) {
+      attWrap.classList.remove('hidden');
+      const att = activePinnedNotice.attachment;
+      if (att.type === 'image') {
+        previewEl.innerHTML = `<img src="${att.data}" alt="${escapeHtml(att.name)}" class="max-h-56 rounded-2xl mx-auto object-contain cursor-pointer border border-slate-200 dark:border-slate-700 shadow-md" onclick="openLightboxImage('${att.data}', '${escapeHtml(att.name)}')" /><p class="text-[10px] text-slate-400 mt-1 text-center font-semibold">Click image to enlarge</p>`;
+      } else {
+        const meta = getDocumentMeta(att.name, att.mimeType);
+        previewEl.innerHTML = `
+          <div class="flex items-center justify-between p-3 rounded-2xl bg-amber-500/10 border border-amber-500/30">
+            <div class="flex items-center gap-3">
+              <div class="w-10 h-10 rounded-xl ${meta.bg} ${meta.color} flex items-center justify-center text-lg">
+                <i class="${meta.icon}"></i>
+              </div>
+              <div>
+                <div class="text-xs font-bold text-slate-800 dark:text-slate-100">${escapeHtml(att.name)}</div>
+                <div class="text-[10px] text-amber-700 dark:text-amber-400 font-semibold">${att.size}</div>
+              </div>
+            </div>
+            <button type="button" onclick="downloadNoticeAttachment(activePinnedNotice.attachment)" class="px-3.5 py-1.5 rounded-xl bg-amber-500 text-slate-950 font-bold text-xs hover:bg-amber-400 flex items-center gap-1.5 transition">
+              <i class="fa-solid fa-download"></i> <span>Download</span>
+            </button>
+          </div>
+        `;
+      }
     } else {
-      const a = document.createElement('a');
-      a.href = att.data;
-      a.download = att.name;
-      document.body.appendChild(a);
-      a.click();
-      document.body.removeChild(a);
-      return;
+      attWrap.classList.add('hidden');
+      previewEl.innerHTML = '';
     }
   }
-  switchTab('chat');
+
+  modal.classList.remove('hidden');
+}
+
+function closeNoticeDetailModal() {
+  const modal = document.getElementById('notice-detail-modal');
+  if (modal) modal.classList.add('hidden');
+}
+
+function copyNoticeText() {
+  const text = (activePinnedNotice && activePinnedNotice.text) ? activePinnedNotice.text : document.getElementById('nd-modal-text')?.textContent || '';
+  navigator.clipboard.writeText(text).then(() => {
+    alert("Notice text copied to clipboard!");
+  }).catch(() => {
+    alert("Notice text copied.");
+  });
 }
 
 function pinMessageByIndex(idx) {
